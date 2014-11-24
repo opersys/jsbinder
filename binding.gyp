@@ -1,0 +1,98 @@
+{
+    "targets": [
+        {
+            "target_name": "jsbinder",
+            "include_dirs": [ 
+                "lib/include",
+            ],
+            "cflags": [
+                "-include AndroidConfig.h"
+            ],
+            "defines": [
+                "ANDROID_SMP=0"
+            ],
+            "sources": [ 
+                "lib/binder/Binder.cpp",
+                "lib/binder/BpBinder.cpp",
+                "lib/binder/IInterface.cpp",
+                "lib/binder/IMemory.cpp",
+                "lib/binder/IPCThreadState.cpp",
+                "lib/binder/IPermissionController.cpp",
+                "lib/binder/IServiceManager.cpp",
+                "lib/binder/MemoryBase.cpp",
+                "lib/binder/MemoryDealer.cpp",
+                "lib/binder/MemoryHeapBase.cpp",
+                "lib/binder/MemoryHeapPmem.cpp",
+                "lib/binder/Parcel.cpp",
+                "lib/binder/Permission.cpp",
+                "lib/binder/ProcessState.cpp",
+                "lib/binder/Static.cpp",
+
+                "lib/utils/BufferedTextOutput.cpp",
+                "lib/utils/CallStack.cpp",
+                "lib/utils/Debug.cpp",
+                "lib/utils/FileMap.cpp",
+                "lib/utils/Flattenable.cpp",
+                "lib/utils/Looper.cpp",
+                "lib/utils/misc.cpp",
+                "lib/utils/ObbFile.cpp",
+                "lib/utils/PackageRedirectionMap.cpp",
+                "lib/utils/Pool.cpp",
+                "lib/utils/RefBase.cpp",
+                "lib/utils/ResourceTypes.cpp",
+                "lib/utils/SharedBuffer.cpp",
+                "lib/utils/Static.cpp",
+                "lib/utils/StopWatch.cpp",
+                "lib/utils/String16.cpp",
+                "lib/utils/String8.cpp",
+                "lib/utils/StringArray.cpp",
+                "lib/utils/SystemClock.cpp",
+                "lib/utils/tests",
+                "lib/utils/TextOutput.cpp",
+                "lib/utils/Threads.cpp",
+                "lib/utils/Timers.cpp",
+                "lib/utils/VectorImpl.cpp",
+
+                "lib/libcutils/buffer.c",
+                "lib/libcutils/uio.c",
+                "lib/libcutils/socket_local_client.c",
+                "lib/libcutils/socket_loopback_server.c",
+                "lib/libcutils/native_handle.c",
+                "lib/libcutils/socket_inaddr_any_server.c",
+                "lib/libcutils/properties.c",
+                "lib/libcutils/load_file.c",
+                "lib/libcutils/dir_hash.c",
+                "lib/libcutils/ashmem-host.c",
+                "lib/libcutils/record_stream.c",
+                "lib/libcutils/tztime.c",
+                "lib/libcutils/open_memstream.c",
+                "lib/libcutils/cpu_info.c",
+                "lib/libcutils/strdup16to8.c",
+                "lib/libcutils/socket_local_server.c",
+                "lib/libcutils/threads.c",
+                "lib/libcutils/dlmalloc_stubs.c",
+                "lib/libcutils/iosched_policy.c",
+                "lib/libcutils/sched_policy.c",
+                "lib/libcutils/config_utils.c",
+                "lib/libcutils/socket_network_client.c",
+                "lib/libcutils/abort_socket.c",
+                "lib/libcutils/strdup8to16.c",
+                "lib/libcutils/array.c",
+                "lib/libcutils/process_name.c",
+                "lib/libcutils/zygote.c",
+                "lib/libcutils/mq.c",
+                "lib/libcutils/socket_loopback_client.c",
+                "lib/libcutils/atomic.c",
+                "lib/libcutils/selector.c",
+                "lib/libcutils/hashmap.c",
+
+                "lib/liblog/event_tag_map.c",
+                "lib/liblog/fake_log_device.c",
+                "lib/liblog/logd_write.c",
+                "lib/liblog/logprint.c",
+
+                "lib/jsbinder.cpp"
+            ]
+        }
+    ]
+}
