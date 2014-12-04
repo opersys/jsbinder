@@ -1,4 +1,4 @@
-var JsBinder = require("./jsbinder");
+var JsBinder = require("./build/Release/jsbinder");
 
 exports.Parcel = JsBinder.JsParcel;
 exports.ServiceManager = JsBinder.JsServiceManager;

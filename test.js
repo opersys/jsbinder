@@ -1,4 +1,4 @@
-var Binder = require("./JsBinder");
+var Binder = require("./index");
 
 function testParcel() {
 	var p = new Binder.Parcel();
@@ -48,6 +48,7 @@ function testPowerManagerCalls() {
 	console.log("Returned data size: " + np.dataSize());
 	np.readExceptionCode();
 	console.log("isScreenOn: " + np.readInt32());
+	console.log(pm.getInterface());
 }
 
 testParcel();

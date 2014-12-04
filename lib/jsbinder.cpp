@@ -72,6 +72,7 @@ class JsService : public node::ObjectWrap {
     static Handle<Value> New(const Arguments& args);
     static Handle<Value> Ping(const Arguments& args);
     static Handle<Value> Transact(const Arguments& args);    
+    static Handle<Value> GetInterface(const Arguments& args);
 
     sp<IBinder> sv;
 
@@ -127,6 +128,7 @@ void JsService::Init(Handle<Object> exports) {
 
   proto->Set(String::NewSymbol("ping"), FunctionTemplate::New(Ping)->GetFunction());
   proto->Set(String::NewSymbol("transact"), FunctionTemplate::New(Transact)->GetFunction());
+  proto->Set(String::NewSymbol("getInterface"), FunctionTemplate::New(GetInterface)->GetFunction());
 
   constructor = Persistent<Function>::New(tpl->GetFunction());
   exports->Set(String::NewSymbol("JsService"), constructor);
@@ -274,6 +276,25 @@ Handle<Value> JsService::Ping(const Arguments& args) {
   jsSv->sv->pingBinder();
 
   return scope.Close(Null());
+}
+
+Handle<Value> JsService::GetInterface(const Arguments& args) {
+  HandleScope scope;
+  JsService *jsSv;
+  Parcel p, r;
+  status_t err;
+  String16 iface;
+
+  jsSv = node::ObjectWrap::Unwrap<JsService>(args.This());
+  assert(jsSv->sv != 0);
+
+  err = jsSv->sv->transact(IBinder::INTERFACE_TRANSACTION, p, &r);
+  iface = r.readString16();
+
+  if (err == NO_ERROR)
+    return scope.Close(String::New(iface.string()));
+  else
+    return scope.Close(String::New(""));
 }
 
 Handle<Value> JsParcel::WriteString(const Arguments& args) {
