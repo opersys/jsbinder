@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2015 Opersys inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #include <node.h>
 
 #include <binder/IPCThreadState.h>
@@ -18,7 +34,7 @@ using namespace android;
 
 class JsParcel : public node::ObjectWrap {
 
-  public: 
+  public:
     static void Init(Handle<Object> exports);
     static Persistent<Function> constructor;
 
@@ -71,7 +87,7 @@ class JsService : public node::ObjectWrap {
   private:
     static Handle<Value> New(const Arguments& args);
     static Handle<Value> Ping(const Arguments& args);
-    static Handle<Value> Transact(const Arguments& args);    
+    static Handle<Value> Transact(const Arguments& args);
     static Handle<Value> GetInterface(const Arguments& args);
 
     sp<IBinder> sv;
@@ -108,13 +124,13 @@ void JsServiceManager::Init(Handle<Object> exports) {
 
   tpl->SetClassName(String::NewSymbol("JsServiceManager"));
   tpl->InstanceTemplate()->SetInternalFieldCount(1);
-  tpl->PrototypeTemplate()->Set(String::NewSymbol("list"), 
+  tpl->PrototypeTemplate()->Set(String::NewSymbol("list"),
     FunctionTemplate::New(List)->GetFunction());
-  tpl->PrototypeTemplate()->Set(String::NewSymbol("getService"), 
+  tpl->PrototypeTemplate()->Set(String::NewSymbol("getService"),
     FunctionTemplate::New(GetService)->GetFunction());
 
   constructor = Persistent<Function>::New(tpl->GetFunction());
-  exports->Set(String::NewSymbol("JsServiceManager"), constructor);  
+  exports->Set(String::NewSymbol("JsServiceManager"), constructor);
 }
 
 void JsService::Init(Handle<Object> exports) {
@@ -176,7 +192,7 @@ Handle<Value> JsService::New(const Arguments& args) {
     JsService* jsSv = new JsService();
     jsSv->Wrap(args.This());
     return args.This();
-  } 
+  }
   else return ThrowException(Exception::TypeError(String::New("Constructor not to be called directly")));
 }
 
@@ -189,7 +205,7 @@ Handle<Value> JsParcel::New(const Arguments& args) {
   else return ThrowException(Exception::TypeError(String::New("Constructor not to be called directly")));
 }
 
-Handle<Value> JsServiceManager::List(const Arguments& args) 
+Handle<Value> JsServiceManager::List(const Arguments& args)
 {
   Handle<Array> jsServices;
   HandleScope scope;
@@ -198,7 +214,7 @@ Handle<Value> JsServiceManager::List(const Arguments& args)
   JsServiceManager *jsSm;
 
   jsSm = ObjectWrap::Unwrap<JsServiceManager>(args.This());
-  services = jsSm->sm->listServices();  
+  services = jsSm->sm->listServices();
   jsServices = Array::New(services.size());
 
   for (size_t i = 0; i < services.size(); i++) {
@@ -220,7 +236,7 @@ Handle<Value> JsServiceManager::GetService(const Arguments& args) {
     return ThrowException(Exception::TypeError(String::New("Expected: service name")));
 
   // Unwrap the C++ object from inside the V8 object.
-  jsSm = ObjectWrap::Unwrap<JsServiceManager>(args.This());  
+  jsSm = ObjectWrap::Unwrap<JsServiceManager>(args.This());
   sv = jsSm->sm->getService(String16(*String::Utf8Value(args[0])));
 
   if (sv != 0) {
@@ -229,7 +245,7 @@ Handle<Value> JsServiceManager::GetService(const Arguments& args) {
     jsSv = ObjectWrap::Unwrap<JsService>(svObj);
 
     // Set the service to the object we just built.
-    jsSv->setService(sv); 
+    jsSv->setService(sv);
 
     return scope.Close(svObj);
   }
@@ -253,7 +269,7 @@ Handle<Value> JsService::Transact(const Arguments& args) {
     return ThrowException(Exception::TypeError(String::New("Argument 2 should be a Parcel object")));
 
   code = args[0]->ToUint32()->Value();
-  
+
   jsP = node::ObjectWrap::Unwrap<JsParcel>(args[1]->ToObject());
   jsSv = node::ObjectWrap::Unwrap<JsService>(args.This());
 
@@ -363,7 +379,7 @@ Handle<Value> JsParcel::WriteInt32(const Arguments& args) {
 
   jsP = ObjectWrap::Unwrap<JsParcel>(args.This());
   jsP->parcel.writeInt32(val);
-  
+
   return scope.Close(Null());
 }
 
@@ -375,7 +391,7 @@ Handle<Value> JsParcel::ReadInt32(const Arguments& args) {
   jsP = ObjectWrap::Unwrap<JsParcel>(args.This());
   r = jsP->parcel.readInt32();
 
-  return scope.Close(Number::New(r));  
+  return scope.Close(Number::New(r));
 }
 
 Handle<Value> JsParcel::SetDataPosition(const Arguments& args) {
@@ -408,7 +424,7 @@ Handle<Value> JsParcel::GetDataPosition(const Arguments& args) {
 Handle<Value> JsParcel::GetDataSize(const Arguments& args) {
   HandleScope scope;
   JsParcel *jsP;
-  size_t sz; 
+  size_t sz;
 
   jsP = ObjectWrap::Unwrap<JsParcel>(args.This());
   sz = jsP->parcel.dataSize();

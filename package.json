@@ -1,5 +1,10 @@
 {
-	"name": "jslibbinder",
-	"version": "0.0.1",
-	"private": true
+		"name": "jslibbinder",
+		"version": "0.1",
+		"private": true,
+    "license": "Apache-2.0",
+    "author": {
+        "name": "François-Denis Gonthier",
+        "email": "francois-denis.gonthier@opersys.com"
+    }
 }
