@@ -8,7 +8,7 @@ projects should do the following.
 
 - Get Node.js for Android sources from:
 
-https://github.com/fdgonthier/node
+https://github.com/opersys/node
 
 - In the node-android directory:
 
