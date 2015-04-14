@@ -86,7 +86,6 @@
                 "external/aosp/libcutils/socket_local_server.c",
                 "external/aosp/libcutils/threads.c",
                 "external/aosp/libcutils/dlmalloc_stubs.c",
-                "external/aosp/libcutils/iosched_policy.c",
                 "external/aosp/libcutils/sched_policy.c",
                 "external/aosp/libcutils/config_utils.c",
                 "external/aosp/libcutils/socket_network_client.c",
