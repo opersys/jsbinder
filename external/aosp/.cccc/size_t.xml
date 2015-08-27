@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module size_t-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="0" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="0" />
+<lines_of_code value="0" level="0" />
+<lines_of_code_per_member_function value="********" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+<weighted_methods_per_class_unity value="0" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="25" level="0" />
+<IF4 value="0" level="0" />
+<IF4_per_member_function value="********" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_visible_per_member_function value="********" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+</module_detail>
+<procedural_detail>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>size_t</name>
+<client_module>
+<name>Allocation</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/MemoryDealer.cpp" line="115" />
+</extent>
+<name>BasicHashtableImpl</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/BasicHashtable.cpp" line="27" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/BasicHashtable.cpp" line="28" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/BasicHashtable.cpp" line="188" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/BasicHashtable.cpp" line="202" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/BasicHashtable.cpp" line="245" />
+</extent>
+<name>Blob</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="1814" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/BlobCache.cpp" line="304" />
+</extent>
+<name>BlobCache</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/BlobCache.cpp" line="39" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/BlobCache.cpp" line="39" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/BlobCache.cpp" line="39" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/BlobCache.cpp" line="55" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/BlobCache.cpp" line="56" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/BlobCache.cpp" line="134" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/BlobCache.cpp" line="135" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/BlobCache.cpp" line="179" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/BlobCache.cpp" line="228" />
+</extent>
+<name>BpMemory</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/IMemory.cpp" line="127" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/IMemory.cpp" line="178" />
+</extent>
+<name>BufferedTextOutput</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/BufferedTextOutput.cpp" line="155" />
+</extent>
+<name>FdTextOutput</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Static.cpp" line="55" />
+</extent>
+<name>FileMap</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/FileMap.cpp" line="84" />
+</extent>
+<name>HexDump</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/TextOutput.cpp" line="148" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/TextOutput.cpp" line="148" />
+</extent>
+<name>IPCThreadState</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/IPCThreadState.cpp" line="1151" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/IPCThreadState.cpp" line="1153" />
+</extent>
+<name>LinearAllocator</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/LinearAllocator.cpp" line="140" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/LinearAllocator.cpp" line="144" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/LinearAllocator.cpp" line="163" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/LinearAllocator.cpp" line="183" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/LinearAllocator.cpp" line="194" />
+</extent>
+<name>LogTextOutput</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Static.cpp" line="39" />
+</extent>
+<name>MemoryBase</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/MemoryBase.cpp" line="29" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/MemoryBase.cpp" line="34" />
+</extent>
+<name>MemoryHeapBase</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="44" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="61" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="80" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="102" />
+</extent>
+<name>Page</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/LinearAllocator.cpp" line="95" />
+</extent>
+<name>Parcel</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="356" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="367" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="373" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="379" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="390" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="390" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="562" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="575" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="594" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="604" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="654" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="664" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="738" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="839" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="969" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="969" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="974" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="986" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/Parcel.cpp" line="1193" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="1292" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="1452" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="1453" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="1562" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="1570" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="1610" />
+</extent>
+<name>ProcessState</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/ProcessState.cpp" line="295" />
+</extent>
+<name>SharedBuffer</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/SharedBuffer.cpp" line="27" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/SharedBuffer.cpp" line="58" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/SharedBuffer.cpp" line="86" />
+</extent>
+<name>SimpleBestFitAllocator</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/MemoryDealer.cpp" line="129" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/MemoryDealer.cpp" line="132" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/MemoryDealer.cpp" line="133" />
+</extent>
+<name>SortedVectorImpl</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="521" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/VectorImpl.cpp" line="552" />
+</extent>
+<name>String16</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String16.cpp" line="112" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String16.cpp" line="112" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String16.cpp" line="133" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String16.cpp" line="158" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String16.cpp" line="175" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String16.cpp" line="175" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String16.cpp" line="201" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String16.cpp" line="237" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String16.cpp" line="259" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String16.cpp" line="264" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String16.cpp" line="264" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String16.cpp" line="385" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String16.cpp" line="385" />
+</extent>
+<name>String8</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="173" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="191" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="201" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="252" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="263" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="274" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="303" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="350" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="367" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="384" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="401" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="441" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="441" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="465" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="465" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="489" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/String8.cpp" line="489" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="507" />
+</extent>
+<name>Thread</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/Threads.cpp" line="669" />
+</extent>
+<name>Tokenizer</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/Tokenizer.cpp" line="39" />
+</extent>
+<name>VectorImpl</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="44" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="109" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="119" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="119" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="130" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="135" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="135" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="140" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="140" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="244" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="249" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="272" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="272" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="296" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="311" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="326" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="346" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="367" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="367" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="423" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="423" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="484" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="491" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="498" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="507" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="511" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="515" />
+</extent>
+</client_module>
+<supplier_module>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

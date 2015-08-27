@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module VectorImpl-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="405" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="102" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
+<lines_of_code value="15" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="27.000" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="6.800" level="1" />
+<weighted_methods_per_class_unity value="38" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="5" level="0" />
+<IF4 value="16" level="0" />
+<IF4_per_member_function value="********" level="2" />
+<IF4_visible value="16" level="0" />
+<IF4_visible_per_member_function value="********" level="2" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+</module_detail>
+<procedural_detail>
+<member_function>
+<name>VectorImpl(const VectorImpl &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="49" />
+</extent>
+<lines_of_code value="8" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>VectorImpl(size_t,uint32_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="44" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>_do_construct(void *,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="484" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>_do_copy(void *,const void *,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="498" />
+</extent>
+<lines_of_code value="8" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>_do_destroy(void *,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="491" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>_do_move_backward(void *,const void *,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="515" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>_do_move_forward(void *,const void *,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="511" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>_do_splat(void *,const void *,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="507" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>_grow(size_t,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="367" />
+</extent>
+<lines_of_code value="50" level="1" />
+<McCabes_cyclomatic_complexity value="13" level="1" />
+<lines_of_comment value="4" level="0" />
+<lines_of_code_per_line_of_comment value="12.500" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="3.250" level="0" />
+</member_function>
+<member_function>
+<name>_shrink(size_t,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="423" />
+</extent>
+<lines_of_code value="50" level="1" />
+<McCabes_cyclomatic_complexity value="13" level="1" />
+<lines_of_comment value="4" level="0" />
+<lines_of_code_per_line_of_comment value="12.500" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="3.250" level="0" />
+</member_function>
+<member_function>
+<name>add()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="234" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>add(const void *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="239" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>appendArray(const void *,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="130" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>appendVector(const VectorImpl &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="114" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>capacity()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="101" />
+</extent>
+<lines_of_code value="7" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>clear()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="291" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>editArrayImpl()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="85" />
+</extent>
+<lines_of_code value="15" level="0" />
+<McCabes_cyclomatic_complexity value="4" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>editItemLocation(size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="296" />
+</extent>
+<lines_of_code value="13" level="0" />
+<McCabes_cyclomatic_complexity value="4" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>finish_vector()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="284" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>insertArrayAt(const void *,size_t,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="119" />
+</extent>
+<lines_of_code value="10" level="0" />
+<McCabes_cyclomatic_complexity value="5" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="******" level="0" />
+</member_function>
+<member_function>
+<name>insertAt(const void *,size_t,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="140" />
+</extent>
+<lines_of_code value="14" level="0" />
+<McCabes_cyclomatic_complexity value="6" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="******" level="2" />
+</member_function>
+<member_function>
+<name>insertAt(size_t,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="135" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>insertVectorAt(const VectorImpl &amp;,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="109" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>itemLocation(size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="311" />
+</extent>
+<lines_of_code value="13" level="0" />
+<McCabes_cyclomatic_complexity value="4" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>itemSize()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="480" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>operator =(const VectorImpl &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="67" />
+</extent>
+<lines_of_code value="17" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>pop()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="218" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>push()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="224" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>push(const void *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="229" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>release_storage()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="356" />
+</extent>
+<lines_of_code value="10" level="0" />
+<McCabes_cyclomatic_complexity value="2" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>removeItemsAt(size_t,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="272" />
+</extent>
+<lines_of_code value="10" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>replaceAt(const void *,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="249" />
+</extent>
+<lines_of_code value="20" level="0" />
+<McCabes_cyclomatic_complexity value="7" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="******" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="******" level="2" />
+</member_function>
+<member_function>
+<name>replaceAt(size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="244" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>resize(size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="346" />
+</extent>
+<lines_of_code value="9" level="0" />
+<McCabes_cyclomatic_complexity value="4" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setCapacity(size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="326" />
+</extent>
+<lines_of_code value="18" level="0" />
+<McCabes_cyclomatic_complexity value="5" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="5.000" level="0" />
+</member_function>
+<member_function>
+<name>sort(compar_r_t,void *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="165" />
+</extent>
+<lines_of_code value="43" level="1" />
+<McCabes_cyclomatic_complexity value="12" level="1" />
+<lines_of_comment value="4" level="0" />
+<lines_of_code_per_line_of_comment value="10.750" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="3.000" level="0" />
+</member_function>
+<member_function>
+<name>sort(compar_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="160" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>~VectorImpl()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/VectorImpl.cpp" line="58" />
+</extent>
+<lines_of_code value="7" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>VectorImpl</name>
+<client_module>
+<name>SortedVectorImpl</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/VectorImpl.cpp" line="526" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/VectorImpl.cpp" line="590" />
+</extent>
+</client_module>
+<supplier_module>
+<name>compar_r_t</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="165" />
+</extent>
+<name>compar_t</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="160" />
+</extent>
+<name>size_t</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="44" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="109" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="119" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="119" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="130" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="135" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="135" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="140" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="140" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="244" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="249" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="272" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="272" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="296" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="311" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="326" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="346" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="367" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="367" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="423" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="423" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="484" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="491" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="498" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="507" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="511" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="515" />
+</extent>
+<name>uint32_t</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/VectorImpl.cpp" line="44" />
+</extent>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

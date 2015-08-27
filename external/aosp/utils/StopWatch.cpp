@@ -20,6 +20,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+/* for PRId64 */
+#ifndef __STDC_FORMAT_MACROS
+#define __STDC_FORMAT_MACROS 1
+#endif
+#include <inttypes.h>
+
 #include <utils/Log.h>
 #include <utils/Errors.h>
 #include <utils/StopWatch.h>
@@ -39,11 +45,11 @@ StopWatch::~StopWatch()
 {
     nsecs_t elapsed = elapsedTime();
     const int n = mNumLaps;
-    LOGD("StopWatch %s (us): %lld ", mName, ns2us(elapsed));
+    ALOGD("StopWatch %s (us): %" PRId64 " ", mName, ns2us(elapsed));
     for (int i=0 ; i<n ; i++) {
         const nsecs_t soFar = mLaps[i].soFar;
         const nsecs_t thisLap = mLaps[i].thisLap;
-        LOGD(" [%d: %lld, %lld]", i, ns2us(soFar), ns2us(thisLap));
+        ALOGD(" [%d: %" PRId64 ", %" PRId64, i, ns2us(soFar), ns2us(thisLap));
     }
 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 The Android Open Source Project
+ * Copyright (C) 2008-2014 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,16 +19,22 @@
  * passed on to the underlying (fake) log device.  When not in the
  * simulator, messages are printed to stderr.
  */
-#include "cutils/logd.h"
+#include "fake_log_device.h"
 
-#include <stdlib.h>
-#include <string.h>
 #include <ctype.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <stdlib.h>
+#include <string.h>
 
-#ifdef HAVE_PTHREADS
+#include <log/logd.h>
+
+#if !defined(_WIN32)
 #include <pthread.h>
+#endif
+
+#ifndef __unused
+#define __unused __attribute__((__unused__))
 #endif
 
 #define kMaxTagLen  16      /* from the long-dead utils/Log.cpp */
@@ -82,7 +88,7 @@ typedef struct LogState {
 } LogState;
 
 
-#ifdef HAVE_PTHREADS
+#if !defined(_WIN32)
 /*
  * Locking.  Since we're emulating a device, we need to be prepared
  * to have multiple callers at the same time.  This lock is used
@@ -100,10 +106,10 @@ static void unlock()
 {
     pthread_mutex_unlock(&fakeLogDeviceLock);
 }
-#else   // !HAVE_PTHREADS
+#else   // !defined(_WIN32)
 #define lock() ((void)0)
 #define unlock() ((void)0)
-#endif  // !HAVE_PTHREADS
+#endif  // !defined(_WIN32)
 
 
 /*
@@ -314,17 +320,17 @@ static const char* getPriorityString(int priority)
     return priorityStrings[idx];
 }
 
-#ifndef HAVE_WRITEV
+#if defined(_WIN32)
 /*
- * Some platforms like WIN32 do not have writev().
+ * WIN32 does not have writev().
  * Make up something to replace it.
  */
 static ssize_t fake_writev(int fd, const struct iovec *iov, int iovcnt) {
-    int result = 0;
-    struct iovec* end = iov + iovcnt;
+    ssize_t result = 0;
+    const struct iovec* end = iov + iovcnt;
     for (; iov < end; iov++) {
-        int w = write(fd, iov->iov_base, iov->iov_len);
-        if (w != iov->iov_len) {
+        ssize_t w = write(fd, iov->iov_base, iov->iov_len);
+        if (w != (ssize_t) iov->iov_len) {
             if (w < 0)
                 return w;
             return result + w;
@@ -346,7 +352,7 @@ static ssize_t fake_writev(int fd, const struct iovec *iov, int iovcnt) {
 static void showLog(LogState *state,
         int logPrio, const char* tag, const char* msg)
 {
-#if defined(HAVE_LOCALTIME_R)
+#if !defined(_WIN32)
     struct tm tmBuf;
 #endif
     struct tm* ptm;
@@ -371,7 +377,7 @@ static void showLog(LogState *state,
      * in the time stamp.  Don't use forward slashes, parenthesis,
      * brackets, asterisks, or other special chars here.
      */
-#if defined(HAVE_LOCALTIME_R)
+#if !defined(_WIN32)
     ptm = localtime_r(&when, &tmBuf);
 #else
     ptm = localtime(&when);
@@ -398,7 +404,7 @@ static void showLog(LogState *state,
         break;
     case FORMAT_THREAD:
         prefixLen = snprintf(prefixBuf, sizeof(prefixBuf),
-            "%c(%5d:%p) ", priChar, pid, (void*)tid);
+            "%c(%5d:%5d) ", priChar, pid, tid);
         strcpy(suffixBuf, "\n"); suffixLen = 1;
         break;
     case FORMAT_RAW:
@@ -417,8 +423,8 @@ static void showLog(LogState *state,
         break;
     case FORMAT_LONG:
         prefixLen = snprintf(prefixBuf, sizeof(prefixBuf),
-            "[ %s %5d:%p %c/%-8s ]\n",
-            timeBuf, pid, (void*)tid, priChar, tag);
+            "[ %s %5d:%5d %c/%-8s ]\n",
+            timeBuf, pid, tid, priChar, tag);
         strcpy(suffixBuf, "\n\n"); suffixLen = 2;
         break;
     default:
@@ -611,7 +617,7 @@ static int logClose(int fd)
 /*
  * Open a log output device and return a fake fd.
  */
-static int logOpen(const char* pathName, int flags)
+static int logOpen(const char* pathName, int flags __unused)
 {
     LogState *logState;
     int fd = -1;
@@ -682,4 +688,10 @@ ssize_t fakeLogWritev(int fd, const struct iovec* vector, int count)
 {
     /* Assume that open() was called first. */
     return redirectWritev(fd, vector, count);
+}
+
+int __android_log_is_loggable(int prio, const char *tag __unused, int def)
+{
+    int logLevel = def;
+    return logLevel >= 0 && prio >= logLevel;
 }

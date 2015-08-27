@@ -14,6 +14,13 @@
  * limitations under the License.
  */
 
-#define inline
+/*
+ * Generate non-inlined versions of android_atomic functions.
+ * Nobody should be using these, but some binary blobs currently (late 2014)
+ * are.
+ * If you read this in 2015 or later, please try to delete this file.
+ */
 
-#include <cutils/atomic-inline.h>
+#define ANDROID_ATOMIC_INLINE
+
+#include <cutils/atomic.h>

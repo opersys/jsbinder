@@ -51,6 +51,7 @@ public:
         PING_TRANSACTION        = B_PACK_CHARS('_','P','N','G'),
         DUMP_TRANSACTION        = B_PACK_CHARS('_','D','M','P'),
         INTERFACE_TRANSACTION   = B_PACK_CHARS('_', 'N', 'T', 'F'),
+        SYSPROPS_TRANSACTION    = B_PACK_CHARS('_', 'S', 'P', 'R'),
 
         // Corresponds to TF_ONE_WAY -- an asynchronous call.
         FLAG_ONEWAY             = 0x00000001
@@ -80,14 +81,6 @@ public:
                                         Parcel* reply,
                                         uint32_t flags = 0) = 0;
 
-    /**
-     * This method allows you to add data that is transported through
-     * IPC along with your IBinder pointer.  When implementing a Binder
-     * object, override it to write your desired data in to @a outData.
-     * You can then call getConstantData() on your IBinder to retrieve
-     * that data, from any process.  You MUST return the number of bytes
-     * written in to the parcel (including padding).
-     */
     class DeathRecipient : public virtual RefBase
     {
     public:
@@ -98,7 +91,7 @@ public:
      * Register the @a recipient for a notification if this binder
      * goes away.  If this binder object unexpectedly goes away
      * (typically because its hosting process has been killed),
-     * then DeathRecipient::binderDied() will be called with a referene
+     * then DeathRecipient::binderDied() will be called with a reference
      * to this.
      *
      * The @a cookie is optional -- if non-NULL, it should be a

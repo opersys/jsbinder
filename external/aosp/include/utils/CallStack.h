@@ -17,60 +17,56 @@
 #ifndef ANDROID_CALLSTACK_H
 #define ANDROID_CALLSTACK_H
 
+#include <android/log.h>
+#include <backtrace/backtrace_constants.h>
+#include <utils/String8.h>
+#include <utils/Vector.h>
+
 #include <stdint.h>
 #include <sys/types.h>
 
-#include <utils/String8.h>
-
-// ---------------------------------------------------------------------------
-
 namespace android {
 
-class CallStack
-{
-public:
-    enum {
-        MAX_DEPTH = 31
-    };
+class Printer;
 
+// Collect/print the call stack (function, file, line) traces for a single thread.
+class CallStack {
+public:
+    // Create an empty call stack. No-op.
     CallStack();
-    CallStack(const CallStack& rhs);
+    // Create a callstack with the current thread's stack trace.
+    // Immediately dump it to logcat using the given logtag.
+    CallStack(const char* logtag, int32_t ignoreDepth=1);
     ~CallStack();
 
-    CallStack& operator = (const CallStack& rhs);
-    
-    bool operator == (const CallStack& rhs) const;
-    bool operator != (const CallStack& rhs) const;
-    bool operator < (const CallStack& rhs) const;
-    bool operator >= (const CallStack& rhs) const;
-    bool operator > (const CallStack& rhs) const;
-    bool operator <= (const CallStack& rhs) const;
-    
-    const void* operator [] (int index) const;
-    
-    void clear();
+    // Reset the stack frames (same as creating an empty call stack).
+    void clear() { mFrameLines.clear(); }
 
-    void update(int32_t ignoreDepth=0, int32_t maxDepth=MAX_DEPTH);
+    // Immediately collect the stack traces for the specified thread.
+    // The default is to dump the stack of the current call.
+    void update(int32_t ignoreDepth=1, pid_t tid=BACKTRACE_CURRENT_THREAD);
 
-    // Dump a stack trace to the log
-    void dump(const char* prefix = 0) const;
+    // Dump a stack trace to the log using the supplied logtag.
+    void log(const char* logtag,
+             android_LogPriority priority = ANDROID_LOG_DEBUG,
+             const char* prefix = 0) const;
 
-    // Return a string (possibly very long) containing the complete stack trace
+    // Dump a stack trace to the specified file descriptor.
+    void dump(int fd, int indent = 0, const char* prefix = 0) const;
+
+    // Return a string (possibly very long) containing the complete stack trace.
     String8 toString(const char* prefix = 0) const;
-    
-    size_t size() const { return mCount; }
+
+    // Dump a serialized representation of the stack trace to the specified printer.
+    void print(Printer& printer) const;
+
+    // Get the count of stack frames that are in this call stack.
+    size_t size() const { return mFrameLines.size(); }
 
 private:
-    // Internal helper function
-    String8 toStringSingleLevel(const char* prefix, int32_t level) const;
-
-    size_t      mCount;
-    const void* mStack[MAX_DEPTH];
+    Vector<String8> mFrameLines;
 };
 
 }; // namespace android
-
-
-// ---------------------------------------------------------------------------
 
 #endif // ANDROID_CALLSTACK_H

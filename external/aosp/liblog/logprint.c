@@ -1,6 +1,6 @@
-/* //device/libs/cutils/logprint.c
+/*
 **
-** Copyright 2006, The Android Open Source Project
+** Copyright 2006-2014, The Android Open Source Project
 **
 ** Licensed under the Apache License, Version 2.0 (the "License");
 ** you may not use this file except in compliance with the License.
@@ -17,24 +17,23 @@
 
 #define _GNU_SOURCE /* for asprintf */
 
-#define COLOR_BLUE     75
-#define COLOR_DEFAULT 231
-#define COLOR_GREEN    40
-#define COLOR_ORANGE  166
-#define COLOR_RED     196
-#define COLOR_YELLOW  226
-
-#include <ctype.h>
-#include <stdio.h>
-#include <errno.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <string.h>
-#include <assert.h>
 #include <arpa/inet.h>
+#include <assert.h>
+#include <ctype.h>
+#include <errno.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <inttypes.h>
+#include <sys/param.h>
 
-#include <cutils/logd.h>
-#include <cutils/logprint.h>
+#include <log/logd.h>
+#include <log/logprint.h>
+
+/* open coded fragment, prevent circular dependencies */
+#define WEAK static
 
 typedef struct FilterInfo_t {
     char *mTag;
@@ -46,8 +45,24 @@ struct AndroidLogFormat_t {
     android_LogPriority global_pri;
     FilterInfo *filters;
     AndroidLogPrintFormat format;
-    AndroidLogColoredOutput colored_output;
+    bool colored_output;
+    bool usec_time_output;
+    bool printable_output;
 };
+
+/*
+ *  gnome-terminal color tags
+ *    See http://misc.flogisoft.com/bash/tip_colors_and_formatting
+ *    for ideas on how to set the forground color of the text for xterm.
+ *    The color manipulation character stream is defined as:
+ *      ESC [ 3 8 ; 5 ; <color#> m
+ */
+#define ANDROID_COLOR_BLUE     75
+#define ANDROID_COLOR_DEFAULT 231
+#define ANDROID_COLOR_GREEN    40
+#define ANDROID_COLOR_ORANGE  166
+#define ANDROID_COLOR_RED     196
+#define ANDROID_COLOR_YELLOW  226
 
 static FilterInfo * filterinfo_new(const char * tag, android_LogPriority pri)
 {
@@ -60,15 +75,7 @@ static FilterInfo * filterinfo_new(const char * tag, android_LogPriority pri)
     return p_ret;
 }
 
-static void filterinfo_free(FilterInfo *p_info)
-{
-    if (p_info == NULL) {
-        return;
-    }
-
-    free(p_info->mTag);
-    p_info->mTag = NULL;
-}
+/* balance to above, filterinfo_free left unimplemented */
 
 /*
  * Note: also accepts 0-9 priorities
@@ -129,17 +136,17 @@ static char filterPriToChar (android_LogPriority pri)
 static int colorFromPri (android_LogPriority pri)
 {
     switch (pri) {
-        case ANDROID_LOG_VERBOSE:       return COLOR_DEFAULT;
-        case ANDROID_LOG_DEBUG:         return COLOR_BLUE;
-        case ANDROID_LOG_INFO:          return COLOR_GREEN;
-        case ANDROID_LOG_WARN:          return COLOR_ORANGE;
-        case ANDROID_LOG_ERROR:         return COLOR_RED;
-        case ANDROID_LOG_FATAL:         return COLOR_RED;
-        case ANDROID_LOG_SILENT:        return COLOR_DEFAULT;
+        case ANDROID_LOG_VERBOSE:       return ANDROID_COLOR_DEFAULT;
+        case ANDROID_LOG_DEBUG:         return ANDROID_COLOR_BLUE;
+        case ANDROID_LOG_INFO:          return ANDROID_COLOR_GREEN;
+        case ANDROID_LOG_WARN:          return ANDROID_COLOR_ORANGE;
+        case ANDROID_LOG_ERROR:         return ANDROID_COLOR_RED;
+        case ANDROID_LOG_FATAL:         return ANDROID_COLOR_RED;
+        case ANDROID_LOG_SILENT:        return ANDROID_COLOR_DEFAULT;
 
         case ANDROID_LOG_DEFAULT:
         case ANDROID_LOG_UNKNOWN:
-        default:                        return COLOR_DEFAULT;
+        default:                        return ANDROID_COLOR_DEFAULT;
     }
 }
 
@@ -164,23 +171,6 @@ static android_LogPriority filterPriForTag(
     return p_format->global_pri;
 }
 
-/** for debugging */
-static void dumpFilters(AndroidLogFormat *p_format)
-{
-    FilterInfo *p_fi;
-
-    for (p_fi = p_format->filters ; p_fi != NULL ; p_fi = p_fi->p_next) {
-        char cPri = filterPriToChar(p_fi->mPri);
-        if (p_fi->mPri == ANDROID_LOG_DEFAULT) {
-            cPri = filterPriToChar(p_format->global_pri);
-        }
-        fprintf(stderr,"%s:%c\n", p_fi->mTag, cPri);
-    }
-
-    fprintf(stderr,"*:%c\n", filterPriToChar(p_format->global_pri));
-
-}
-
 /**
  * returns 1 if this log line should be printed based on its priority
  * and tag, and 0 if it should not
@@ -199,7 +189,9 @@ AndroidLogFormat *android_log_format_new()
 
     p_ret->global_pri = ANDROID_LOG_VERBOSE;
     p_ret->format = FORMAT_BRIEF;
-    p_ret->colored_output = OUTPUT_COLOR_OFF;
+    p_ret->colored_output = false;
+    p_ret->usec_time_output = false;
+    p_ret->printable_output = false;
 
     return p_ret;
 }
@@ -222,15 +214,24 @@ void android_log_format_free(AndroidLogFormat *p_format)
 
 
 
-void android_log_setPrintFormat(AndroidLogFormat *p_format,
+int android_log_setPrintFormat(AndroidLogFormat *p_format,
         AndroidLogPrintFormat format)
 {
-    p_format->format=format;
-}
-
-void android_log_setColoredOutput(AndroidLogFormat *p_format)
-{
-    p_format->colored_output = OUTPUT_COLOR_ON;
+    switch (format) {
+    case FORMAT_MODIFIER_COLOR:
+        p_format->colored_output = true;
+        return 0;
+    case FORMAT_MODIFIER_TIME_USEC:
+        p_format->usec_time_output = true;
+        return 0;
+    case FORMAT_MODIFIER_PRINTABLE:
+        p_format->printable_output = true;
+        return 0;
+    default:
+        break;
+    }
+    p_format->format = format;
+    return 1;
 }
 
 /**
@@ -248,6 +249,9 @@ AndroidLogPrintFormat android_log_formatFromString(const char * formatString)
     else if (strcmp(formatString, "time") == 0) format = FORMAT_TIME;
     else if (strcmp(formatString, "threadtime") == 0) format = FORMAT_THREADTIME;
     else if (strcmp(formatString, "long") == 0) format = FORMAT_LONG;
+    else if (strcmp(formatString, "color") == 0) format = FORMAT_MODIFIER_COLOR;
+    else if (strcmp(formatString, "usec") == 0) format = FORMAT_MODIFIER_TIME_USEC;
+    else if (strcmp(formatString, "printable") == 0) format = FORMAT_MODIFIER_PRINTABLE;
     else format = FORMAT_OFF;
 
     return format;
@@ -265,7 +269,6 @@ AndroidLogPrintFormat android_log_formatFromString(const char * formatString)
 int android_log_addFilterRule(AndroidLogFormat *p_format,
         const char *filterExpression)
 {
-    size_t i=0;
     size_t tagNameLength;
     android_LogPriority pri = ANDROID_LOG_DEFAULT;
 
@@ -284,29 +287,35 @@ int android_log_addFilterRule(AndroidLogFormat *p_format,
     }
 
     if(0 == strncmp("*", filterExpression, tagNameLength)) {
-        // This filter expression refers to the global filter
-        // The default level for this is DEBUG if the priority
-        // is unspecified
+        /*
+         * This filter expression refers to the global filter
+         * The default level for this is DEBUG if the priority
+         * is unspecified
+         */
         if (pri == ANDROID_LOG_DEFAULT) {
             pri = ANDROID_LOG_DEBUG;
         }
 
         p_format->global_pri = pri;
     } else {
-        // for filter expressions that don't refer to the global
-        // filter, the default is verbose if the priority is unspecified
+        /*
+         * for filter expressions that don't refer to the global
+         * filter, the default is verbose if the priority is unspecified
+         */
         if (pri == ANDROID_LOG_DEFAULT) {
             pri = ANDROID_LOG_VERBOSE;
         }
 
         char *tagName;
 
-// Presently HAVE_STRNDUP is never defined, so the second case is always taken
-// Darwin doesn't have strnup, everything else does
+/*
+ * Presently HAVE_STRNDUP is never defined, so the second case is always taken
+ * Darwin doesn't have strnup, everything else does
+ */
 #ifdef HAVE_STRNDUP
         tagName = strndup(filterExpression, tagNameLength);
 #else
-        //a few extra bytes copied...
+        /* a few extra bytes copied... */
         tagName = strdup(filterExpression);
         tagName[tagNameLength] = '\0';
 #endif /*HAVE_STRNDUP*/
@@ -343,9 +352,9 @@ int android_log_addFilterString(AndroidLogFormat *p_format,
     char *p_ret;
     int err;
 
-    // Yes, I'm using strsep
+    /* Yes, I'm using strsep */
     while (NULL != (p_ret = strsep(&p_cur, " \t,"))) {
-        // ignore whitespace-only entries
+        /* ignore whitespace-only entries */
         if(p_ret[0] != '\0') {
             err = android_log_addFilterRule(p_format, p_ret);
 
@@ -362,15 +371,6 @@ error:
     return -1;
 }
 
-static inline char * strip_end(char *str)
-{
-    char *end = str + strlen(str) - 1;
-
-    while (end >= str && isspace(*end))
-        *end-- = '\0';
-    return str;
-}
-
 /**
  * Splits a wire-format buffer into an AndroidLogEntry
  * entry allocated by caller. Pointers will point directly into buf
@@ -381,17 +381,65 @@ static inline char * strip_end(char *str)
 int android_log_processLogBuffer(struct logger_entry *buf,
                                  AndroidLogEntry *entry)
 {
-    size_t tag_len;
-
     entry->tv_sec = buf->sec;
     entry->tv_nsec = buf->nsec;
-    entry->priority = buf->msg[0];
     entry->pid = buf->pid;
     entry->tid = buf->tid;
-    entry->tag = buf->msg + 1;
-    tag_len = strlen(entry->tag);
-    entry->messageLen = buf->len - tag_len - 3;
-    entry->message = entry->tag + tag_len + 1;
+
+    /*
+     * format: <priority:1><tag:N>\0<message:N>\0
+     *
+     * tag str
+     *   starts at buf->msg+1
+     * msg
+     *   starts at buf->msg+1+len(tag)+1
+     *
+     * The message may have been truncated by the kernel log driver.
+     * When that happens, we must null-terminate the message ourselves.
+     */
+    if (buf->len < 3) {
+        /*
+         * An well-formed entry must consist of at least a priority
+         * and two null characters
+         */
+        fprintf(stderr, "+++ LOG: entry too small\n");
+        return -1;
+    }
+
+    int msgStart = -1;
+    int msgEnd = -1;
+
+    int i;
+    char *msg = buf->msg;
+    struct logger_entry_v2 *buf2 = (struct logger_entry_v2 *)buf;
+    if (buf2->hdr_size) {
+        msg = ((char *)buf2) + buf2->hdr_size;
+    }
+    for (i = 1; i < buf->len; i++) {
+        if (msg[i] == '\0') {
+            if (msgStart == -1) {
+                msgStart = i + 1;
+            } else {
+                msgEnd = i;
+                break;
+            }
+        }
+    }
+
+    if (msgStart == -1) {
+        fprintf(stderr, "+++ LOG: malformed log message\n");
+        return -1;
+    }
+    if (msgEnd == -1) {
+        /* incoming message not null-terminated; force it */
+        msgEnd = buf->len - 1;
+        msg[msgEnd] = '\0';
+    }
+
+    entry->priority = msg[0];
+    entry->tag = msg + 1;
+    entry->message = msg + msgStart;
+    entry->messageLen = msgEnd - msgStart;
 
     return 0;
 }
@@ -413,7 +461,7 @@ static inline uint64_t get8LE(const uint8_t* src)
 
     low = src[0] | (src[1] << 8) | (src[2] << 16) | (src[3] << 24);
     high = src[4] | (src[5] << 8) | (src[6] << 16) | (src[7] << 24);
-    return ((long long) high << 32) | (long long) low;
+    return ((uint64_t) high << 32) | (uint64_t) low;
 }
 
 
@@ -444,8 +492,6 @@ static int android_log_printBinaryEvent(const unsigned char** pEventData,
     type = *eventData++;
     eventDataLen--;
 
-    //fprintf(stderr, "--- type=%d (rem len=%d)\n", type, eventDataLen);
-
     switch (type) {
     case EVENT_TYPE_INT:
         /* 32-bit signed int */
@@ -471,7 +517,7 @@ static int android_log_printBinaryEvent(const unsigned char** pEventData,
     case EVENT_TYPE_LONG:
         /* 64-bit signed long */
         {
-            long long lval;
+            uint64_t lval;
 
             if (eventDataLen < 8)
                 return -1;
@@ -479,7 +525,30 @@ static int android_log_printBinaryEvent(const unsigned char** pEventData,
             eventData += 8;
             eventDataLen -= 8;
 
-            outCount = snprintf(outBuf, outBufLen, "%lld", lval);
+            outCount = snprintf(outBuf, outBufLen, "%" PRId64, lval);
+            if (outCount < outBufLen) {
+                outBuf += outCount;
+                outBufLen -= outCount;
+            } else {
+                /* halt output */
+                goto no_room;
+            }
+        }
+        break;
+    case EVENT_TYPE_FLOAT:
+        /* float */
+        {
+            uint32_t ival;
+            float fval;
+
+            if (eventDataLen < 4)
+                return -1;
+            ival = get4LE(eventData);
+            fval = *(float*)&ival;
+            eventData += 4;
+            eventDataLen -= 4;
+
+            outCount = snprintf(outBuf, outBufLen, "%f", fval);
             if (outCount < outBufLen) {
                 outBuf += outCount;
                 outBufLen -= outCount;
@@ -604,6 +673,10 @@ int android_log_processBinaryLogBuffer(struct logger_entry *buf,
      * Pull the tag out.
      */
     eventData = (const unsigned char*) buf->msg;
+    struct logger_entry_v2 *buf2 = (struct logger_entry_v2 *)buf;
+    if (buf2->hdr_size) {
+        eventData = ((unsigned char *)buf2) + buf2->hdr_size;
+    }
     inCount = buf->len;
     if (inCount < 4)
         return -1;
@@ -663,7 +736,7 @@ int android_log_processBinaryLogBuffer(struct logger_entry *buf,
 
     if (inCount != 0) {
         fprintf(stderr,
-            "Warning: leftover binary log data (%d bytes)\n", inCount);
+            "Warning: leftover binary log data (%zu bytes)\n", inCount);
     }
 
     /*
@@ -677,6 +750,122 @@ int android_log_processBinaryLogBuffer(struct logger_entry *buf,
     entry->message = messageBuf;
 
     return 0;
+}
+
+/*
+ * One utf8 character at a time
+ *
+ * Returns the length of the utf8 character in the buffer,
+ * or -1 if illegal or truncated
+ *
+ * Open coded from libutils/Unicode.cpp, borrowed from utf8_length(),
+ * can not remove from here because of library circular dependencies.
+ * Expect one-day utf8_character_length with the same signature could
+ * _also_ be part of libutils/Unicode.cpp if its usefullness needs to
+ * propagate globally.
+ */
+WEAK ssize_t utf8_character_length(const char *src, size_t len)
+{
+    const char *cur = src;
+    const char first_char = *cur++;
+    static const uint32_t kUnicodeMaxCodepoint = 0x0010FFFF;
+    int32_t mask, to_ignore_mask;
+    size_t num_to_read;
+    uint32_t utf32;
+
+    if ((first_char & 0x80) == 0) { /* ASCII */
+        return 1;
+    }
+
+    /*
+     * (UTF-8's character must not be like 10xxxxxx,
+     *  but 110xxxxx, 1110xxxx, ... or 1111110x)
+     */
+    if ((first_char & 0x40) == 0) {
+        return -1;
+    }
+
+    for (utf32 = 1, num_to_read = 1, mask = 0x40, to_ignore_mask = 0x80;
+         num_to_read < 5 && (first_char & mask);
+         num_to_read++, to_ignore_mask |= mask, mask >>= 1) {
+        if (num_to_read > len) {
+            return -1;
+        }
+        if ((*cur & 0xC0) != 0x80) { /* can not be 10xxxxxx? */
+            return -1;
+        }
+        utf32 = (utf32 << 6) + (*cur++ & 0b00111111);
+    }
+    /* "first_char" must be (110xxxxx - 11110xxx) */
+    if (num_to_read >= 5) {
+        return -1;
+    }
+    to_ignore_mask |= mask;
+    utf32 |= ((~to_ignore_mask) & first_char) << (6 * (num_to_read - 1));
+    if (utf32 > kUnicodeMaxCodepoint) {
+        return -1;
+    }
+    return num_to_read;
+}
+
+/*
+ * Convert to printable from message to p buffer, return string length. If p is
+ * NULL, do not copy, but still return the expected string length.
+ */
+static size_t convertPrintable(char *p, const char *message, size_t messageLen)
+{
+    char *begin = p;
+    bool print = p != NULL;
+
+    while (messageLen) {
+        char buf[6];
+        ssize_t len = sizeof(buf) - 1;
+        if ((size_t)len > messageLen) {
+            len = messageLen;
+        }
+        len = utf8_character_length(message, len);
+
+        if (len < 0) {
+            snprintf(buf, sizeof(buf),
+                     ((messageLen > 1) && isdigit(message[1]))
+                         ? "\\%03o"
+                         : "\\%o",
+                     *message & 0377);
+            len = 1;
+        } else {
+            buf[0] = '\0';
+            if (len == 1) {
+                if (*message == '\a') {
+                    strcpy(buf, "\\a");
+                } else if (*message == '\b') {
+                    strcpy(buf, "\\b");
+                } else if (*message == '\t') {
+                    strcpy(buf, "\\t");
+                } else if (*message == '\v') {
+                    strcpy(buf, "\\v");
+                } else if (*message == '\f') {
+                    strcpy(buf, "\\f");
+                } else if (*message == '\r') {
+                    strcpy(buf, "\\r");
+                } else if (*message == '\\') {
+                    strcpy(buf, "\\\\");
+                } else if ((*message < ' ') || (*message & 0x80)) {
+                    snprintf(buf, sizeof(buf), "\\%o", *message & 0377);
+                }
+            }
+            if (!buf[0]) {
+                strncpy(buf, message, len);
+                buf[len] = '\0';
+            }
+        }
+        if (print) {
+            strcpy(p, buf);
+        }
+        p += strlen(buf);
+        message += len;
+        messageLen -= len;
+    }
+    return p - begin;
 }
 
 /**
@@ -694,18 +883,19 @@ char *android_log_formatLogLine (
     const AndroidLogEntry *entry,
     size_t *p_outLength)
 {
-#if defined(HAVE_LOCALTIME_R)
+#if !defined(_WIN32)
     struct tm tmBuf;
 #endif
     struct tm* ptm;
-    char timeBuf[32];
-    char headerBuf[128];
+    char timeBuf[32]; /* good margin, 23+nul for msec, 26+nul for usec */
     char prefixBuf[128], suffixBuf[128];
     char priChar;
     int prefixSuffixIsHeaderFooter = 0;
     char * ret = NULL;
 
     priChar = filterPriToChar(entry->priority);
+    size_t prefixLen = 0, suffixLen = 0;
+    size_t len;
 
     /*
      * Get the current date/time in pretty form
@@ -716,135 +906,134 @@ char *android_log_formatLogLine (
      * in the time stamp.  Don't use forward slashes, parenthesis,
      * brackets, asterisks, or other special chars here.
      */
-#if defined(HAVE_LOCALTIME_R)
+#if !defined(_WIN32)
     ptm = localtime_r(&(entry->tv_sec), &tmBuf);
 #else
     ptm = localtime(&(entry->tv_sec));
 #endif
-    //strftime(timeBuf, sizeof(timeBuf), "%Y-%m-%d %H:%M:%S", ptm);
+    /* strftime(timeBuf, sizeof(timeBuf), "%Y-%m-%d %H:%M:%S", ptm); */
     strftime(timeBuf, sizeof(timeBuf), "%m-%d %H:%M:%S", ptm);
+    len = strlen(timeBuf);
+    if (p_format->usec_time_output) {
+        snprintf(timeBuf + len, sizeof(timeBuf) - len,
+                 ".%06ld", entry->tv_nsec / 1000);
+    } else {
+        snprintf(timeBuf + len, sizeof(timeBuf) - len,
+                 ".%03ld", entry->tv_nsec / 1000000);
+    }
 
     /*
      * Construct a buffer containing the log header and log message.
      */
-    size_t prefixLen, suffixLen;
-
-    size_t prefixColorLen = 0;
-    char * prefixBufTmp = prefixBuf;
-    size_t prefixBufTmpRemainLen = sizeof(prefixBuf);
-
-    if (p_format->colored_output == OUTPUT_COLOR_ON) {
-    prefixColorLen = snprintf(prefixBufTmp, prefixBufTmpRemainLen, "%c[%d;%d;%dm", 0x1B, 38, 5, colorFromPri(entry->priority));
-    if(prefixColorLen >= prefixBufTmpRemainLen)
-        prefixColorLen = prefixBufTmpRemainLen - 1;
-    prefixBufTmp += prefixColorLen;
-    prefixBufTmpRemainLen -= prefixColorLen;
+    if (p_format->colored_output) {
+        prefixLen = snprintf(prefixBuf, sizeof(prefixBuf), "\x1B[38;5;%dm",
+                             colorFromPri(entry->priority));
+        prefixLen = MIN(prefixLen, sizeof(prefixBuf));
+        suffixLen = snprintf(suffixBuf, sizeof(suffixBuf), "\x1B[0m");
+        suffixLen = MIN(suffixLen, sizeof(suffixBuf));
     }
 
     switch (p_format->format) {
         case FORMAT_TAG:
-            prefixLen = snprintf(prefixBufTmp, prefixBufTmpRemainLen,
+            len = snprintf(prefixBuf + prefixLen, sizeof(prefixBuf) - prefixLen,
                 "%c/%-8s: ", priChar, entry->tag);
-            strcpy(suffixBuf, "\n"); suffixLen = 1;
+            strcpy(suffixBuf + suffixLen, "\n");
+            ++suffixLen;
             break;
         case FORMAT_PROCESS:
-            prefixLen = snprintf(prefixBufTmp, prefixBufTmpRemainLen,
-                "%c(%5d) ", priChar, entry->pid);
-            suffixLen = snprintf(suffixBuf, sizeof(suffixBuf),
+            len = snprintf(suffixBuf + suffixLen, sizeof(suffixBuf) - suffixLen,
                 "  (%s)\n", entry->tag);
+            suffixLen += MIN(len, sizeof(suffixBuf) - suffixLen);
+            len = snprintf(prefixBuf + prefixLen, sizeof(prefixBuf) - prefixLen,
+                "%c(%5d) ", priChar, entry->pid);
             break;
         case FORMAT_THREAD:
-            prefixLen = snprintf(prefixBufTmp, prefixBufTmpRemainLen,
-                "%c(%5d:%p) ", priChar, entry->pid, (void*)entry->tid);
-            strcpy(suffixBuf, "\n");
-            suffixLen = 1;
+            len = snprintf(prefixBuf + prefixLen, sizeof(prefixBuf) - prefixLen,
+                "%c(%5d:%5d) ", priChar, entry->pid, entry->tid);
+            strcpy(suffixBuf + suffixLen, "\n");
+            ++suffixLen;
             break;
         case FORMAT_RAW:
-            prefixBuf[0] = 0;
-            prefixLen = 0;
-            strcpy(suffixBuf, "\n");
-            suffixLen = 1;
+            prefixBuf[prefixLen] = 0;
+            len = 0;
+            strcpy(suffixBuf + suffixLen, "\n");
+            ++suffixLen;
             break;
         case FORMAT_TIME:
-            prefixLen = snprintf(prefixBufTmp, prefixBufTmpRemainLen,
-                "%s.%03ld %c/%-8s(%5d): ", timeBuf, entry->tv_nsec / 1000000,
-                priChar, entry->tag, entry->pid);
-            strcpy(suffixBuf, "\n");
-            suffixLen = 1;
+            len = snprintf(prefixBuf + prefixLen, sizeof(prefixBuf) - prefixLen,
+                "%s %c/%-8s(%5d): ", timeBuf, priChar, entry->tag, entry->pid);
+            strcpy(suffixBuf + suffixLen, "\n");
+            ++suffixLen;
             break;
         case FORMAT_THREADTIME:
-            prefixLen = snprintf(prefixBufTmp, prefixBufTmpRemainLen,
-                "%s.%03ld %5d %5d %c %-8s: ", timeBuf, entry->tv_nsec / 1000000,
-                (int)entry->pid, (int)entry->tid, priChar, entry->tag);
-            strcpy(suffixBuf, "\n");
-            suffixLen = 1;
+            len = snprintf(prefixBuf + prefixLen, sizeof(prefixBuf) - prefixLen,
+                "%s %5d %5d %c %-8s: ", timeBuf,
+                entry->pid, entry->tid, priChar, entry->tag);
+            strcpy(suffixBuf + suffixLen, "\n");
+            ++suffixLen;
             break;
         case FORMAT_LONG:
-            prefixLen = snprintf(prefixBufTmp, prefixBufTmpRemainLen,
-                "[ %s.%03ld %5d:%p %c/%-8s ]\n",
-                timeBuf, entry->tv_nsec / 1000000, entry->pid,
-                (void*)entry->tid, priChar, entry->tag);
-            strcpy(suffixBuf, "\n\n");
-            suffixLen = 2;
+            len = snprintf(prefixBuf + prefixLen, sizeof(prefixBuf) - prefixLen,
+                "[ %s %5d:%5d %c/%-8s ]\n",
+                timeBuf, entry->pid, entry->tid, priChar, entry->tag);
+            strcpy(suffixBuf + suffixLen, "\n\n");
+            suffixLen += 2;
             prefixSuffixIsHeaderFooter = 1;
             break;
         case FORMAT_BRIEF:
         default:
-            prefixLen = snprintf(prefixBufTmp, prefixBufTmpRemainLen,
+            len = snprintf(prefixBuf + prefixLen, sizeof(prefixBuf) - prefixLen,
                 "%c/%-8s(%5d): ", priChar, entry->tag, entry->pid);
-            strcpy(suffixBuf, "\n");
-            suffixLen = 1;
+            strcpy(suffixBuf + suffixLen, "\n");
+            ++suffixLen;
             break;
     }
+
     /* snprintf has a weird return value.   It returns what would have been
      * written given a large enough buffer.  In the case that the prefix is
      * longer then our buffer(128), it messes up the calculations below
      * possibly causing heap corruption.  To avoid this we double check and
      * set the length at the maximum (size minus null byte)
      */
-    if(prefixLen >= prefixBufTmpRemainLen)
-        prefixLen = prefixBufTmpRemainLen - 1;
-    if(suffixLen >= sizeof(suffixBuf))
-        suffixLen = sizeof(suffixBuf) - 1;
-
-    size_t suffixColorLen = 0;
-    char * suffixBufTmp = suffixBuf + suffixLen;
-    size_t suffixBufTmpRemainLen = sizeof(suffixBuf) - suffixLen;
-
-    if (p_format->colored_output == OUTPUT_COLOR_ON) {
-    suffixColorLen = snprintf(suffixBufTmp, suffixBufTmpRemainLen, "%c[%dm", 0x1B, 0);
-    if(suffixColorLen >= suffixBufTmpRemainLen)
-        suffixColorLen = suffixBufTmpRemainLen - 1;
-    }
-
+    prefixLen += MIN(len, sizeof(prefixBuf) - prefixLen);
+    suffixLen = MIN(suffixLen, sizeof(suffixBuf));
 
     /* the following code is tragically unreadable */
 
     size_t numLines;
-    size_t i;
     char *p;
     size_t bufferSize;
     const char *pm;
 
     if (prefixSuffixIsHeaderFooter) {
-        // we're just wrapping message with a header/footer
+        /* we're just wrapping message with a header/footer */
         numLines = 1;
     } else {
         pm = entry->message;
         numLines = 0;
 
-        // The line-end finding here must match the line-end finding
-        // in for ( ... numLines...) loop below
+        /*
+         * The line-end finding here must match the line-end finding
+         * in for ( ... numLines...) loop below
+         */
         while (pm < (entry->message + entry->messageLen)) {
             if (*pm++ == '\n') numLines++;
         }
-        // plus one line for anything not newline-terminated at the end
+        /* plus one line for anything not newline-terminated at the end */
         if (pm > entry->message && *(pm-1) != '\n') numLines++;
     }
 
-    // this is an upper bound--newlines in message may be counted
-    // extraneously
-    bufferSize = (numLines * (prefixColorLen + prefixLen + suffixLen + suffixColorLen)) + entry->messageLen + 1;
+    /*
+     * this is an upper bound--newlines in message may be counted
+     * extraneously
+     */
+    bufferSize = (numLines * (prefixLen + suffixLen)) + 1;
+    if (p_format->printable_output) {
+        /* Calculate extra length to convert non-printable to printable */
+        bufferSize += convertPrintable(NULL, entry->message, entry->messageLen);
+    } else {
+        bufferSize += entry->messageLen;
+    }
 
     if (defaultBufferSize >= bufferSize) {
         ret = defaultBuffer;
@@ -863,29 +1052,36 @@ char *android_log_formatLogLine (
 
     if (prefixSuffixIsHeaderFooter) {
         strcat(p, prefixBuf);
-        p += prefixColorLen + prefixLen;
-        strncat(p, entry->message, entry->messageLen);
-        p += entry->messageLen;
+        p += prefixLen;
+        if (p_format->printable_output) {
+            p += convertPrintable(p, entry->message, entry->messageLen);
+        } else {
+            strncat(p, entry->message, entry->messageLen);
+            p += entry->messageLen;
+        }
         strcat(p, suffixBuf);
-        p += suffixLen + suffixColorLen;
+        p += suffixLen;
     } else {
         while(pm < (entry->message + entry->messageLen)) {
             const char *lineStart;
             size_t lineLen;
-
             lineStart = pm;
 
-            // Find the next end-of-line in message
+            /* Find the next end-of-line in message */
             while (pm < (entry->message + entry->messageLen)
                     && *pm != '\n') pm++;
             lineLen = pm - lineStart;
 
             strcat(p, prefixBuf);
-            p += prefixColorLen + prefixLen;
-            strncat(p, lineStart, lineLen);
-            p += lineLen;
+            p += prefixLen;
+            if (p_format->printable_output) {
+                p += convertPrintable(p, lineStart, lineLen);
+            } else {
+                strncat(p, lineStart, lineLen);
+                p += lineLen;
+            }
             strcat(p, suffixBuf);
-            p += suffixLen + suffixColorLen;
+            p += suffixLen;
 
             if (*pm == '\n') pm++;
         }
@@ -942,89 +1138,4 @@ done:
     }
 
     return ret;
-}
-
-
-
-void logprint_run_tests()
-{
-#if 0
-
-    fprintf(stderr, "tests disabled\n");
-
-#else
-
-    int err;
-    const char *tag;
-    AndroidLogFormat *p_format;
-
-    p_format = android_log_format_new();
-
-    fprintf(stderr, "running tests\n");
-
-    tag = "random";
-
-    android_log_addFilterRule(p_format,"*:i");
-
-    assert (ANDROID_LOG_INFO == filterPriForTag(p_format, "random"));
-    assert(android_log_shouldPrintLine(p_format, tag, ANDROID_LOG_DEBUG) == 0);
-    android_log_addFilterRule(p_format, "*");
-    assert (ANDROID_LOG_DEBUG == filterPriForTag(p_format, "random"));
-    assert(android_log_shouldPrintLine(p_format, tag, ANDROID_LOG_DEBUG) > 0);
-    android_log_addFilterRule(p_format, "*:v");
-    assert (ANDROID_LOG_VERBOSE == filterPriForTag(p_format, "random"));
-    assert(android_log_shouldPrintLine(p_format, tag, ANDROID_LOG_DEBUG) > 0);
-    android_log_addFilterRule(p_format, "*:i");
-    assert (ANDROID_LOG_INFO == filterPriForTag(p_format, "random"));
-    assert(android_log_shouldPrintLine(p_format, tag, ANDROID_LOG_DEBUG) == 0);
-
-    android_log_addFilterRule(p_format, "random");
-    assert (ANDROID_LOG_VERBOSE == filterPriForTag(p_format, "random"));
-    assert(android_log_shouldPrintLine(p_format, tag, ANDROID_LOG_DEBUG) > 0);
-    android_log_addFilterRule(p_format, "random:v");
-    assert (ANDROID_LOG_VERBOSE == filterPriForTag(p_format, "random"));
-    assert(android_log_shouldPrintLine(p_format, tag, ANDROID_LOG_DEBUG) > 0);
-    android_log_addFilterRule(p_format, "random:d");
-    assert (ANDROID_LOG_DEBUG == filterPriForTag(p_format, "random"));
-    assert(android_log_shouldPrintLine(p_format, tag, ANDROID_LOG_DEBUG) > 0);
-    android_log_addFilterRule(p_format, "random:w");
-    assert (ANDROID_LOG_WARN == filterPriForTag(p_format, "random"));
-    assert(android_log_shouldPrintLine(p_format, tag, ANDROID_LOG_DEBUG) == 0);
-
-    android_log_addFilterRule(p_format, "crap:*");
-    assert (ANDROID_LOG_VERBOSE== filterPriForTag(p_format, "crap"));
-    assert(android_log_shouldPrintLine(p_format, "crap", ANDROID_LOG_VERBOSE) > 0);
-
-    // invalid expression
-    err = android_log_addFilterRule(p_format, "random:z");
-    assert (err < 0);
-    assert (ANDROID_LOG_WARN == filterPriForTag(p_format, "random"));
-    assert(android_log_shouldPrintLine(p_format, tag, ANDROID_LOG_DEBUG) == 0);
-
-    // Issue #550946
-    err = android_log_addFilterString(p_format, " ");
-    assert(err == 0);
-    assert(ANDROID_LOG_WARN == filterPriForTag(p_format, "random"));
-
-    // note trailing space
-    err = android_log_addFilterString(p_format, "*:s random:d ");
-    assert(err == 0);
-    assert(ANDROID_LOG_DEBUG == filterPriForTag(p_format, "random"));
-
-    err = android_log_addFilterString(p_format, "*:s random:z");
-    assert(err < 0);
-
-
-#if 0
-    char *ret;
-    char defaultBuffer[512];
-
-    ret = android_log_formatLogLine(p_format,
-        defaultBuffer, sizeof(defaultBuffer), 0, ANDROID_LOG_ERROR, 123,
-        123, 123, "random", "nofile", strlen("Hello"), "Hello", NULL);
-#endif
-
-
-    fprintf(stderr, "tests complete\n");
-#endif
 }

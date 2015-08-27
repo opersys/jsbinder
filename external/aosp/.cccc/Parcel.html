@@ -1,0 +1,969 @@
+<HTML><HEAD><TITLE>
+Detailed report on module Parcel
+</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="summary">Detailed report on module Parcel</A></H1>
+<TABLE BORDER WIDTH=100%>
+<TR>
+<TH BGCOLOR="AQUA" WIDTH=70%>Metric</TH><TH BGCOLOR="AQUA" WIDTH=10%>Tag</TH><TH BGCOLOR="AQUA" WIDTH=10%>Overall</TH><TH BGCOLOR="AQUA" WIDTH=10%>Per Function</TH></TR>
+<TR>
+<TD>Lines of Code</TD><TD>LOC</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>  1208</EM></TD><TD ALIGN=RIGHT>******</TD></TR>
+<TR>
+<TD>McCabe's Cyclomatic Number</TD><TD>MVG</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>   349</EM></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
+<TR>
+<TD>Lines of Comment</TD><TD>COM</TD><TD ALIGN=RIGHT>    91</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>********</STRONG></TD></TR>
+<TR>
+<TD>LOC/COM</TD><TD>L_C</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>13.275</EM></TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>MVG/COM</TD><TD>M_C</TD><TD ALIGN=RIGHT> 3.835</TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>Weighted Methods per Class ( &nbsp;weighting = unity&nbsp;)</TD><TD>WMC1</TD><TD ALIGN=RIGHT>   102</TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>Weighted Methods per Class ( &nbsp;weighting = visible&nbsp;)</TD><TD>WMCv</TD><TD ALIGN=RIGHT>     0</TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>Depth of Inheritance Tree</TD><TD>DIT</TD><TD ALIGN=RIGHT>     0</TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>Number of Children</TD><TD>NOC</TD><TD ALIGN=RIGHT>     0</TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>Coupling between objects</TD><TD>CBO</TD><TD ALIGN=RIGHT>    36</TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>Information Flow measure ( &nbsp;inclusive&nbsp;)</TD><TD>IF4</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG> 67600</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>********</STRONG></TD></TR>
+<TR>
+<TD>Information Flow measure ( &nbsp;visible&nbsp;)</TD><TD>IF4v</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG> 67600</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>********</STRONG></TD></TR>
+<TR>
+<TD>Information Flow measure ( &nbsp;concrete&nbsp;)</TD><TD>IF4c</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>********</TD></TR>
+</TABLE>
+<H2><A NAME="modext">Definitions and Declarations</A></H2>
+<TABLE BORDER WIDTH=100%><TR>
+<TD WIDTH=50%>Description</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH><TR><TD COLSPAN=6>No module extents have been identified for this module</TD></TR>
+<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
+</TR></TABLE>
+<H2><A NAME="proc">Functions</A></H2>
+<TABLE BORDER WIDTH=100%><TR>
+<TD WIDTH=50%>Function prototype</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH><TR>
+<TD>Parcel( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       299">./binder/Parcel.cpp:299</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>acquireObjects( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1521">./binder/Parcel.cpp:1521</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    13</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>appendFrom( &nbsp;const Parcel *, &nbsp;size_t, &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       390">./binder/Parcel.cpp:390</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    68</EM></TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    21</EM></TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM> 7.556</EM></TD><TD ALIGN=RIGHT> 2.333</TD></TR>
+<TR>
+<TD>checkInterface( &nbsp;IBinder *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       510">./binder/Parcel.cpp:510</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>closeFileDescriptors( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1415">./binder/Parcel.cpp:1415</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    14</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>continueWrite( &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1610">./binder/Parcel.cpp:1610</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>   124</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>    35</STRONG></TD><TD ALIGN=RIGHT>    12</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>10.333</EM></TD><TD ALIGN=RIGHT> 2.917</TD></TR>
+<TR>
+<TD>data( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       325">./binder/Parcel.cpp:325</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>dataAvail( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       335">./binder/Parcel.cpp:335</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>dataCapacity( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       351">./binder/Parcel.cpp:351</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>dataPosition( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       346">./binder/Parcel.cpp:346</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>dataSize( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       330">./binder/Parcel.cpp:330</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>enforceInterface( &nbsp;const String16 &amp;, &nbsp;IPCThreadState *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       515">./binder/Parcel.cpp:515</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    22</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT> 5.500</TD><TD ALIGN=RIGHT> 1.250</TD></TR>
+<TR>
+<TD>errorCheck( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       552">./binder/Parcel.cpp:552</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>finishWrite( &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       562">./binder/Parcel.cpp:562</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    10</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>freeData( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1535">./binder/Parcel.cpp:1535</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>freeDataNoInit( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1541">./binder/Parcel.cpp:1541</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    19</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>getGlobalAllocCount( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       318">./binder/Parcel.cpp:318</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>getGlobalAllocSize( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       311">./binder/Parcel.cpp:311</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>growData( &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1562">./binder/Parcel.cpp:1562</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>hasFileDescriptors( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       493">./binder/Parcel.cpp:493</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>initState( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1762">./binder/Parcel.cpp:1762</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    19</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>ipcData( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1432">./binder/Parcel.cpp:1432</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>ipcDataSize( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1437">./binder/Parcel.cpp:1437</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>ipcObjects( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1442">./binder/Parcel.cpp:1442</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>ipcObjectsCount( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1447">./binder/Parcel.cpp:1447</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>ipcSetDataReference( &nbsp;const uint8_t *, &nbsp;size_t, &nbsp;const binder_size_t *, &nbsp;size_t, &nbsp;release_func, &nbsp;void *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1452">./binder/Parcel.cpp:1452</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    27</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>27.000</EM></TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>objects( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       542">./binder/Parcel.cpp:542</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>objectsCount( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       547">./binder/Parcel.cpp:547</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>print( &nbsp;TextOutput &amp;, &nbsp;uint32_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1481">./binder/Parcel.cpp:1481</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    23</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>23.000</EM></TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>pushAllowFds( &nbsp;bool&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       479">./binder/Parcel.cpp:479</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>read( &nbsp;FlattenableHelperInterface &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1318">./binder/Parcel.cpp:1318</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    28</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>14.000</EM></TD><TD ALIGN=RIGHT> 4.500</TD></TR>
+<TR>
+<TD>read( &nbsp;void *, &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       974">./binder/Parcel.cpp:974</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>******</TD></TR>
+<TR>
+<TD>readAligned( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1013">./binder/Parcel.cpp:1013</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readAligned( &nbsp;T *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       999">./binder/Parcel.cpp:999</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readBlob( &nbsp;size_t, &nbsp;ReadableBlob *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1292">./binder/Parcel.cpp:1292</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    20</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    11</EM></TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>10.000</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM> 5.500</EM></TD></TR>
+<TR>
+<TD>readCString( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1156">./binder/Parcel.cpp:1156</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    15</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readDouble( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1120">./binder/Parcel.cpp:1120</A></CODE><BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1137">./binder/Parcel.cpp:1137</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    13</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readDouble( &nbsp;double *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1107">./binder/Parcel.cpp:1107</A></CODE><BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1132">./binder/Parcel.cpp:1132</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    16</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readExceptionCode( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1222">./binder/Parcel.cpp:1222</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readFileDescriptor( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1262">./binder/Parcel.cpp:1262</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readFloat( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1100">./binder/Parcel.cpp:1100</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readFloat( &nbsp;float *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1094">./binder/Parcel.cpp:1094</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readInplace( &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       986">./binder/Parcel.cpp:986</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>******</TD></TR>
+<TR>
+<TD>readInt32( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1042">./binder/Parcel.cpp:1042</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readInt32( &nbsp;int32_t *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1037">./binder/Parcel.cpp:1037</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readInt64( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1063">./binder/Parcel.cpp:1063</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readInt64( &nbsp;int64_t *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1057">./binder/Parcel.cpp:1057</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readIntPtr( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1150">./binder/Parcel.cpp:1150</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readIntPtr( &nbsp;intptr_t *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1144">./binder/Parcel.cpp:1144</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readNativeHandle( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1238">./binder/Parcel.cpp:1238</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    21</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
+<TR>
+<TD>readObject( &nbsp;bool&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1354">./binder/Parcel.cpp:1354</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    47</EM></TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    16</EM></TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT> 5.222</TD><TD ALIGN=RIGHT> 1.778</TD></TR>
+<TR>
+<TD>readParcelFileDescriptor( &nbsp;int &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1277">./binder/Parcel.cpp:1277</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    13</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readPointer( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1088">./binder/Parcel.cpp:1088</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readPointer( &nbsp;uintptr_t *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1078">./binder/Parcel.cpp:1078</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readString16( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1184">./binder/Parcel.cpp:1184</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readString16Inplace( &nbsp;size_t *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1193">./binder/Parcel.cpp:1193</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    13</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT> 5.000</TD></TR>
+<TR>
+<TD>readString8( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1173">./binder/Parcel.cpp:1173</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT> 5.000</TD></TR>
+<TR>
+<TD>readStrongBinder( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1208">./binder/Parcel.cpp:1208</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readUint32( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1052">./binder/Parcel.cpp:1052</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readUint32( &nbsp;uint32_t *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1047">./binder/Parcel.cpp:1047</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readUint64( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1073">./binder/Parcel.cpp:1073</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readUint64( &nbsp;uint64_t *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1068">./binder/Parcel.cpp:1068</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>readWeakBinder( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1215">./binder/Parcel.cpp:1215</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>releaseObjects( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1507">./binder/Parcel.cpp:1507</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    13</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>remove( &nbsp;size_t, &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       969">./binder/Parcel.cpp:969</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>restartWrite( &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1570">./binder/Parcel.cpp:1570</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    33</EM></TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
+<TR>
+<TD>restoreAllowFds( &nbsp;bool&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       488">./binder/Parcel.cpp:488</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>scanForFds( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1782">./binder/Parcel.cpp:1782</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    14</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>setData( &nbsp;const uint8_t *, &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       379">./binder/Parcel.cpp:379</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    10</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>setDataCapacity( &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       373">./binder/Parcel.cpp:373</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>setDataPosition( &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       367">./binder/Parcel.cpp:367</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>setDataSize( &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       356">./binder/Parcel.cpp:356</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    10</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>setError( &nbsp;status_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       557">./binder/Parcel.cpp:557</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>write( &nbsp;const FlattenableHelperInterface &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       887">./binder/Parcel.cpp:887</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    25</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    11</EM></TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>12.500</EM></TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM> 5.500</EM></TD></TR>
+<TR>
+<TD>write( &nbsp;const void *, &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       594">./binder/Parcel.cpp:594</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeAligned( &nbsp;T&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1023">./binder/Parcel.cpp:1023</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeBlob( &nbsp;size_t, &nbsp;WritableBlob *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       839">./binder/Parcel.cpp:839</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    42</EM></TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    16</EM></TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>14.000</EM></TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM> 5.333</EM></TD></TR>
+<TR>
+<TD>writeByteArray( &nbsp;size_t, &nbsp;const uint8_t *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       664">./binder/Parcel.cpp:664</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    10</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeCString( &nbsp;const char *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       716">./binder/Parcel.cpp:716</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeDouble( &nbsp;double&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       697">./binder/Parcel.cpp:697</A></CODE><BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       709">./binder/Parcel.cpp:709</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    13</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeDupFileDescriptor( &nbsp;int&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       800">./binder/Parcel.cpp:800</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    12</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeFileDescriptor( &nbsp;int, &nbsp;bool&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       789">./binder/Parcel.cpp:789</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    10</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeFloat( &nbsp;float&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       690">./binder/Parcel.cpp:690</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeInplace( &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       604">./binder/Parcel.cpp:604</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    25</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT> 5.000</TD><TD ALIGN=RIGHT> 1.400</TD></TR>
+<TR>
+<TD>writeInt32( &nbsp;int32_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       644">./binder/Parcel.cpp:644</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeInt32Array( &nbsp;size_t, &nbsp;const int32_t *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       654">./binder/Parcel.cpp:654</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    10</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeInt64( &nbsp;int64_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       675">./binder/Parcel.cpp:675</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeInterfaceToken( &nbsp;const String16 &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       502">./binder/Parcel.cpp:502</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeNativeHandle( &nbsp;const native_handle *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       766">./binder/Parcel.cpp:766</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    18</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    12</EM></TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
+<TR>
+<TD>writeNoException( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       964">./binder/Parcel.cpp:964</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeObject( &nbsp;const flat_binder_object &amp;, &nbsp;bool&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       923">./binder/Parcel.cpp:923</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    33</EM></TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    14</EM></TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>16.500</EM></TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM> 7.000</EM></TD></TR>
+<TR>
+<TD>writeParcelFileDescriptor( &nbsp;int, &nbsp;int&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       816">./binder/Parcel.cpp:816</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    21</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>    13</EM></TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT> 3.000</TD><TD ALIGN=RIGHT> 1.857</TD></TR>
+<TR>
+<TD>writePointer( &nbsp;uintptr_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       685">./binder/Parcel.cpp:685</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeString16( &nbsp;const String16 &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       733">./binder/Parcel.cpp:733</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeString16( &nbsp;const char16_t *, &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       738">./binder/Parcel.cpp:738</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    16</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
+<TR>
+<TD>writeString8( &nbsp;const String8 &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       721">./binder/Parcel.cpp:721</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeStrongBinder( &nbsp;const sp &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       756">./binder/Parcel.cpp:756</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeUint32( &nbsp;uint32_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       649">./binder/Parcel.cpp:649</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeUint64( &nbsp;uint64_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       680">./binder/Parcel.cpp:680</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>writeUnpadded( &nbsp;const void *, &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       575">./binder/Parcel.cpp:575</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    15</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM> 6.000</EM></TD></TR>
+<TR>
+<TD>writeWeakBinder( &nbsp;const wp &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       761">./binder/Parcel.cpp:761</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>~Parcel( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       305">./binder/Parcel.cpp:305</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
+</TR></TABLE>
+<H2><A NAME="structdet">Relationships</A></H2>
+<TABLE BORDER WIDTH=100%>
+<TR><TH WIDTH=50%>Clients</TH><TH WIDTH=50%>Suppliers</TH></TR>
+<TR>
+<TD WIDTH=50%>
+BBinder [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Binder.cpp:        98">./binder/Binder.cpp:98</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Binder.cpp:        98">./binder/Binder.cpp:98</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Binder.cpp:       205">./binder/Binder.cpp:205</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Binder.cpp:       205">./binder/Binder.cpp:205</A></CODE><BR>
+<BR>
+<BR>
+BnAppOpsCallback [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IAppOpsCallback.cpp:        53">./binder/IAppOpsCallback.cpp:53</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IAppOpsCallback.cpp:        53">./binder/IAppOpsCallback.cpp:53</A></CODE><BR>
+<BR>
+<BR>
+BnAppOpsService [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IAppOpsService.cpp:       121">./binder/IAppOpsService.cpp:121</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IAppOpsService.cpp:       121">./binder/IAppOpsService.cpp:121</A></CODE><BR>
+<BR>
+<BR>
+BnBatteryStats [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IBatteryStats.cpp:        99">./binder/IBatteryStats.cpp:99</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IBatteryStats.cpp:        99">./binder/IBatteryStats.cpp:99</A></CODE><BR>
+<BR>
+<BR>
+BnMemory [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IMemory.cpp:       212">./binder/IMemory.cpp:212</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IMemory.cpp:       212">./binder/IMemory.cpp:212</A></CODE><BR>
+<BR>
+<BR>
+BnMemoryHeap [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IMemory.cpp:       366">./binder/IMemory.cpp:366</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IMemory.cpp:       366">./binder/IMemory.cpp:366</A></CODE><BR>
+<BR>
+<BR>
+BnPermissionController [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IPermissionController.cpp:        58">./binder/IPermissionController.cpp:58</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IPermissionController.cpp:        58">./binder/IPermissionController.cpp:58</A></CODE><BR>
+<BR>
+<BR>
+BnServiceManager [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IServiceManager.cpp:       190">./binder/IServiceManager.cpp:190</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IServiceManager.cpp:       190">./binder/IServiceManager.cpp:190</A></CODE><BR>
+<BR>
+<BR>
+BpBinder [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/BpBinder.cpp:       160">./binder/BpBinder.cpp:160</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/BpBinder.cpp:       160">./binder/BpBinder.cpp:160</A></CODE><BR>
+<BR>
+<BR>
+IPCThreadState [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IPCThreadState.cpp:       528">./binder/IPCThreadState.cpp:528</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IPCThreadState.cpp:       529">./binder/IPCThreadState.cpp:529</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IPCThreadState.cpp:       681">./binder/IPCThreadState.cpp:681</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IPCThreadState.cpp:       691">./binder/IPCThreadState.cpp:691</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IPCThreadState.cpp:       884">./binder/IPCThreadState.cpp:884</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/IPCThreadState.cpp:      1150">./binder/IPCThreadState.cpp:1150</A></CODE><BR>
+<BR>
+<BR>
+&nbsp;
+</TD>
+<TD WIDTH=50%>
+FlattenableHelperInterface [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       887">./binder/Parcel.cpp:887</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1318">./binder/Parcel.cpp:1318</A></CODE><BR>
+<BR>
+<BR>
+IBinder [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       510">./binder/Parcel.cpp:510</A></CODE><BR>
+<BR>
+<BR>
+IPCThreadState [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       516">./binder/Parcel.cpp:516</A></CODE><BR>
+<BR>
+<BR>
+ReadableBlob [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1292">./binder/Parcel.cpp:1292</A></CODE><BR>
+<BR>
+<BR>
+String16 [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       502">./binder/Parcel.cpp:502</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       515">./binder/Parcel.cpp:515</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       733">./binder/Parcel.cpp:733</A></CODE><BR>
+<BR>
+<BR>
+String8 [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       721">./binder/Parcel.cpp:721</A></CODE><BR>
+<BR>
+<BR>
+T [CV] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       999">./binder/Parcel.cpp:999</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1023">./binder/Parcel.cpp:1023</A></CODE><BR>
+<BR>
+<BR>
+TextOutput [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1481">./binder/Parcel.cpp:1481</A></CODE><BR>
+<BR>
+<BR>
+WritableBlob [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       839">./binder/Parcel.cpp:839</A></CODE><BR>
+<BR>
+<BR>
+binder_size_t [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1453">./binder/Parcel.cpp:1453</A></CODE><BR>
+<BR>
+<BR>
+bool [CV] <BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       479">./binder/Parcel.cpp:479</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       488">./binder/Parcel.cpp:488</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       789">./binder/Parcel.cpp:789</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       923">./binder/Parcel.cpp:923</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1354">./binder/Parcel.cpp:1354</A></CODE><BR>
+<BR>
+<BR>
+char16_t [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       738">./binder/Parcel.cpp:738</A></CODE><BR>
+<BR>
+<BR>
+flat_binder_object [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       923">./binder/Parcel.cpp:923</A></CODE><BR>
+<BR>
+<BR>
+int32_t [CV] <BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       644">./binder/Parcel.cpp:644</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       654">./binder/Parcel.cpp:654</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1037">./binder/Parcel.cpp:1037</A></CODE><BR>
+<BR>
+<BR>
+int64_t [CV] <BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       675">./binder/Parcel.cpp:675</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1057">./binder/Parcel.cpp:1057</A></CODE><BR>
+<BR>
+<BR>
+intptr_t [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1144">./binder/Parcel.cpp:1144</A></CODE><BR>
+<BR>
+<BR>
+native_handle [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       766">./binder/Parcel.cpp:766</A></CODE><BR>
+<BR>
+<BR>
+release_func [CV] <BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1453">./binder/Parcel.cpp:1453</A></CODE><BR>
+<BR>
+<BR>
+size_t [CV] <BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       356">./binder/Parcel.cpp:356</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       367">./binder/Parcel.cpp:367</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       373">./binder/Parcel.cpp:373</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       379">./binder/Parcel.cpp:379</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       390">./binder/Parcel.cpp:390</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       390">./binder/Parcel.cpp:390</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       562">./binder/Parcel.cpp:562</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       575">./binder/Parcel.cpp:575</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       594">./binder/Parcel.cpp:594</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       604">./binder/Parcel.cpp:604</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       654">./binder/Parcel.cpp:654</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       664">./binder/Parcel.cpp:664</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       738">./binder/Parcel.cpp:738</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       839">./binder/Parcel.cpp:839</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       969">./binder/Parcel.cpp:969</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       969">./binder/Parcel.cpp:969</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       974">./binder/Parcel.cpp:974</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       986">./binder/Parcel.cpp:986</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1193">./binder/Parcel.cpp:1193</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1292">./binder/Parcel.cpp:1292</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1452">./binder/Parcel.cpp:1452</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1453">./binder/Parcel.cpp:1453</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1562">./binder/Parcel.cpp:1562</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1570">./binder/Parcel.cpp:1570</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1610">./binder/Parcel.cpp:1610</A></CODE><BR>
+<BR>
+<BR>
+sp [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       756">./binder/Parcel.cpp:756</A></CODE><BR>
+<BR>
+<BR>
+status_t [CV] <BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       557">./binder/Parcel.cpp:557</A></CODE><BR>
+<BR>
+<BR>
+uint32_t [CV] <BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       649">./binder/Parcel.cpp:649</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1047">./binder/Parcel.cpp:1047</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1481">./binder/Parcel.cpp:1481</A></CODE><BR>
+<BR>
+<BR>
+uint64_t [CV] <BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       680">./binder/Parcel.cpp:680</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1068">./binder/Parcel.cpp:1068</A></CODE><BR>
+<BR>
+<BR>
+uint8_t [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       379">./binder/Parcel.cpp:379</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       664">./binder/Parcel.cpp:664</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1452">./binder/Parcel.cpp:1452</A></CODE><BR>
+<BR>
+<BR>
+uintptr_t [CV] <BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       685">./binder/Parcel.cpp:685</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:      1078">./binder/Parcel.cpp:1078</A></CODE><BR>
+<BR>
+<BR>
+wp [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       761">./binder/Parcel.cpp:761</A></CODE><BR>
+<BR>
+<BR>
+&nbsp;
+</TD>
+</TR></TABLE>
+</BODY></HTML>

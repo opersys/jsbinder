@@ -16,40 +16,23 @@
 LOCAL_PATH := $(my-dir)
 include $(CLEAR_VARS)
 
-ifeq ($(TARGET_CPU_SMP),true)
-    targetSmpFlag := -DANDROID_SMP=1
-else
-    targetSmpFlag := -DANDROID_SMP=0
-endif
-hostSmpFlag := -DANDROID_SMP=0
-
 commonSources := \
-	array.c \
 	hashmap.c \
 	atomic.c.arm \
 	native_handle.c \
-	buffer.c \
-	socket_inaddr_any_server.c \
-	socket_local_client.c \
-	socket_local_server.c \
-	socket_loopback_client.c \
-	socket_loopback_server.c \
-	socket_network_client.c \
 	config_utils.c \
-	cpu_info.c \
 	load_file.c \
+	strlcpy.c \
 	open_memstream.c \
 	strdup16to8.c \
 	strdup8to16.c \
 	record_stream.c \
 	process_name.c \
-	properties.c \
 	threads.c \
 	sched_policy.c \
-	iosched_policy.c
-
-commonHostSources := \
-        ashmem-host.c
+	iosched_policy.c \
+	str_parms.c \
+	fs_config.c
 
 # some files must not be compiled when building against Mingw
 # they correspond to features not used by our host development tools
@@ -65,85 +48,91 @@ ifneq ($(strip $(USE_MINGW)),)
     WINDOWS_HOST_ONLY := 1
 endif
 
-ifeq ($(WINDOWS_HOST_ONLY),1)
+ifneq ($(WINDOWS_HOST_ONLY),1)
     commonSources += \
-        uio.c
-else
-    commonSources += \
-        abort_socket.c \
-        mspace.c \
-        selector.c \
-        tztime.c \
-        zygote.c
+        fs.c \
+        multiuser.c \
+        socket_inaddr_any_server.c \
+        socket_local_client.c \
+        socket_local_server.c \
+        socket_loopback_client.c \
+        socket_loopback_server.c \
+        socket_network_client.c \
+        sockets.c \
 
     commonHostSources += \
-        tzstrftime.c
+        ashmem-host.c \
+        trace-host.c
+
 endif
 
 
-# Static library for host
+# Shared and static library for host
 # ========================================================
 LOCAL_MODULE := libcutils
 LOCAL_SRC_FILES := $(commonSources) $(commonHostSources) dlmalloc_stubs.c
-LOCAL_LDLIBS := -lpthread
 LOCAL_STATIC_LIBRARIES := liblog
-LOCAL_CFLAGS += $(hostSmpFlag)
+ifneq ($(HOST_OS),windows)
+LOCAL_CFLAGS += -Werror -Wall -Wextra
+endif
+LOCAL_MULTILIB := both
 include $(BUILD_HOST_STATIC_LIBRARY)
 
-
-ifeq ($(TARGET_SIMULATOR),true)
-
-# Shared library for simulator
-# ========================================================
 include $(CLEAR_VARS)
 LOCAL_MODULE := libcutils
-LOCAL_SRC_FILES := $(commonSources) $(commonHostSources) memory.c dlmalloc_stubs.c
-LOCAL_LDLIBS := -lpthread
+LOCAL_SRC_FILES := $(commonSources) $(commonHostSources) dlmalloc_stubs.c
 LOCAL_SHARED_LIBRARIES := liblog
-LOCAL_CFLAGS += $(targetSmpFlag)
-include $(BUILD_SHARED_LIBRARY)
+ifneq ($(HOST_OS),windows)
+LOCAL_CFLAGS += -Werror -Wall -Wextra
+endif
+LOCAL_MULTILIB := both
+include $(BUILD_HOST_SHARED_LIBRARY)
 
-else #!sim
+
 
 # Shared and static library for target
 # ========================================================
 
-targetSources := ashmem-dev.c mq.c
-ifeq ($(TARGET_ARCH),arm)
-targetSources += arch-arm/memset32.S
-else  # !arm
-ifeq ($(TARGET_ARCH),sh)
-targetSources += memory.c atomic-android-sh.c
-else  # !sh
-ifeq ($(TARGET_ARCH_VARIANT),x86-atom)
-LOCAL_CFLAGS += -DHAVE_MEMSET16 -DHAVE_MEMSET32
-LOCAL_SRC_FILES += arch-x86/android_memset16.S arch-x86/android_memset32.S memory.c
-else # !x86-atom
-LOCAL_SRC_FILES += memory.c
-endif # !x86-atom
-endif # !sh
-endif # !arm
-
 include $(CLEAR_VARS)
 LOCAL_MODULE := libcutils
-LOCAL_SRC_FILES := $(commonSources) $(targetSources)
-LOCAL_CFLAGS += $(targetCFLAGS) $(targetSmpFlag)
+LOCAL_SRC_FILES := $(commonSources) \
+        android_reboot.c \
+        ashmem-dev.c \
+        debugger.c \
+        klog.c \
+        partition_utils.c \
+        properties.c \
+        qtaguid.c \
+        trace-dev.c \
+        uevent.c \
 
-LOCAL_C_INCLUDES := $(KERNEL_HEADERS)
+LOCAL_SRC_FILES_arm += arch-arm/memset32.S
+LOCAL_SRC_FILES_arm64 += arch-arm64/android_memset.S
+
+LOCAL_SRC_FILES_mips += arch-mips/android_memset.c
+LOCAL_SRC_FILES_mips64 += arch-mips/android_memset.c
+
+LOCAL_SRC_FILES_x86 += \
+        arch-x86/android_memset16.S \
+        arch-x86/android_memset32.S \
+
+LOCAL_SRC_FILES_x86_64 += \
+        arch-x86_64/android_memset16.S \
+        arch-x86_64/android_memset32.S \
+
+LOCAL_C_INCLUDES := $(libcutils_c_includes)
 LOCAL_STATIC_LIBRARIES := liblog
+LOCAL_CFLAGS += -Werror -Wall -Wextra -std=gnu90
 include $(BUILD_STATIC_LIBRARY)
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := libcutils
-ifeq ($(BOARD_NEEDS_CUTILS_LOG),true)
-LOCAL_WHOLE_STATIC_LIBRARIES := libcutils
-else
-LOCAL_SRC_FILES := $(commonSources) $(targetSources)
-endif
-LOCAL_CFLAGS += $(targetCFLAGS) $(targetSmpFlag)
-
-LOCAL_C_INCLUDES := $(KERNEL_HEADERS)
+# TODO: remove liblog as whole static library, once we don't have prebuilt that requires
+# liblog symbols present in libcutils.
+LOCAL_WHOLE_STATIC_LIBRARIES := libcutils liblog
 LOCAL_SHARED_LIBRARIES := liblog
+LOCAL_CFLAGS += -Werror -Wall -Wextra
+LOCAL_C_INCLUDES := $(libcutils_c_includes)
 include $(BUILD_SHARED_LIBRARY)
 
-endif #!sim
+include $(call all-makefiles-under,$(LOCAL_PATH))

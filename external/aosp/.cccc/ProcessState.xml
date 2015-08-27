@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module ProcessState-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="189" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="43" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
+<lines_of_code value="41" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="4.610" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="1.049" level="0" />
+<weighted_methods_per_class_unity value="18" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="7" level="0" />
+<IF4 value="0" level="0" />
+<IF4_per_member_function value="********" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_visible_per_member_function value="********" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+</module_detail>
+<procedural_detail>
+<member_function>
+<name>ProcessState()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/ProcessState.cpp" line="337" />
+</extent>
+<lines_of_code value="19" level="0" />
+<McCabes_cyclomatic_complexity value="2" level="0" />
+<lines_of_comment value="2" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>becomeContextManager(context_check_func,void *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/ProcessState.cpp" line="145" />
+</extent>
+<lines_of_code value="18" level="0" />
+<McCabes_cyclomatic_complexity value="4" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>expungeHandle(int32_t,IBinder *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/ProcessState.cpp" line="266" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="2" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getContextObject(const String16 &amp;,const sp &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/ProcessState.cpp" line="95" />
+</extent>
+<lines_of_code value="26" level="0" />
+<McCabes_cyclomatic_complexity value="8" level="0" />
+<lines_of_comment value="4" level="0" />
+<lines_of_code_per_line_of_comment value="6.500" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="2.000" level="0" />
+</member_function>
+<member_function>
+<name>getContextObject(const sp &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/ProcessState.cpp" line="84" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getStrongProxyForHandle(int32_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/ProcessState.cpp" line="178" />
+</extent>
+<lines_of_code value="26" level="0" />
+<McCabes_cyclomatic_complexity value="8" level="0" />
+<lines_of_comment value="24" level="0" />
+<lines_of_code_per_line_of_comment value="1.083" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.333" level="0" />
+</member_function>
+<member_function>
+<name>getWeakProxyForHandle(int32_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/ProcessState.cpp" line="235" />
+</extent>
+<lines_of_code value="19" level="0" />
+<McCabes_cyclomatic_complexity value="5" level="0" />
+<lines_of_comment value="7" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="0.714" level="0" />
+</member_function>
+<member_function>
+<name>giveThreadPoolName()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/ProcessState.cpp" line="304" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>isContextManager(void)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/ProcessState.cpp" line="140" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>lookupHandleLocked(int32_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/ProcessState.cpp" line="165" />
+</extent>
+<lines_of_code value="12" level="0" />
+<McCabes_cyclomatic_complexity value="4" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>makeBinderThreadName()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/ProcessState.cpp" line="278" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>self()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/ProcessState.cpp" line="69" />
+</extent>
+<lines_of_code value="9" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setContextObject(const sp &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/ProcessState.cpp" line="79" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setContextObject(const sp &amp;,const String16 &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/ProcessState.cpp" line="89" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setThreadPoolMaxThreadCount(size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/ProcessState.cpp" line="295" />
+</extent>
+<lines_of_code value="8" level="0" />
+<McCabes_cyclomatic_complexity value="2" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>spawnPooledThread(bool)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/ProcessState.cpp" line="285" />
+</extent>
+<lines_of_code value="9" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>startThreadPool()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/ProcessState.cpp" line="131" />
+</extent>
+<lines_of_code value="8" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>~ProcessState()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/ProcessState.cpp" line="360" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>ProcessState</name>
+<client_module>
+</client_module>
+<supplier_module>
+<name>IBinder</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/ProcessState.cpp" line="266" />
+</extent>
+<name>String16</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/ProcessState.cpp" line="89" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/ProcessState.cpp" line="95" />
+</extent>
+<name>bool</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/ProcessState.cpp" line="285" />
+</extent>
+<name>context_check_func</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/ProcessState.cpp" line="145" />
+</extent>
+<name>int32_t</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/ProcessState.cpp" line="165" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/ProcessState.cpp" line="178" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/ProcessState.cpp" line="235" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/ProcessState.cpp" line="266" />
+</extent>
+<name>size_t</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/ProcessState.cpp" line="295" />
+</extent>
+<name>sp</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/ProcessState.cpp" line="79" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/ProcessState.cpp" line="84" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/ProcessState.cpp" line="89" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/ProcessState.cpp" line="95" />
+</extent>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

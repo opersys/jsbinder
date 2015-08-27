@@ -27,19 +27,12 @@
 // ---------------------------------------------------------------------------
 namespace android {
 
-// Global variables
-extern int                 mArgC;
-extern const char* const*  mArgV;
-extern int                 mArgLen;
-
 class IPCThreadState;
 
 class ProcessState : public virtual RefBase
 {
 public:
     static  sp<ProcessState>    self();
-
-    static  void                setSingleProcess(bool singleProcess);
 
             void                setContextObject(const sp<IBinder>& object);
             sp<IBinder>         getContextObject(const sp<IBinder>& caller);
@@ -48,8 +41,6 @@ public:
                                                  const String16& name);
             sp<IBinder>         getContextObject(const String16& name,
                                                  const sp<IBinder>& caller);
-                                                 
-            bool                supportsProcesses() const;
 
             void                startThreadPool();
                         
@@ -66,14 +57,11 @@ public:
             wp<IBinder>         getWeakProxyForHandle(int32_t handle);
             void                expungeHandle(int32_t handle, IBinder* binder);
 
-            void                setArgs(int argc, const char* const argv[]);
-            int                 getArgC() const;
-            const char* const*  getArgV() const;
-
-            void                setArgV0(const char* txt);
-
             void                spawnPooledThread(bool isMain);
             
+            status_t            setThreadPoolMaxThreadCount(size_t maxThreads);
+            void                giveThreadPoolName();
+
 private:
     friend class IPCThreadState;
     
@@ -82,6 +70,7 @@ private:
 
                                 ProcessState(const ProcessState& o);
             ProcessState&       operator=(const ProcessState& o);
+            String8             makeBinderThreadName();
             
             struct handle_entry {
                 IBinder* binder;

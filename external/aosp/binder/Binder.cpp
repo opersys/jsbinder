@@ -16,7 +16,8 @@
 
 #include <binder/Binder.h>
 
-#include <utils/Atomic.h>
+#include <stdatomic.h>
+#include <utils/misc.h>
 #include <binder/BpBinder.h>
 #include <binder/IInterface.h>
 #include <binder/Parcel.h>
@@ -38,7 +39,7 @@ IBinder::~IBinder()
 
 // ---------------------------------------------------------------------------
 
-sp<IInterface>  IBinder::queryLocalInterface(const String16& descriptor)
+sp<IInterface>  IBinder::queryLocalInterface(const String16& /*descriptor*/)
 {
     return NULL;
 }
@@ -70,8 +71,8 @@ public:
 // ---------------------------------------------------------------------------
 
 BBinder::BBinder()
-    : mExtras(NULL)
 {
+  atomic_init(&mExtras, static_cast<uintptr_t>(0));
 }
 
 bool BBinder::isBinderAlive() const
@@ -89,7 +90,7 @@ const String16& BBinder::getInterfaceDescriptor() const
     // This is a local static rather than a global static,
     // to avoid static initializer ordering issues.
     static String16 sEmptyDescriptor;
-    LOGW("reached BBinder::getInterfaceDescriptor (this=%p)", this);
+    ALOGW("reached BBinder::getInterfaceDescriptor (this=%p)", this);
     return sEmptyDescriptor;
 }
 
@@ -116,19 +117,20 @@ status_t BBinder::transact(
 }
 
 status_t BBinder::linkToDeath(
-    const sp<DeathRecipient>& recipient, void* cookie, uint32_t flags)
+    const sp<DeathRecipient>& /*recipient*/, void* /*cookie*/,
+    uint32_t /*flags*/)
 {
     return INVALID_OPERATION;
 }
 
 status_t BBinder::unlinkToDeath(
-    const wp<DeathRecipient>& recipient, void* cookie, uint32_t flags,
-    wp<DeathRecipient>* outRecipient)
+    const wp<DeathRecipient>& /*recipient*/, void* /*cookie*/,
+    uint32_t /*flags*/, wp<DeathRecipient>* /*outRecipient*/)
 {
     return INVALID_OPERATION;
 }
 
-status_t BBinder::dump(int fd, const Vector<String16>& args)
+    status_t BBinder::dump(int /*fd*/, const Vector<String16>& /*args*/)
 {
     return NO_ERROR;
 }
@@ -137,14 +139,19 @@ void BBinder::attachObject(
     const void* objectID, void* object, void* cleanupCookie,
     object_cleanup_func func)
 {
-    Extras* e = mExtras;
+    Extras* e = reinterpret_cast<Extras*>(
+                    atomic_load_explicit(&mExtras, memory_order_acquire));
 
     if (!e) {
         e = new Extras;
-        if (android_atomic_cmpxchg(0, reinterpret_cast<int32_t>(e),
-                reinterpret_cast<volatile int32_t*>(&mExtras)) != 0) {
+        uintptr_t expected = 0;
+        if (!atomic_compare_exchange_strong_explicit(
+                                        &mExtras, &expected,
+                                        reinterpret_cast<uintptr_t>(e),
+                                        memory_order_release,
+                                        memory_order_acquire)) {
             delete e;
-            e = mExtras;
+            e = reinterpret_cast<Extras*>(expected);  // Filled in by CAS
         }
         if (e == 0) return; // out of memory
     }
@@ -153,9 +160,18 @@ void BBinder::attachObject(
     e->mObjects.attach(objectID, object, cleanupCookie, func);
 }
 
+// The C11 standard doesn't allow atomic loads from const fields,
+// though C++11 does.  Fudge it until standards get straightened out.
+static inline uintptr_t load_const_atomic(const atomic_uintptr_t* p,
+                                          memory_order mo) {
+    atomic_uintptr_t* non_const_p = const_cast<atomic_uintptr_t*>(p);
+    return atomic_load_explicit(non_const_p, mo);
+}
+
 void* BBinder::findObject(const void* objectID) const
 {
-    Extras* e = mExtras;
+    Extras* e = reinterpret_cast<Extras*>(
+                    load_const_atomic(&mExtras, memory_order_acquire));
     if (!e) return NULL;
 
     AutoMutex _l(e->mLock);
@@ -164,7 +180,8 @@ void* BBinder::findObject(const void* objectID) const
 
 void BBinder::detachObject(const void* objectID)
 {
-    Extras* e = mExtras;
+    Extras* e = reinterpret_cast<Extras*>(
+                    atomic_load_explicit(&mExtras, memory_order_acquire));
     if (!e) return;
 
     AutoMutex _l(e->mLock);
@@ -178,12 +195,14 @@ BBinder* BBinder::localBinder()
 
 BBinder::~BBinder()
 {
-    if (mExtras) delete mExtras;
+    Extras* e = reinterpret_cast<Extras*>(
+                    atomic_load_explicit(&mExtras, memory_order_relaxed));
+    if (e) delete e;
 }
 
 
 status_t BBinder::onTransact(
-    uint32_t code, const Parcel& data, Parcel* reply, uint32_t flags)
+    uint32_t code, const Parcel& data, Parcel* reply, uint32_t /*flags*/)
 {
     switch (code) {
         case INTERFACE_TRANSACTION:
@@ -199,6 +218,12 @@ status_t BBinder::onTransact(
             }
             return dump(fd, args);
         }
+
+        case SYSPROPS_TRANSACTION: {
+            report_sysprop_change();
+            return NO_ERROR;
+        }
+
         default:
             return UNKNOWN_TRANSACTION;
     }
@@ -239,14 +264,14 @@ void BpRefBase::onFirstRef()
     android_atomic_or(kRemoteAcquired, &mState);
 }
 
-void BpRefBase::onLastStrongRef(const void* id)
+void BpRefBase::onLastStrongRef(const void* /*id*/)
 {
     if (mRemote) {
         mRemote->decStrong(this);
     }
 }
 
-bool BpRefBase::onIncStrongAttempted(uint32_t flags, const void* id)
+bool BpRefBase::onIncStrongAttempted(uint32_t /*flags*/, const void* /*id*/)
 {
     return mRemote ? mRefs->attemptIncStrong(this) : false;
 }

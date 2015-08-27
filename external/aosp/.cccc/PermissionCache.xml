@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module PermissionCache-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="67" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="15" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
+<lines_of_code value="4" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="16.750" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="3.750" level="0" />
+<weighted_methods_per_class_unity value="7" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="5" level="0" />
+<IF4 value="0" level="0" />
+<IF4_per_member_function value="********" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_visible_per_member_function value="********" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+</module_detail>
+<procedural_detail>
+<member_function>
+<name>PermissionCache()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/PermissionCache.cpp" line="34" />
+</extent>
+<lines_of_code value="2" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>cache(const String16 &amp;,uid_t,bool)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/PermissionCache.cpp" line="51" />
+</extent>
+<lines_of_code value="18" level="0" />
+<McCabes_cyclomatic_complexity value="2" level="0" />
+<lines_of_comment value="2" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>check(bool *,const String16 &amp;,uid_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/PermissionCache.cpp" line="37" />
+</extent>
+<lines_of_code value="13" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>checkCallingPermission(const String16 &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/PermissionCache.cpp" line="77" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>checkCallingPermission(const String16 &amp;,int32_t *,int32_t *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/PermissionCache.cpp" line="81" />
+</extent>
+<lines_of_code value="9" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>checkPermission(const String16 &amp;,pid_t,uid_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/PermissionCache.cpp" line="91" />
+</extent>
+<lines_of_code value="18" level="0" />
+<McCabes_cyclomatic_complexity value="6" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="6.000" level="1" />
+</member_function>
+<member_function>
+<name>purge()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/PermissionCache.cpp" line="72" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>PermissionCache</name>
+<client_module>
+</client_module>
+<supplier_module>
+<name>String16</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/PermissionCache.cpp" line="38" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/PermissionCache.cpp" line="51" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/PermissionCache.cpp" line="77" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/PermissionCache.cpp" line="82" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/PermissionCache.cpp" line="92" />
+</extent>
+<name>bool</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/PermissionCache.cpp" line="37" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/PermissionCache.cpp" line="52" />
+</extent>
+<name>int32_t</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/PermissionCache.cpp" line="82" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/PermissionCache.cpp" line="82" />
+</extent>
+<name>pid_t</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/PermissionCache.cpp" line="92" />
+</extent>
+<name>uid_t</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/PermissionCache.cpp" line="38" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/PermissionCache.cpp" line="52" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/PermissionCache.cpp" line="92" />
+</extent>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

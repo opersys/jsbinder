@@ -27,11 +27,14 @@
 
 namespace android {
 
+// For TextStream.cpp
+extern Vector<int32_t> gTextBuffers;
+
 // For ProcessState.cpp
 extern Mutex gProcessMutex;
 extern sp<ProcessState> gProcess;
 
-// For ServiceManager.cpp
+// For IServiceManager.cpp
 extern Mutex gDefaultServiceManagerLock;
 extern sp<IServiceManager> gDefaultServiceManager;
 extern sp<IPermissionController> gPermissionController;

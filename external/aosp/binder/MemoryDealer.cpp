@@ -180,7 +180,6 @@ Allocation::~Allocation()
         /* NOTE: it's VERY important to not free allocations of size 0 because
          * they're special as they don't have any record in the allocator
          * and could alias some real allocation (their offset is zero). */
-        mDealer->deallocate(freedOffset);
 
         // keep the size to unmap in excess
         size_t pagesize = getpagesize();
@@ -211,18 +210,23 @@ Allocation::~Allocation()
 #ifdef MADV_REMOVE
             if (size) {
                 int err = madvise(start_ptr, size, MADV_REMOVE);
-                LOGW_IF(err, "madvise(%p, %u, MADV_REMOVE) returned %s",
+                ALOGW_IF(err, "madvise(%p, %zu, MADV_REMOVE) returned %s",
                         start_ptr, size, err<0 ? strerror(errno) : "Ok");
             }
 #endif
         }
+
+        // This should be done after madvise(MADV_REMOVE), otherwise madvise()
+        // might kick out the memory region that's allocated and/or written
+        // right after the deallocation.
+        mDealer->deallocate(freedOffset);
     }
 }
 
 // ----------------------------------------------------------------------------
 
-MemoryDealer::MemoryDealer(size_t size, const char* name)
-    : mHeap(new MemoryHeapBase(size, 0, name)),
+MemoryDealer::MemoryDealer(size_t size, const char* name, uint32_t flags)
+    : mHeap(new MemoryHeapBase(size, flags, name)),
     mAllocator(new SimpleBestFitAllocator(size))
 {    
 }
@@ -344,7 +348,7 @@ ssize_t SimpleBestFitAllocator::alloc(size_t size, uint32_t flags)
                 mList.insertBefore(free_chunk, split);
             }
 
-            LOGE_IF((flags&PAGE_ALIGNED) && 
+            ALOGE_IF((flags&PAGE_ALIGNED) && 
                     ((free_chunk->start*kMemoryAlign)&(pagesize-1)),
                     "PAGE_ALIGNED requested, but page is not aligned!!!");
 
@@ -411,7 +415,7 @@ void SimpleBestFitAllocator::dump_l(const char* what) const
 {
     String8 result;
     dump_l(result, what);
-    LOGD("%s", result.string());
+    ALOGD("%s", result.string());
 }
 
 void SimpleBestFitAllocator::dump(String8& result,
@@ -441,8 +445,8 @@ void SimpleBestFitAllocator::dump_l(String8& result,
         int np = ((cur->next) && cur->next->prev != cur) ? 1 : 0;
         int pn = ((cur->prev) && cur->prev->next != cur) ? 2 : 0;
 
-        snprintf(buffer, SIZE, "  %3u: %08x | 0x%08X | 0x%08X | %s %s\n",
-            i, int(cur), int(cur->start*kMemoryAlign),
+        snprintf(buffer, SIZE, "  %3u: %p | 0x%08X | 0x%08X | %s %s\n",
+            i, cur, int(cur->start*kMemoryAlign),
             int(cur->size*kMemoryAlign),
                     int(cur->free) ? "F" : "A",
                     errs[np|pn]);

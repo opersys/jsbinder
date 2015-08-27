@@ -18,122 +18,18 @@
 #define ANDROID_STRING8_H
 
 #include <utils/Errors.h>
+#include <utils/SharedBuffer.h>
+#include <utils/Unicode.h>
+#include <utils/TypeHelpers.h>
 
-// Need this for the char16_t type; String8.h should not
-// be depedent on the String16 class.
-#include <utils/String16.h>
-
-#include <stdint.h>
-#include <string.h>
-#include <sys/types.h>
-
-// ---------------------------------------------------------------------------
-
-extern "C" {
-
-typedef uint32_t char32_t;
-
-size_t strlen32(const char32_t *);
-size_t strnlen32(const char32_t *, size_t);
-
-/*
- * Returns the length of "src" when "src" is valid UTF-8 string.
- * Returns 0 if src is NULL, 0-length string or non UTF-8 string.
- * This function should be used to determine whether "src" is valid UTF-8
- * characters with valid unicode codepoints. "src" must be null-terminated.
- *
- * If you are going to use other GetUtf... functions defined in this header
- * with string which may not be valid UTF-8 with valid codepoint (form 0 to
- * 0x10FFFF), you should use this function before calling others, since the
- * other functions do not check whether the string is valid UTF-8 or not.
- *
- * If you do not care whether "src" is valid UTF-8 or not, you should use
- * strlen() as usual, which should be much faster.
- */
-size_t utf8_length(const char *src);
-
-/*
- * Returns the UTF-32 length of "src".
- */
-size_t utf32_length(const char *src, size_t src_len);
-
-/*
- * Returns the UTF-8 length of "src".
- */
-size_t utf8_length_from_utf16(const char16_t *src, size_t src_len);
-
-/*
- * Returns the UTF-8 length of "src".
- */
-size_t utf8_length_from_utf32(const char32_t *src, size_t src_len);
-
-/*
- * Returns the unicode value at "index".
- * Returns -1 when the index is invalid (equals to or more than "src_len").
- * If returned value is positive, it is able to be converted to char32_t, which
- * is unsigned. Then, if "next_index" is not NULL, the next index to be used is
- * stored in "next_index". "next_index" can be NULL.
- */
-int32_t utf32_at(const char *src, size_t src_len,
-                 size_t index, size_t *next_index);
-
-/*
- * Stores a UTF-32 string converted from "src" in "dst", if "dst_length" is not
- * large enough to store the string, the part of the "src" string is stored
- * into "dst".
- * Returns the size actually used for storing the string.
- * "dst" is not null-terminated when dst_len is fully used (like strncpy).
- */
-size_t utf8_to_utf32(const char* src, size_t src_len,
-                     char32_t* dst, size_t dst_len);
-
-/*
- * Stores a UTF-8 string converted from "src" in "dst", if "dst_length" is not
- * large enough to store the string, the part of the "src" string is stored
- * into "dst" as much as possible. See the examples for more detail.
- * Returns the size actually used for storing the string.
- * dst" is not null-terminated when dst_len is fully used (like strncpy).
- *
- * Example 1
- * "src" == \u3042\u3044 (\xE3\x81\x82\xE3\x81\x84)
- * "src_len" == 2
- * "dst_len" >= 7
- * ->
- * Returned value == 6
- * "dst" becomes \xE3\x81\x82\xE3\x81\x84\0
- * (note that "dst" is null-terminated)
- *
- * Example 2
- * "src" == \u3042\u3044 (\xE3\x81\x82\xE3\x81\x84)
- * "src_len" == 2
- * "dst_len" == 5
- * ->
- * Returned value == 3
- * "dst" becomes \xE3\x81\x82\0
- * (note that "dst" is null-terminated, but \u3044 is not stored in "dst"
- * since "dst" does not have enough size to store the character)
- *
- * Example 3
- * "src" == \u3042\u3044 (\xE3\x81\x82\xE3\x81\x84)
- * "src_len" == 2
- * "dst_len" == 6
- * ->
- * Returned value == 6
- * "dst" becomes \xE3\x81\x82\xE3\x81\x84
- * (note that "dst" is NOT null-terminated, like strncpy)
- */
-size_t utf32_to_utf8(const char32_t* src, size_t src_len,
-                     char* dst, size_t dst_len);
-
-size_t utf16_to_utf8(const char16_t* src, size_t src_len,
-                     char* dst, size_t dst_len);
-
-}
+#include <string.h> // for strcmp
+#include <stdarg.h>
 
 // ---------------------------------------------------------------------------
 
 namespace android {
 
+class String16;
 class TextOutput;
 
 //! This is a string holding UTF-8 characters. Does not allow the value more
@@ -141,7 +37,16 @@ class TextOutput;
 class String8
 {
 public:
+    /* use String8(StaticLinkage) if you're statically linking against
+     * libutils and declaring an empty static String8, e.g.:
+     *
+     *   static String8 sAStaticEmptyString(String8::kEmptyString);
+     *   static String8 sAnotherStaticEmptyString(sAStaticEmptyString);
+     */
+    enum StaticLinkage { kEmptyString };
+
                                 String8();
+    explicit                    String8(StaticLinkage);
                                 String8(const String8& o);
     explicit                    String8(const char* o);
     explicit                    String8(const char* o, size_t numChars);
@@ -152,14 +57,22 @@ public:
     explicit                    String8(const char32_t* o);
     explicit                    String8(const char32_t* o, size_t numChars);
                                 ~String8();
-    
+
+    static inline const String8 empty();
+
+    static String8              format(const char* fmt, ...) __attribute__((format (printf, 1, 2)));
+    static String8              formatV(const char* fmt, va_list args);
+
     inline  const char*         string() const;
     inline  size_t              size() const;
     inline  size_t              length() const;
     inline  size_t              bytes() const;
+    inline  bool                isEmpty() const;
     
     inline  const SharedBuffer* sharedBuffer() const;
     
+            void                clear();
+
             void                setTo(const String8& other);
             status_t            setTo(const char* other);
             status_t            setTo(const char* other, size_t numChars);
@@ -173,13 +86,14 @@ public:
 
             status_t            appendFormat(const char* fmt, ...)
                     __attribute__((format (printf, 2, 3)));
+            status_t            appendFormatV(const char* fmt, va_list args);
 
             // Note that this function takes O(N) time to calculate the value.
             // No cache value is stored.
             size_t              getUtf32Length() const;
             int32_t             getUtf32At(size_t index,
                                            size_t *next_index) const;
-            size_t              getUtf32(char32_t* dst, size_t dst_len) const;
+            void                getUtf32(char32_t* dst) const;
 
     inline  String8&            operator=(const String8& other);
     inline  String8&            operator=(const char* other);
@@ -216,10 +130,18 @@ public:
             // start, or -1 if not found
             ssize_t             find(const char* other, size_t start = 0) const;
 
+            // return true if this string contains the specified substring
+    inline  bool                contains(const char* other) const;
+
+            // removes all occurrence of the specified substring
+            // returns true if any were found and removed
+            bool                removeAll(const char* other);
+
             void                toLower();
             void                toLower(size_t start, size_t numChars);
             void                toUpper();
             void                toUpper(size_t start, size_t numChars);
+
 
     /*
      * These methods operate on the string as if it were a path name.
@@ -261,8 +183,8 @@ public:
     String8 walkPath(String8* outRemains = NULL) const;
 
     /*
-     * Return the filename extension.  This is the last '.' and up to
-     * four characters that follow it.  The '.' is included in case we
+     * Return the filename extension.  This is the last '.' and any number
+     * of characters that follow it.  The '.' is included in case we
      * decide to expand our definition of what constitutes an extension.
      *
      * "/tmp/foo/bar.c" --> ".c"
@@ -315,7 +237,9 @@ private:
             const char* mString;
 };
 
-TextOutput& operator<<(TextOutput& to, const String16& val);
+// String8 can be trivially moved using memcpy() because moving does not
+// require any change to the underlying SharedBuffer contents or reference count.
+ANDROID_TRIVIAL_MOVE_TRAIT(String8)
 
 // ---------------------------------------------------------------------------
 // No user servicable parts below.
@@ -328,6 +252,10 @@ inline int compare_type(const String8& lhs, const String8& rhs)
 inline int strictly_order_type(const String8& lhs, const String8& rhs)
 {
     return compare_type(lhs, rhs) < 0;
+}
+
+inline const String8 String8::empty() {
+    return String8();
 }
 
 inline const char* String8::string() const
@@ -345,6 +273,11 @@ inline size_t String8::size() const
     return length();
 }
 
+inline bool String8::isEmpty() const
+{
+    return length() == 0;
+}
+
 inline size_t String8::bytes() const
 {
     return SharedBuffer::sizeFromData(mString)-1;
@@ -353,6 +286,11 @@ inline size_t String8::bytes() const
 inline const SharedBuffer* String8::sharedBuffer() const
 {
     return SharedBuffer::bufferFromData(mString);
+}
+
+inline bool String8::contains(const char* other) const
+{
+    return find(other) >= 0;
 }
 
 inline String8& String8::operator=(const String8& other)

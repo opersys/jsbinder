@@ -18,7 +18,6 @@
 
 #include <binder/IServiceManager.h>
 
-#include <utils/Debug.h>
 #include <utils/Log.h>
 #include <binder/IPCThreadState.h>
 #include <binder/Parcel.h>
@@ -26,7 +25,6 @@
 #include <utils/SystemClock.h>
 
 #include <private/binder/Static.h>
-#include <private/binder/binder_module.h>
 
 #include <unistd.h>
 
@@ -38,9 +36,11 @@ sp<IServiceManager> defaultServiceManager()
     
     {
         AutoMutex _l(gDefaultServiceManagerLock);
-        if (gDefaultServiceManager == NULL) {
+        while (gDefaultServiceManager == NULL) {
             gDefaultServiceManager = interface_cast<IServiceManager>(
                 ProcessState::self()->getContextObject(NULL));
+            if (gDefaultServiceManager == NULL)
+                sleep(1);
         }
     }
     
@@ -79,7 +79,7 @@ bool checkPermission(const String16& permission, pid_t pid, uid_t uid)
             bool res = pc->checkPermission(permission, pid, uid);
             if (res) {
                 if (startTime != 0) {
-                    LOGI("Check passed after %d seconds for %s from uid=%d pid=%d",
+                    ALOGI("Check passed after %d seconds for %s from uid=%d pid=%d",
                             (int)((uptimeMillis()-startTime)/1000),
                             String8(permission).string(), uid, pid);
                 }
@@ -87,8 +87,8 @@ bool checkPermission(const String16& permission, pid_t pid, uid_t uid)
             }
             
             // Is this a permission failure, or did the controller go away?
-            if (pc->asBinder()->isBinderAlive()) {
-                LOGW("Permission failure: %s from uid=%d pid=%d",
+            if (IInterface::asBinder(pc)->isBinderAlive()) {
+                ALOGW("Permission failure: %s from uid=%d pid=%d",
                         String8(permission).string(), uid, pid);
                 return false;
             }
@@ -107,7 +107,7 @@ bool checkPermission(const String16& permission, pid_t pid, uid_t uid)
             // Wait for the permission controller to come back...
             if (startTime == 0) {
                 startTime = uptimeMillis();
-                LOGI("Waiting to check permission %s from uid=%d pid=%d",
+                ALOGI("Waiting to check permission %s from uid=%d pid=%d",
                         String8(permission).string(), uid, pid);
             }
             sleep(1);
@@ -137,7 +137,7 @@ public:
         for (n = 0; n < 5; n++){
             sp<IBinder> svc = checkService(name);
             if (svc != NULL) return svc;
-            LOGI("Waiting for service %s...\n", String8(name).string());
+            ALOGI("Waiting for service %s...\n", String8(name).string());
             sleep(1);
         }
         return NULL;
@@ -152,12 +152,14 @@ public:
         return reply.readStrongBinder();
     }
 
-    virtual status_t addService(const String16& name, const sp<IBinder>& service)
+    virtual status_t addService(const String16& name, const sp<IBinder>& service,
+            bool allowIsolated)
     {
         Parcel data, reply;
         data.writeInterfaceToken(IServiceManager::getInterfaceDescriptor());
         data.writeString16(name);
         data.writeStrongBinder(service);
+        data.writeInt32(allowIsolated ? 1 : 0);
         status_t err = remote()->transact(ADD_SERVICE_TRANSACTION, data, &reply);
         return err == NO_ERROR ? reply.readExceptionCode() : err;
     }

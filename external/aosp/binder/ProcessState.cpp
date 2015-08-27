@@ -43,18 +43,11 @@
 
 #define BINDER_VM_SIZE ((1*1024*1024) - (4096 *2))
 
-static bool gSingleProcess = false;
-
 
 // ---------------------------------------------------------------------------
 
 namespace android {
  
-// Global variables
-int                 mArgC;
-const char* const*  mArgV;
-int                 mArgLen;
-
 class PoolThread : public Thread
 {
 public:
@@ -75,31 +68,22 @@ protected:
 
 sp<ProcessState> ProcessState::self()
 {
-    if (gProcess != NULL) return gProcess;
-    
-    AutoMutex _l(gProcessMutex);
-    if (gProcess == NULL) gProcess = new ProcessState;
+    Mutex::Autolock _l(gProcessMutex);
+    if (gProcess != NULL) {
+        return gProcess;
+    }
+    gProcess = new ProcessState;
     return gProcess;
 }
-
-void ProcessState::setSingleProcess(bool singleProcess)
-{
-    gSingleProcess = singleProcess;
-}
-
 
 void ProcessState::setContextObject(const sp<IBinder>& object)
 {
     setContextObject(object, String16("default"));
 }
 
-sp<IBinder> ProcessState::getContextObject(const sp<IBinder>& caller)
+sp<IBinder> ProcessState::getContextObject(const sp<IBinder>& /*caller*/)
 {
-    if (supportsProcesses()) {
-        return getStrongProxyForHandle(0);
-    } else {
-        return getContextObject(String16("default"), caller);
-    }
+    return getStrongProxyForHandle(0);
 }
 
 void ProcessState::setContextObject(const sp<IBinder>& object, const String16& name)
@@ -121,7 +105,7 @@ sp<IBinder> ProcessState::getContextObject(const String16& name, const sp<IBinde
 
     // Don't attempt to retrieve contexts if we manage them
     if (mManagesContexts) {
-        LOGE("getContextObject(%s) failed, but we manage the contexts!\n",
+        ALOGE("getContextObject(%s) failed, but we manage the contexts!\n",
             String8(name).string());
         return NULL;
     }
@@ -144,11 +128,6 @@ sp<IBinder> ProcessState::getContextObject(const String16& name, const sp<IBinde
     return object;
 }
 
-bool ProcessState::supportsProcesses() const
-{
-    return mDriverFD >= 0;
-}
-
 void ProcessState::startThreadPool()
 {
     AutoMutex _l(mLock);
@@ -169,24 +148,15 @@ bool ProcessState::becomeContextManager(context_check_func checkFunc, void* user
         AutoMutex _l(mLock);
         mBinderContextCheckFunc = checkFunc;
         mBinderContextUserData = userData;
-        if (mDriverFD >= 0) {
-            int dummy = 0;
-#if defined(HAVE_ANDROID_OS)
-            status_t result = ioctl(mDriverFD, BINDER_SET_CONTEXT_MGR, &dummy);
-#else
-            status_t result = INVALID_OPERATION;
-#endif
-            if (result == 0) {
-                mManagesContexts = true;
-            } else if (result == -1) {
-                mBinderContextCheckFunc = NULL;
-                mBinderContextUserData = NULL;
-                LOGE("Binder ioctl to become context manager failed: %s\n", strerror(errno));
-            }
-        } else {
-            // If there is no driver, our only world is the local
-            // process so we can always become the context manager there.
+
+        int dummy = 0;
+        status_t result = ioctl(mDriverFD, BINDER_SET_CONTEXT_MGR, &dummy);
+        if (result == 0) {
             mManagesContexts = true;
+        } else if (result == -1) {
+            mBinderContextCheckFunc = NULL;
+            mBinderContextUserData = NULL;
+            ALOGE("Binder ioctl to become context manager failed: %s\n", strerror(errno));
         }
     }
     return mManagesContexts;
@@ -219,6 +189,33 @@ sp<IBinder> ProcessState::getStrongProxyForHandle(int32_t handle)
         // in getWeakProxyForHandle() for more info about this.
         IBinder* b = e->binder;
         if (b == NULL || !e->refs->attemptIncWeak(this)) {
+            if (handle == 0) {
+                // Special case for context manager...
+                // The context manager is the only object for which we create
+                // a BpBinder proxy without already holding a reference.
+                // Perform a dummy transaction to ensure the context manager
+                // is registered before we create the first local reference
+                // to it (which will occur when creating the BpBinder).
+                // If a local reference is created for the BpBinder when the
+                // context manager is not present, the driver will fail to
+                // provide a reference to the context manager, but the
+                // driver API does not return status.
+                //
+                // Note that this is not race-free if the context manager
+                // dies while this code runs.
+                //
+                // TODO: add a driver API to wait for context manager, or
+                // stop special casing handle 0 for context manager and add
+                // a driver API to get a handle to the context manager with
+                // proper reference counting.
+
+                Parcel data;
+                status_t status = IPCThreadState::self()->transact(
+                        0, IBinder::PING_TRANSACTION, data, NULL, 0);
+                if (status == DEAD_OBJECT)
+                   return NULL;
+            }
+
             b = new BpBinder(handle); 
             e->binder = b;
             if (b) e->refs = b->getWeakRefs();
@@ -278,84 +275,61 @@ void ProcessState::expungeHandle(int32_t handle, IBinder* binder)
     if (e && e->binder == binder) e->binder = NULL;
 }
 
-void ProcessState::setArgs(int argc, const char* const argv[])
-{
-    mArgC = argc;
-    mArgV = (const char **)argv;
-
-    mArgLen = 0;
-    for (int i=0; i<argc; i++) {
-        mArgLen += strlen(argv[i]) + 1;
-    }
-    mArgLen--;
-}
-
-int ProcessState::getArgC() const
-{
-    return mArgC;
-}
-
-const char* const* ProcessState::getArgV() const
-{
-    return mArgV;
-}
-
-void ProcessState::setArgV0(const char* txt)
-{
-    if (mArgV != NULL) {
-        strncpy((char*)mArgV[0], txt, mArgLen);
-        set_process_name(txt);
-    }
+String8 ProcessState::makeBinderThreadName() {
+    int32_t s = android_atomic_add(1, &mThreadPoolSeq);
+    String8 name;
+    name.appendFormat("Binder_%X", s);
+    return name;
 }
 
 void ProcessState::spawnPooledThread(bool isMain)
 {
     if (mThreadPoolStarted) {
-        int32_t s = android_atomic_add(1, &mThreadPoolSeq);
-        char buf[32];
-        sprintf(buf, "Binder Thread #%d", s);
-        LOGV("Spawning new pooled thread, name=%s\n", buf);
+        String8 name = makeBinderThreadName();
+        ALOGV("Spawning new pooled thread, name=%s\n", name.string());
         sp<Thread> t = new PoolThread(isMain);
-        t->run(buf);
+        t->run(name.string());
     }
+}
+
+status_t ProcessState::setThreadPoolMaxThreadCount(size_t maxThreads) {
+    status_t result = NO_ERROR;
+    if (ioctl(mDriverFD, BINDER_SET_MAX_THREADS, &maxThreads) == -1) {
+        result = -errno;
+        ALOGE("Binder ioctl to set max threads failed: %s", strerror(-result));
+    }
+    return result;
+}
+
+void ProcessState::giveThreadPoolName() {
+    androidSetThreadName( makeBinderThreadName().string() );
 }
 
 static int open_driver()
 {
-    if (gSingleProcess) {
-        return -1;
-    }
-
     int fd = open("/dev/binder", O_RDWR);
     if (fd >= 0) {
         fcntl(fd, F_SETFD, FD_CLOEXEC);
-        int vers;
-#if defined(HAVE_ANDROID_OS)
+        int vers = 0;
         status_t result = ioctl(fd, BINDER_VERSION, &vers);
-#else
-        status_t result = -1;
-        errno = EPERM;
-#endif
         if (result == -1) {
-            LOGE("Binder ioctl to obtain version failed: %s", strerror(errno));
+            ALOGE("Binder ioctl to obtain version failed: %s", strerror(errno));
             close(fd);
             fd = -1;
         }
         if (result != 0 || vers != BINDER_CURRENT_PROTOCOL_VERSION) {
-            LOGE("Binder driver protocol does not match user space protocol!");
+            ALOGE("Binder driver protocol does not match user space protocol! (Kernel: %d, local: %d)",
+                vers, BINDER_CURRENT_PROTOCOL_VERSION);
             close(fd);
             fd = -1;
         }
-#if defined(HAVE_ANDROID_OS)
         size_t maxThreads = 15;
         result = ioctl(fd, BINDER_SET_MAX_THREADS, &maxThreads);
         if (result == -1) {
-            LOGE("Binder ioctl to set max threads failed: %s", strerror(errno));
+            ALOGE("Binder ioctl to set max threads failed: %s", strerror(errno));
         }
-#endif
-        
     } else {
-        LOGW("Opening '/dev/binder' failed: %s\n", strerror(errno));
+        ALOGW("Opening '/dev/binder' failed: %s\n", strerror(errno));
     }
     return fd;
 }
@@ -370,25 +344,17 @@ ProcessState::ProcessState()
     , mThreadPoolSeq(1)
 {
     if (mDriverFD >= 0) {
-        // XXX Ideally, there should be a specific define for whether we
-        // have mmap (or whether we could possibly have the kernel module
-        // availabla).
-#if !defined(HAVE_WIN32_IPC)
         // mmap the binder, providing a chunk of virtual address space to receive transactions.
         mVMStart = mmap(0, BINDER_VM_SIZE, PROT_READ, MAP_PRIVATE | MAP_NORESERVE, mDriverFD, 0);
         if (mVMStart == MAP_FAILED) {
             // *sigh*
-            LOGE("Using /dev/binder failed: unable to mmap transaction memory.\n");
+            ALOGE("Using /dev/binder failed: unable to mmap transaction memory.\n");
             close(mDriverFD);
             mDriverFD = -1;
         }
-#else
-        mDriverFD = -1;
-#endif
     }
-    if (mDriverFD < 0) {
-        // Need to run without the driver, starting our own thread pool.
-    }
+
+    LOG_ALWAYS_FATAL_IF(mDriverFD < 0, "Binder driver could not be opened.  Terminating.");
 }
 
 ProcessState::~ProcessState()

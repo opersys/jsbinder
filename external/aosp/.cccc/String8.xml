@@ -1,0 +1,818 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module String8-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="418" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="99" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
+<lines_of_code value="26" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="16.077" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="3.808" level="0" />
+<weighted_methods_per_class_unity value="47" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="12" level="0" />
+<IF4 value="1296" level="2" />
+<IF4_per_member_function value="********" level="2" />
+<IF4_visible value="1296" level="2" />
+<IF4_visible_per_member_function value="********" level="2" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+</module_detail>
+<procedural_detail>
+<member_function>
+<name>String8()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="141" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>String8(StaticLinkage)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="146" />
+</extent>
+<lines_of_code value="8" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="3" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>String8(const String16 &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="181" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>String8(const String8 &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="159" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>String8(const char *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="165" />
+</extent>
+<lines_of_code value="7" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>String8(const char *,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="173" />
+</extent>
+<lines_of_code value="7" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>String8(const char16_t *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="186" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>String8(const char16_t *,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="191" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>String8(const char32_t *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="196" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>String8(const char32_t *,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="201" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>append(const String8 &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="285" />
+</extent>
+<lines_of_code value="11" level="0" />
+<McCabes_cyclomatic_complexity value="5" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="******" level="0" />
+</member_function>
+<member_function>
+<name>append(const char *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="298" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>append(const char *,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="303" />
+</extent>
+<lines_of_code value="9" level="0" />
+<McCabes_cyclomatic_complexity value="5" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="******" level="0" />
+</member_function>
+<member_function>
+<name>appendFormat(...)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="314" />
+</extent>
+<lines_of_code value="8" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>appendFormatV(const char *,va_list)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="325" />
+</extent>
+<lines_of_code value="18" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="4" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>appendPath(const char *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="620" />
+</extent>
+<lines_of_code value="24" level="0" />
+<McCabes_cyclomatic_complexity value="8" level="0" />
+<lines_of_comment value="5" level="0" />
+<lines_of_code_per_line_of_comment value="4.800" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="1.600" level="0" />
+</member_function>
+<member_function>
+<name>clear()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="229" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>convertToResPath()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="657" />
+</extent>
+<lines_of_code value="13" level="0" />
+<McCabes_cyclomatic_complexity value="4" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>find(const char *,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="401" />
+</extent>
+<lines_of_code value="10" level="0" />
+<McCabes_cyclomatic_complexity value="4" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>find_extension(void)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="575" />
+</extent>
+<lines_of_code value="15" level="0" />
+<McCabes_cyclomatic_complexity value="4" level="0" />
+<lines_of_comment value="8" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>format(...)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="211" />
+</extent>
+<lines_of_code value="8" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>formatV(const char *,va_list)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="222" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getBasePath(void)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="608" />
+</extent>
+<lines_of_code value="10" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getPathDir(void)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="534" />
+</extent>
+<lines_of_code value="10" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getPathExtension(void)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="597" />
+</extent>
+<lines_of_code value="9" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getPathLeaf(void)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="522" />
+</extent>
+<lines_of_code value="10" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getUtf32(char32_t *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="494" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getUtf32At(size_t,size_t *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="489" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getUtf32Length()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="484" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>lockBuffer(size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="367" />
+</extent>
+<lines_of_code value="11" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>real_append(const char *,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="350" />
+</extent>
+<lines_of_code value="15" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>removeAll(const char *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="412" />
+</extent>
+<lines_of_code value="20" level="0" />
+<McCabes_cyclomatic_complexity value="7" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="20.000" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="7.000" level="1" />
+</member_function>
+<member_function>
+<name>setPathName(const char *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="502" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="2" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setPathName(const char *,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="507" />
+</extent>
+<lines_of_code value="9" level="0" />
+<McCabes_cyclomatic_complexity value="2" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setTo(const String8 &amp;)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="234" />
+</extent>
+<lines_of_code value="6" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setTo(const char *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="241" />
+</extent>
+<lines_of_code value="9" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setTo(const char *,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="252" />
+</extent>
+<lines_of_code value="9" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setTo(const char16_t *,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="263" />
+</extent>
+<lines_of_code value="9" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>setTo(const char32_t *,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="274" />
+</extent>
+<lines_of_code value="9" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>toLower()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="436" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>toLower(size_t,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="441" />
+</extent>
+<lines_of_code value="18" level="0" />
+<McCabes_cyclomatic_complexity value="4" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>toUpper()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="460" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>toUpper(size_t,size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="465" />
+</extent>
+<lines_of_code value="18" level="0" />
+<McCabes_cyclomatic_complexity value="4" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>unlockBuffer()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="379" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>unlockBuffer(size_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="384" />
+</extent>
+<lines_of_code value="14" level="0" />
+<McCabes_cyclomatic_complexity value="4" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>walkPath(String8 *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="546" />
+</extent>
+<lines_of_code value="19" level="0" />
+<McCabes_cyclomatic_complexity value="7" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="7.000" level="1" />
+</member_function>
+<member_function>
+<name>~String8()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/String8.cpp" line="206" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>String8</name>
+<client_module>
+<name>Parcel</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/Parcel.cpp" line="721" />
+</extent>
+<name>PropertyMap</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/PropertyMap.cpp" line="50" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/PropertyMap.cpp" line="50" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/PropertyMap.cpp" line="54" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/PropertyMap.cpp" line="58" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/PropertyMap.cpp" line="58" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/PropertyMap.cpp" line="68" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/PropertyMap.cpp" line="78" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/PropertyMap.cpp" line="95" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/PropertyMap.cpp" line="118" />
+</extent>
+<name>SimpleBestFitAllocator</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/MemoryDealer.cpp" line="136" />
+</extent>
+<name>String16</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/String16.cpp" line="148" />
+</extent>
+<name>String8Printer</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/Printer.cpp" line="126" />
+</extent>
+<name>Tokenizer</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/Tokenizer.cpp" line="38" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/Tokenizer.cpp" line="52" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/Tokenizer.cpp" line="103" />
+</extent>
+</client_module>
+<supplier_module>
+<name>StaticLinkage</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="146" />
+</extent>
+<name>String16</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/String8.cpp" line="181" />
+</extent>
+<name>char16_t</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/String8.cpp" line="186" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/String8.cpp" line="191" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/String8.cpp" line="263" />
+</extent>
+<name>char32_t</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/String8.cpp" line="196" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/String8.cpp" line="201" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/String8.cpp" line="274" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/String8.cpp" line="494" />
+</extent>
+<name>size_t</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="173" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="191" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="201" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="252" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="263" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="274" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="303" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="350" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="367" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="384" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="401" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="441" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="441" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="465" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="465" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="489" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/String8.cpp" line="489" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="507" />
+</extent>
+<name>va_list</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="222" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/String8.cpp" line="325" />
+</extent>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

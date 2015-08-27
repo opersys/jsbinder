@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module bool-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="0" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="0" />
+<lines_of_code value="0" level="0" />
+<lines_of_code_per_member_function value="********" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+<weighted_methods_per_class_unity value="0" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="15" level="0" />
+<IF4 value="0" level="0" />
+<IF4_per_member_function value="********" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_visible_per_member_function value="********" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+</module_detail>
+<procedural_detail>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>bool</name>
+<client_module>
+<name>BasicHashtableImpl</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/BasicHashtable.cpp" line="27" />
+</extent>
+<name>Blob</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="1814" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/BlobCache.cpp" line="304" />
+</extent>
+<name>BpServiceManager</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/IServiceManager.cpp" line="156" />
+</extent>
+<name>FileMap</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/FileMap.cpp" line="85" />
+</extent>
+<name>IPCThreadState</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/IPCThreadState.cpp" line="329" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/IPCThreadState.cpp" line="456" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/IPCThreadState.cpp" line="517" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/IPCThreadState.cpp" line="782" />
+</extent>
+<name>LogPrinter</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/Printer.cpp" line="68" />
+</extent>
+<name>Looper</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/Looper.cpp" line="71" />
+</extent>
+<name>NativeHandle</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/NativeHandle.cpp" line="23" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/NativeHandle.cpp" line="27" />
+</extent>
+<name>Parcel</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="479" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="488" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="789" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="923" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/Parcel.cpp" line="1354" />
+</extent>
+<name>PermissionCache</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./binder/PermissionCache.cpp" line="37" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/PermissionCache.cpp" line="52" />
+</extent>
+<name>PoolThread</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/ProcessState.cpp" line="54" />
+</extent>
+<extent>
+<description>has by value</description>
+<source_reference file="./binder/ProcessState.cpp" line="66" />
+</extent>
+<name>ProcessState</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/ProcessState.cpp" line="285" />
+</extent>
+<name>PropertyMap</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/PropertyMap.cpp" line="68" />
+</extent>
+<name>Thread</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/Threads.cpp" line="648" />
+</extent>
+<name>Tokenizer</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/Tokenizer.cpp" line="39" />
+</extent>
+</client_module>
+<supplier_module>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

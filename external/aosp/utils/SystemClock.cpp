@@ -19,7 +19,7 @@
  * System clock functions.
  */
 
-#if HAVE_ANDROID_OS
+#if defined(__ANDROID__)
 #include <linux/ioctl.h>
 #include <linux/rtc.h>
 #include <utils/Atomic.h>
@@ -29,68 +29,15 @@
 #include <sys/time.h>
 #include <limits.h>
 #include <fcntl.h>
-#include <errno.h>
 #include <string.h>
 
 #include <utils/SystemClock.h>
 #include <utils/Timers.h>
 
 #define LOG_TAG "SystemClock"
-#include "utils/Log.h"
+#include <utils/Log.h>
 
 namespace android {
-
-/*
- * Set the current time.  This only works when running as root.
- */
-int setCurrentTimeMillis(int64_t millis)
-{
-#if WIN32
-    // not implemented
-    return -1;
-#else
-    struct timeval tv;
-#if HAVE_ANDROID_OS
-    struct timespec ts;
-    int fd;
-    int res;
-#endif
-    int ret = 0;
-
-    if (millis <= 0 || millis / 1000LL >= INT_MAX) {
-        return -1;
-    }
-
-    tv.tv_sec = (time_t) (millis / 1000LL);
-    tv.tv_usec = (suseconds_t) ((millis % 1000LL) * 1000LL);
-
-    LOGD("Setting time of day to sec=%d\n", (int) tv.tv_sec);
-
-#if HAVE_ANDROID_OS
-    fd = open("/dev/alarm", O_RDWR);
-    if(fd < 0) {
-        LOGW("Unable to open alarm driver: %s\n", strerror(errno));
-        return -1;
-    }
-    ts.tv_sec = tv.tv_sec;
-    ts.tv_nsec = tv.tv_usec * 1000;
-    res = ioctl(fd, ANDROID_ALARM_SET_RTC, &ts);
-    if(res < 0) {
-        LOGW("Unable to set rtc to %ld: %s\n", tv.tv_sec, strerror(errno));
-        ret = -1;
-    }
-    close(fd);
-#else
-    if (settimeofday(&tv, NULL) != 0) {
-        LOGW("Unable to set clock to %d.%d: %s\n",
-            (int) tv.tv_sec, (int) tv.tv_usec, strerror(errno));
-        ret = -1;
-    }
-#endif
-
-    return ret;
-#endif // WIN32
-}
 
 /*
  * native public static long uptimeMillis();
@@ -106,7 +53,69 @@ int64_t uptimeMillis()
  */
 int64_t elapsedRealtime()
 {
-#if HAVE_ANDROID_OS
+	return nanoseconds_to_milliseconds(elapsedRealtimeNano());
+}
+
+#define METHOD_CLOCK_GETTIME    0
+#define METHOD_IOCTL            1
+#define METHOD_SYSTEMTIME       2
+
+/*
+ * To debug/verify the timestamps returned by the kernel, change
+ * DEBUG_TIMESTAMP to 1 and call the timestamp routine from a single thread
+ * in the test program. b/10899829
+ */
+#define DEBUG_TIMESTAMP         0
+
+#if DEBUG_TIMESTAMP && defined(__arm__)
+static inline void checkTimeStamps(int64_t timestamp,
+                                   int64_t volatile *prevTimestampPtr,
+                                   int volatile *prevMethodPtr,
+                                   int curMethod)
+{
+    /*
+     * Disable the check for SDK since the prebuilt toolchain doesn't contain
+     * gettid, and int64_t is different on the ARM platform
+     * (ie long vs long long).
+     */
+    int64_t prevTimestamp = *prevTimestampPtr;
+    int prevMethod = *prevMethodPtr;
+
+    if (timestamp < prevTimestamp) {
+        static const char *gettime_method_names[] = {
+            "clock_gettime",
+            "ioctl",
+            "systemTime",
+        };
+
+        ALOGW("time going backwards: prev %lld(%s) vs now %lld(%s), tid=%d",
+              prevTimestamp, gettime_method_names[prevMethod],
+              timestamp, gettime_method_names[curMethod],
+              gettid());
+    }
+    // NOTE - not atomic and may generate spurious warnings if the 64-bit
+    // write is interrupted or not observed as a whole.
+    *prevTimestampPtr = timestamp;
+    *prevMethodPtr = curMethod;
+}
+#else
+#define checkTimeStamps(timestamp, prevTimestampPtr, prevMethodPtr, curMethod)
+#endif
+
+/*
+ * native public static long elapsedRealtimeNano();
+ */
+int64_t elapsedRealtimeNano()
+{
+#if defined(__ANDROID__)
+    struct timespec ts;
+    int result;
+    int64_t timestamp;
+#if DEBUG_TIMESTAMP
+    static volatile int64_t prevTimestamp;
+    static volatile int prevMethod;
+#endif
+
     static int s_fd = -1;
 
     if (s_fd == -1) {
@@ -116,23 +125,33 @@ int64_t elapsedRealtime()
         }
     }
 
-    struct timespec ts;
-    int result = ioctl(s_fd,
+    result = ioctl(s_fd,
             ANDROID_ALARM_GET_TIME(ANDROID_ALARM_ELAPSED_REALTIME), &ts);
 
     if (result == 0) {
-        int64_t when = seconds_to_nanoseconds(ts.tv_sec) + ts.tv_nsec;
-        return (int64_t) nanoseconds_to_milliseconds(when);
-    } else {
-        // XXX: there was an error, probably because the driver didn't
-        // exist ... this should return
-        // a real error, like an exception!
-        int64_t when = systemTime(SYSTEM_TIME_MONOTONIC);
-        return (int64_t) nanoseconds_to_milliseconds(when);
+        timestamp = seconds_to_nanoseconds(ts.tv_sec) + ts.tv_nsec;
+        checkTimeStamps(timestamp, &prevTimestamp, &prevMethod, METHOD_IOCTL);
+        return timestamp;
     }
+
+    // /dev/alarm doesn't exist, fallback to CLOCK_BOOTTIME
+    result = clock_gettime(CLOCK_BOOTTIME, &ts);
+    if (result == 0) {
+        timestamp = seconds_to_nanoseconds(ts.tv_sec) + ts.tv_nsec;
+        checkTimeStamps(timestamp, &prevTimestamp, &prevMethod,
+                        METHOD_CLOCK_GETTIME);
+        return timestamp;
+    }
+
+    // XXX: there was an error, probably because the driver didn't
+    // exist ... this should return
+    // a real error, like an exception!
+    timestamp = systemTime(SYSTEM_TIME_MONOTONIC);
+    checkTimeStamps(timestamp, &prevTimestamp, &prevMethod,
+                    METHOD_SYSTEMTIME);
+    return timestamp;
 #else
-    int64_t when = systemTime(SYSTEM_TIME_MONOTONIC);
-    return (int64_t) nanoseconds_to_milliseconds(when);
+    return systemTime(SYSTEM_TIME_MONOTONIC);
 #endif
 }
 

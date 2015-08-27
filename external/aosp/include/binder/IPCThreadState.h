@@ -22,7 +22,7 @@
 #include <binder/ProcessState.h>
 #include <utils/Vector.h>
 
-#ifdef HAVE_WIN32_PROC
+#if defined(_WIN32)
 typedef  int  uid_t;
 #endif
 
@@ -33,13 +33,14 @@ class IPCThreadState
 {
 public:
     static  IPCThreadState*     self();
+    static  IPCThreadState*     selfOrNull();  // self(), but won't instantiate
     
             sp<ProcessState>    process();
             
             status_t            clearLastError();
 
-            int                 getCallingPid();
-            int                 getCallingUid();
+            pid_t               getCallingPid() const;
+            uid_t               getCallingUid() const;
 
             void                setStrictModePolicy(int32_t policy);
             int32_t             getStrictModePolicy() const;
@@ -50,6 +51,8 @@ public:
             int64_t             clearCallingIdentity();
             void                restoreCallingIdentity(int64_t token);
             
+            int                 setupPolling(int* fd);
+            status_t            handlePolledCommands();
             void                flushCommands();
 
             void                joinThreadPool(bool isMain = true);
@@ -95,14 +98,16 @@ private:
                                                      uint32_t code,
                                                      const Parcel& data,
                                                      status_t* statusBuffer);
+            status_t            getAndExecuteCommand();
             status_t            executeCommand(int32_t command);
+            void                processPendingDerefs();
             
             void                clearCaller();
             
     static  void                threadDestructor(void *st);
     static  void                freeBuffer(Parcel* parcel,
                                            const uint8_t* data, size_t dataSize,
-                                           const size_t* objects, size_t objectsSize,
+                                           const binder_size_t* objects, size_t objectsSize,
                                            void* cookie);
     
     const   sp<ProcessState>    mProcess;

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module MemoryHeapBase-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="119" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="24" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
+<lines_of_code value="6" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="19.833" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="4.000" level="0" />
+<weighted_methods_per_class_unity value="14" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="2" level="0" />
+<IF4 value="0" level="0" />
+<IF4_per_member_function value="********" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_visible_per_member_function value="********" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+</module_detail>
+<procedural_detail>
+<member_function>
+<name>MemoryHeapBase()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="38" />
+</extent>
+<lines_of_code value="5" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>MemoryHeapBase(const char *,size_t,uint32_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="61" />
+</extent>
+<lines_of_code value="17" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>MemoryHeapBase(int,size_t,uint32_t,uint32_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="80" />
+</extent>
+<lines_of_code value="8" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>MemoryHeapBase(size_t,uint32_t,char const*)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="44" />
+</extent>
+<lines_of_code value="16" level="0" />
+<McCabes_cyclomatic_complexity value="4" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>dispose()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="139" />
+</extent>
+<lines_of_code value="12" level="0" />
+<McCabes_cyclomatic_complexity value="2" level="0" />
+<lines_of_comment value="1" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getBase()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="157" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getDevice()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="169" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getFlags()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="165" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getHeapID()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="153" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getOffset()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="173" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>getSize()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="161" />
+</extent>
+<lines_of_code value="3" level="0" />
+<McCabes_cyclomatic_complexity value="1" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>init(int,void *,int,int,const char *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="89" />
+</extent>
+<lines_of_code value="12" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>mapfd(int,size_t,uint32_t)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="102" />
+</extent>
+<lines_of_code value="27" level="0" />
+<McCabes_cyclomatic_complexity value="6" level="0" />
+<lines_of_comment value="4" level="0" />
+<lines_of_code_per_line_of_comment value="6.750" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="1.500" level="0" />
+</member_function>
+<member_function>
+<name>~MemoryHeapBase()</name>
+<extent>
+<description>definition</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="134" />
+</extent>
+<lines_of_code value="4" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>MemoryHeapBase</name>
+<client_module>
+</client_module>
+<supplier_module>
+<name>size_t</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="44" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="61" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="80" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="102" />
+</extent>
+<name>uint32_t</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="44" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="61" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="80" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="80" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./binder/MemoryHeapBase.cpp" line="102" />
+</extent>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

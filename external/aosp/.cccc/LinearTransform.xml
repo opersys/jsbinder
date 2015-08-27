@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Detailed report on module LinearTransform-->
+<CCCC_Project>
+<module_summary>
+<lines_of_code value="62" level="0" />
+<lines_of_code_per_member_function value="******" level="0" />
+<McCabes_cyclomatic_complexity value="20" level="0" />
+<McCabes_cyclomatic_complexity_per_member_function value="******" level="2" />
+<lines_of_code value="4" level="0" />
+<lines_of_code_per_member_function value="********" level="2" />
+<lines_of_code_per_line_of_comment value="15.500" level="1" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="5.000" level="0" />
+<weighted_methods_per_class_unity value="6" level="0" />
+<weighted_methods_per_class_visibility value="0" level="0" />
+<depth_of_inheritance_tree value="0" level="0" />
+<number_of_children value="0" level="0" />
+<coupling_between_objects value="5" level="0" />
+<IF4 value="0" level="0" />
+<IF4_per_member_function value="********" level="0" />
+<IF4_visible value="0" level="0" />
+<IF4_visible_per_member_function value="********" level="0" />
+<IF4_concrete value="0" level="0" />
+<IF4_concrete_per_member_function value="********" level="0" />
+</module_summary>
+<module_detail>
+</module_detail>
+<procedural_detail>
+<member_function>
+<name>doForwardTransform(int64_t,int64_t *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/LinearTransform.cpp" line="187" />
+</extent>
+<lines_of_code value="11" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>doReverseTransform(int64_t,int64_t *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/LinearTransform.cpp" line="200" />
+</extent>
+<lines_of_code value="11" level="0" />
+<McCabes_cyclomatic_complexity value="3" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>reduce(T *,T *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/LinearTransform.cpp" line="213" />
+</extent>
+<lines_of_code value="27" level="0" />
+<McCabes_cyclomatic_complexity value="10" level="0" />
+<lines_of_comment value="4" level="0" />
+<lines_of_code_per_line_of_comment value="6.750" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="2.500" level="0" />
+</member_function>
+<member_function>
+<name>reduce(int32_t *,uint32_t *)</name>
+<extent>
+<description>definition</description>
+<source_reference file="./utils/LinearTransform.cpp" line="253" />
+</extent>
+<lines_of_code value="11" level="0" />
+<McCabes_cyclomatic_complexity value="4" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>reduce(uint32_t *,uint32_t *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="./utils/LinearTransform.cpp" line="251" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+<member_function>
+<name>reduce(uint64_t *,uint64_t *)</name>
+<extent>
+<description>declaration</description>
+<source_reference file="./utils/LinearTransform.cpp" line="250" />
+</extent>
+<lines_of_code value="1" level="0" />
+<McCabes_cyclomatic_complexity value="0" level="0" />
+<lines_of_comment value="0" level="0" />
+<lines_of_code_per_line_of_comment value="------" level="0" />
+<McCabes_cyclomatic_complexity_per_line_of_comment value="------" level="0" />
+</member_function>
+</procedural_detail>
+<structural_detail>
+<module>
+<name>LinearTransform</name>
+<client_module>
+</client_module>
+<supplier_module>
+<name>T</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/LinearTransform.cpp" line="213" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/LinearTransform.cpp" line="213" />
+</extent>
+<name>int32_t</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/LinearTransform.cpp" line="253" />
+</extent>
+<name>int64_t</name>
+<visible>true</visible>
+<concrete>true</concrete>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/LinearTransform.cpp" line="187" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/LinearTransform.cpp" line="187" />
+</extent>
+<extent>
+<description>pass by value</description>
+<source_reference file="./utils/LinearTransform.cpp" line="200" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/LinearTransform.cpp" line="200" />
+</extent>
+<name>uint32_t</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/LinearTransform.cpp" line="251" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/LinearTransform.cpp" line="251" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/LinearTransform.cpp" line="253" />
+</extent>
+<name>uint64_t</name>
+<visible>true</visible>
+<concrete>false</concrete>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/LinearTransform.cpp" line="250" />
+</extent>
+<extent>
+<description>pass by reference</description>
+<source_reference file="./utils/LinearTransform.cpp" line="250" />
+</extent>
+</supplier_module>
+</module>
+</structural_detail>
+</CCCC_Project>

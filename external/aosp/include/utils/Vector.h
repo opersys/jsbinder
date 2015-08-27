@@ -21,13 +21,17 @@
 #include <stdint.h>
 #include <sys/types.h>
 
-#include <utils/Log.h>
+#include <cutils/log.h>
+
 #include <utils/VectorImpl.h>
 #include <utils/TypeHelpers.h>
 
 // ---------------------------------------------------------------------------
 
 namespace android {
+
+template <typename TYPE>
+class SortedVector;
 
 /*!
  * The main templated vector class ensuring type safety
@@ -47,13 +51,17 @@ public:
     
                             Vector();
                             Vector(const Vector<TYPE>& rhs);
+    explicit                Vector(const SortedVector<TYPE>& rhs);
     virtual                 ~Vector();
 
     /*! copy operator */
             const Vector<TYPE>&     operator = (const Vector<TYPE>& rhs) const;
             Vector<TYPE>&           operator = (const Vector<TYPE>& rhs);    
 
-    /*
+            const Vector<TYPE>&     operator = (const SortedVector<TYPE>& rhs) const;
+            Vector<TYPE>&           operator = (const SortedVector<TYPE>& rhs);
+
+            /*
      * empty the vector
      */
 
@@ -65,14 +73,20 @@ public:
 
     //! returns number of items in the vector
     inline  size_t          size() const                { return VectorImpl::size(); }
-    //! returns wether or not the vector is empty
+    //! returns whether or not the vector is empty
     inline  bool            isEmpty() const             { return VectorImpl::isEmpty(); }
     //! returns how many items can be stored without reallocating the backing store
     inline  size_t          capacity() const            { return VectorImpl::capacity(); }
-    //! setst the capacity. capacity can never be reduced less than size()
+    //! sets the capacity. capacity can never be reduced less than size()
     inline  ssize_t         setCapacity(size_t size)    { return VectorImpl::setCapacity(size); }
 
-    /*! 
+    /*!
+     * set the size of the vector. items are appended with the default
+     * constructor, or removed from the end as needed.
+     */
+    inline  ssize_t         resize(size_t size)         { return VectorImpl::resize(size); }
+
+    /*!
      * C-style array access
      */
      
@@ -91,16 +105,14 @@ public:
     inline  const TYPE&     itemAt(size_t index) const;
     //! stack-usage of the vector. returns the top of the stack (last element)
             const TYPE&     top() const;
-    //! same as operator [], but allows to access the vector backward (from the end) with a negative index
-            const TYPE&     mirrorItemAt(ssize_t index) const;
 
     /*!
-     * modifing the array
+     * modifying the array
      */
 
     //! copy-on write support, grants write access to an item
             TYPE&           editItemAt(size_t index);
-    //! grants right acces to the top of the stack (last element)
+    //! grants right access to the top of the stack (last element)
             TYPE&           editTop();
 
             /*! 
@@ -162,6 +174,30 @@ public:
      inline status_t        sort(compar_t cmp);
      inline status_t        sort(compar_r_t cmp, void* state);
 
+     // for debugging only
+     inline size_t getItemSize() const { return itemSize(); }
+
+
+     /*
+      * these inlines add some level of compatibility with STL. eventually
+      * we should probably turn things around.
+      */
+     typedef TYPE* iterator;
+     typedef TYPE const* const_iterator;
+
+     inline iterator begin() { return editArray(); }
+     inline iterator end()   { return editArray() + size(); }
+     inline const_iterator begin() const { return array(); }
+     inline const_iterator end() const   { return array() + size(); }
+     inline void reserve(size_t n) { setCapacity(n); }
+     inline bool empty() const{ return isEmpty(); }
+     inline void push_back(const TYPE& item)  { insertAt(item, size(), 1); }
+     inline void push_front(const TYPE& item) { insertAt(item, 0, 1); }
+     inline iterator erase(iterator pos) {
+         ssize_t index = removeItemsAt(pos-array());
+         return begin() + index;
+     }
+
 protected:
     virtual void    do_construct(void* storage, size_t num) const;
     virtual void    do_destroy(void* storage, size_t num) const;
@@ -171,6 +207,9 @@ protected:
     virtual void    do_move_backward(void* dest, const void* from, size_t num) const;
 };
 
+// Vector<T> can be trivially moved using memcpy() because moving does not
+// require any change to the underlying SharedBuffer contents or reference count.
+template<typename T> struct trait_trivial_move<Vector<T> > { enum { value = true }; };
 
 // ---------------------------------------------------------------------------
 // No user serviceable parts from here...
@@ -192,6 +231,11 @@ Vector<TYPE>::Vector(const Vector<TYPE>& rhs)
 }
 
 template<class TYPE> inline
+Vector<TYPE>::Vector(const SortedVector<TYPE>& rhs)
+    : VectorImpl(static_cast<const VectorImpl&>(rhs)) {
+}
+
+template<class TYPE> inline
 Vector<TYPE>::~Vector() {
     finish_vector();
 }
@@ -204,6 +248,18 @@ Vector<TYPE>& Vector<TYPE>::operator = (const Vector<TYPE>& rhs) {
 
 template<class TYPE> inline
 const Vector<TYPE>& Vector<TYPE>::operator = (const Vector<TYPE>& rhs) const {
+    VectorImpl::operator = (static_cast<const VectorImpl&>(rhs));
+    return *this;
+}
+
+template<class TYPE> inline
+Vector<TYPE>& Vector<TYPE>::operator = (const SortedVector<TYPE>& rhs) {
+    VectorImpl::operator = (static_cast<const VectorImpl&>(rhs));
+    return *this;
+}
+
+template<class TYPE> inline
+const Vector<TYPE>& Vector<TYPE>::operator = (const SortedVector<TYPE>& rhs) const {
     VectorImpl::operator = (rhs);
     return *this; 
 }
@@ -221,22 +277,15 @@ TYPE* Vector<TYPE>::editArray() {
 
 template<class TYPE> inline
 const TYPE& Vector<TYPE>::operator[](size_t index) const {
-    LOG_FATAL_IF( index>=size(),
-                  "itemAt: index %d is past size %d", (int)index, (int)size() );
+    LOG_FATAL_IF(index>=size(),
+            "%s: index=%u out of range (%u)", __PRETTY_FUNCTION__,
+            int(index), int(size()));
     return *(array() + index);
 }
 
 template<class TYPE> inline
 const TYPE& Vector<TYPE>::itemAt(size_t index) const {
     return operator[](index);
-}
-
-template<class TYPE> inline
-const TYPE& Vector<TYPE>::mirrorItemAt(ssize_t index) const {
-    LOG_FATAL_IF( (index>0 ? index : -index)>=size(),
-                  "mirrorItemAt: index %d is past size %d",
-                  (int)index, (int)size() );
-    return *(array() + ((index<0) ? (size()-index) : index));
 }
 
 template<class TYPE> inline

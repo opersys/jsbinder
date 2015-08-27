@@ -206,7 +206,7 @@
 /*
  * Add any extra platform-specific defines here.
  */
-#define __linux__
+//#define __linux__
 
 /*
  * Define if we have <malloc.h> header

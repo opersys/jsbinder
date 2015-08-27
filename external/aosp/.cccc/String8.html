@@ -1,0 +1,465 @@
+<HTML><HEAD><TITLE>
+Detailed report on module String8
+</TITLE>
+</HEAD>
+<BODY>
+<H1><A NAME="summary">Detailed report on module String8</A></H1>
+<TABLE BORDER WIDTH=100%>
+<TR>
+<TH BGCOLOR="AQUA" WIDTH=70%>Metric</TH><TH BGCOLOR="AQUA" WIDTH=10%>Tag</TH><TH BGCOLOR="AQUA" WIDTH=10%>Overall</TH><TH BGCOLOR="AQUA" WIDTH=10%>Per Function</TH></TR>
+<TR>
+<TD>Lines of Code</TD><TD>LOC</TD><TD ALIGN=RIGHT>   418</TD><TD ALIGN=RIGHT>******</TD></TR>
+<TR>
+<TD>McCabe's Cyclomatic Number</TD><TD>MVG</TD><TD ALIGN=RIGHT>    99</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>******</STRONG></TD></TR>
+<TR>
+<TD>Lines of Comment</TD><TD>COM</TD><TD ALIGN=RIGHT>    26</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>********</STRONG></TD></TR>
+<TR>
+<TD>LOC/COM</TD><TD>L_C</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM>16.077</EM></TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>MVG/COM</TD><TD>M_C</TD><TD ALIGN=RIGHT> 3.808</TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>Weighted Methods per Class ( &nbsp;weighting = unity&nbsp;)</TD><TD>WMC1</TD><TD ALIGN=RIGHT>    47</TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>Weighted Methods per Class ( &nbsp;weighting = visible&nbsp;)</TD><TD>WMCv</TD><TD ALIGN=RIGHT>     0</TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>Depth of Inheritance Tree</TD><TD>DIT</TD><TD ALIGN=RIGHT>     0</TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>Number of Children</TD><TD>NOC</TD><TD ALIGN=RIGHT>     0</TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>Coupling between objects</TD><TD>CBO</TD><TD ALIGN=RIGHT>    12</TD><TD>&nbsp;</TD></TR>
+<TR>
+<TD>Information Flow measure ( &nbsp;inclusive&nbsp;)</TD><TD>IF4</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>  1296</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>********</STRONG></TD></TR>
+<TR>
+<TD>Information Flow measure ( &nbsp;visible&nbsp;)</TD><TD>IF4v</TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>  1296</STRONG></TD><TD ALIGN=RIGHT BGCOLOR="RED"><STRONG>********</STRONG></TD></TR>
+<TR>
+<TD>Information Flow measure ( &nbsp;concrete&nbsp;)</TD><TD>IF4c</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>********</TD></TR>
+</TABLE>
+<H2><A NAME="modext">Definitions and Declarations</A></H2>
+<TABLE BORDER WIDTH=100%><TR>
+<TD WIDTH=50%>Description</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH><TR><TD COLSPAN=6>No module extents have been identified for this module</TD></TR>
+<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
+</TR></TABLE>
+<H2><A NAME="proc">Functions</A></H2>
+<TABLE BORDER WIDTH=100%><TR>
+<TD WIDTH=50%>Function prototype</TD><TH BGCOLOR="AQUA" WIDTH=10%>LOC</TH><TH BGCOLOR="AQUA" WIDTH=10%>MVG</TH><TH BGCOLOR="AQUA" WIDTH=10%>COM</TH><TH BGCOLOR="AQUA" WIDTH=10%>L_C</TH><TH BGCOLOR="AQUA" WIDTH=10%>M_C</TH><TR>
+<TD>String8( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       141">./utils/String8.cpp:141</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>String8( &nbsp;StaticLinkage&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       146">./utils/String8.cpp:146</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>String8( &nbsp;const String16 &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       181">./utils/String8.cpp:181</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>String8( &nbsp;const String8 &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       159">./utils/String8.cpp:159</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>String8( &nbsp;const char *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       165">./utils/String8.cpp:165</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>String8( &nbsp;const char *, &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       173">./utils/String8.cpp:173</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>String8( &nbsp;const char16_t *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       186">./utils/String8.cpp:186</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>String8( &nbsp;const char16_t *, &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       191">./utils/String8.cpp:191</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>String8( &nbsp;const char32_t *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       196">./utils/String8.cpp:196</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>String8( &nbsp;const char32_t *, &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       201">./utils/String8.cpp:201</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>append( &nbsp;const String8 &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       285">./utils/String8.cpp:285</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>******</TD></TR>
+<TR>
+<TD>append( &nbsp;const char *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       298">./utils/String8.cpp:298</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>append( &nbsp;const char *, &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       303">./utils/String8.cpp:303</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>******</TD></TR>
+<TR>
+<TD>appendFormat( &nbsp;...&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       314">./utils/String8.cpp:314</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>appendFormatV( &nbsp;const char *, &nbsp;va_list&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       325">./utils/String8.cpp:325</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    18</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>appendPath( &nbsp;const char *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       620">./utils/String8.cpp:620</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    24</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>     5</TD><TD ALIGN=RIGHT> 4.800</TD><TD ALIGN=RIGHT> 1.600</TD></TR>
+<TR>
+<TD>clear( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       229">./utils/String8.cpp:229</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>convertToResPath( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       657">./utils/String8.cpp:657</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    13</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>find( &nbsp;const char *, &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       401">./utils/String8.cpp:401</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    10</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>find_extension( &nbsp;void&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       575">./utils/String8.cpp:575</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    15</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>format( &nbsp;...&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       211">./utils/String8.cpp:211</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     8</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>formatV( &nbsp;const char *, &nbsp;va_list&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       222">./utils/String8.cpp:222</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>getBasePath( &nbsp;void&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       608">./utils/String8.cpp:608</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    10</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>getPathDir( &nbsp;void&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       534">./utils/String8.cpp:534</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    10</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>getPathExtension( &nbsp;void&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       597">./utils/String8.cpp:597</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>getPathLeaf( &nbsp;void&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       522">./utils/String8.cpp:522</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    10</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>getUtf32( &nbsp;char32_t *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       494">./utils/String8.cpp:494</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>getUtf32At( &nbsp;size_t, &nbsp;size_t *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       489">./utils/String8.cpp:489</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>getUtf32Length( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       484">./utils/String8.cpp:484</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>lockBuffer( &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       367">./utils/String8.cpp:367</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    11</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>real_append( &nbsp;const char *, &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       350">./utils/String8.cpp:350</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    15</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>removeAll( &nbsp;const char *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       412">./utils/String8.cpp:412</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    20</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>20.000</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM> 7.000</EM></TD></TR>
+<TR>
+<TD>setPathName( &nbsp;const char *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       502">./utils/String8.cpp:502</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>setPathName( &nbsp;const char *, &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       507">./utils/String8.cpp:507</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>     2</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>setTo( &nbsp;const String8 &amp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       234">./utils/String8.cpp:234</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     6</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>setTo( &nbsp;const char *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       241">./utils/String8.cpp:241</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>setTo( &nbsp;const char *, &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       252">./utils/String8.cpp:252</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>setTo( &nbsp;const char16_t *, &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       263">./utils/String8.cpp:263</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>setTo( &nbsp;const char32_t *, &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       274">./utils/String8.cpp:274</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     9</TD><TD ALIGN=RIGHT>     3</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>toLower( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       436">./utils/String8.cpp:436</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>toLower( &nbsp;size_t, &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       441">./utils/String8.cpp:441</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    18</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>toUpper( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       460">./utils/String8.cpp:460</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>toUpper( &nbsp;size_t, &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       465">./utils/String8.cpp:465</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    18</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>unlockBuffer( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       379">./utils/String8.cpp:379</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>unlockBuffer( &nbsp;size_t&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       384">./utils/String8.cpp:384</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    14</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR>
+<TD>walkPath( &nbsp;String8 *&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       546">./utils/String8.cpp:546</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>    19</TD><TD ALIGN=RIGHT>     7</TD><TD ALIGN=RIGHT>     1</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT BGCOLOR="YELLOW"><EM> 7.000</EM></TD></TR>
+<TR>
+<TD>~String8( &nbsp;&nbsp;)<BR>
+definition &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       206">./utils/String8.cpp:206</A></CODE><BR>
+<BR>
+</TD><TD ALIGN=RIGHT>     4</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>     0</TD><TD ALIGN=RIGHT>------</TD><TD ALIGN=RIGHT>------</TD></TR>
+<TR><TD HEIGHT=12 COLSPAN=6></TD></TR>
+</TR></TABLE>
+<H2><A NAME="structdet">Relationships</A></H2>
+<TABLE BORDER WIDTH=100%>
+<TR><TH WIDTH=50%>Clients</TH><TH WIDTH=50%>Suppliers</TH></TR>
+<TR>
+<TD WIDTH=50%>
+Parcel [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/Parcel.cpp:       721">./binder/Parcel.cpp:721</A></CODE><BR>
+<BR>
+<BR>
+PropertyMap [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/PropertyMap.cpp:        50">./utils/PropertyMap.cpp:50</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/PropertyMap.cpp:        50">./utils/PropertyMap.cpp:50</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/PropertyMap.cpp:        54">./utils/PropertyMap.cpp:54</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/PropertyMap.cpp:        58">./utils/PropertyMap.cpp:58</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/PropertyMap.cpp:        58">./utils/PropertyMap.cpp:58</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/PropertyMap.cpp:        68">./utils/PropertyMap.cpp:68</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/PropertyMap.cpp:        78">./utils/PropertyMap.cpp:78</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/PropertyMap.cpp:        95">./utils/PropertyMap.cpp:95</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/PropertyMap.cpp:       118">./utils/PropertyMap.cpp:118</A></CODE><BR>
+<BR>
+<BR>
+SimpleBestFitAllocator [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./binder/MemoryDealer.cpp:       136">./binder/MemoryDealer.cpp:136</A></CODE><BR>
+<BR>
+<BR>
+String16 [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String16.cpp:       148">./utils/String16.cpp:148</A></CODE><BR>
+<BR>
+<BR>
+String8Printer [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/Printer.cpp:       126">./utils/Printer.cpp:126</A></CODE><BR>
+<BR>
+<BR>
+Tokenizer [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/Tokenizer.cpp:        38">./utils/Tokenizer.cpp:38</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/Tokenizer.cpp:        52">./utils/Tokenizer.cpp:52</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/Tokenizer.cpp:       103">./utils/Tokenizer.cpp:103</A></CODE><BR>
+<BR>
+<BR>
+&nbsp;
+</TD>
+<TD WIDTH=50%>
+StaticLinkage [CV] <BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       146">./utils/String8.cpp:146</A></CODE><BR>
+<BR>
+<BR>
+String16 [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       181">./utils/String8.cpp:181</A></CODE><BR>
+<BR>
+<BR>
+char16_t [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       186">./utils/String8.cpp:186</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       191">./utils/String8.cpp:191</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       263">./utils/String8.cpp:263</A></CODE><BR>
+<BR>
+<BR>
+char32_t [V] <BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       196">./utils/String8.cpp:196</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       201">./utils/String8.cpp:201</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       274">./utils/String8.cpp:274</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       494">./utils/String8.cpp:494</A></CODE><BR>
+<BR>
+<BR>
+size_t [CV] <BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       173">./utils/String8.cpp:173</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       191">./utils/String8.cpp:191</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       201">./utils/String8.cpp:201</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       252">./utils/String8.cpp:252</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       263">./utils/String8.cpp:263</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       274">./utils/String8.cpp:274</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       303">./utils/String8.cpp:303</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       350">./utils/String8.cpp:350</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       367">./utils/String8.cpp:367</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       384">./utils/String8.cpp:384</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       401">./utils/String8.cpp:401</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       441">./utils/String8.cpp:441</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       441">./utils/String8.cpp:441</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       465">./utils/String8.cpp:465</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       465">./utils/String8.cpp:465</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       489">./utils/String8.cpp:489</A></CODE><BR>
+pass by reference &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       489">./utils/String8.cpp:489</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       507">./utils/String8.cpp:507</A></CODE><BR>
+<BR>
+<BR>
+va_list [CV] <BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       222">./utils/String8.cpp:222</A></CODE><BR>
+pass by value &nbsp;
+<CODE><A HREF="cccc_src.html#./utils/String8.cpp:       325">./utils/String8.cpp:325</A></CODE><BR>
+<BR>
+<BR>
+&nbsp;
+</TD>
+</TR></TABLE>
+</BODY></HTML>
