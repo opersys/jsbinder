@@ -16,7 +16,7 @@ source ./android-configure <Android NDK directory> <ia32 or arm>
 
 - In the jslibbinder directory:
 
-node-gyp --arch=arm --nodedir=<node-android directory`
+node-gyp --arch=arm --nodedir=`node-android directory`
 
 This should give you the .so needed for Android. The proper use of this module
 within another project is left as an exercise to the reader while we figure
