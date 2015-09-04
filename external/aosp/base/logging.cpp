@@ -138,11 +138,14 @@ static LogSeverity gMinimumLogSeverity = INFO;
 static std::unique_ptr<std::string> gProgramInvocationName;
 
 static const char* ProgramInvocationName() {
+#if 0
   if (gProgramInvocationName == nullptr) {
     gProgramInvocationName.reset(new std::string(getprogname()));
   }
 
   return gProgramInvocationName->c_str();
+#endif
+  return NULL;
 }
 
 void StderrLogger(LogId, LogSeverity severity, const char*, const char* file,

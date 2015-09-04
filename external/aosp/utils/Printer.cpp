@@ -106,6 +106,32 @@ FdPrinter::FdPrinter(int fd, unsigned int indent, const char* prefix) :
     snprintf(mFormatString, sizeof(mFormatString), "%%-%us%%s\n", mIndent);
 }
 
+int vfdprintf(int fd, const char * __restrict format, __va_list ap)
+{
+	char *buf=0;
+	int ret;
+	ret = vasprintf(&buf, format, ap);
+	if (ret < 0)
+		goto end;
+
+	ret = write(fd, buf, ret);
+	free(buf);
+end:
+	return ret;
+}
+
+int fdprintf(int fd, const char * __restrict format, ...)
+{
+	__va_list ap;
+	int ret;
+
+	va_start(ap, format);
+	ret = vfdprintf(fd, format, ap);
+	va_end(ap);
+
+	return ret;
+}
+
 void FdPrinter::printLine(const char* string) {
     if (string == NULL) {
         ALOGW("%s: NULL string passed in", __FUNCTION__);
@@ -114,10 +140,8 @@ void FdPrinter::printLine(const char* string) {
         ALOGW("%s: File descriptor out of range (%d)", __FUNCTION__, mFd);
         return;
     }
-
-#ifndef USE_MINGW
-    dprintf(mFd, mFormatString, mPrefix, string);
-#endif
+    
+    fdprintf(mFd, mFormatString, mPrefix, string);
 }
 
 /*

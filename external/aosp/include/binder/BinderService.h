@@ -54,7 +54,9 @@ private:
     static void joinThreadPool() {
         sp<ProcessState> ps(ProcessState::self());
         ps->startThreadPool();
+#if 0
         ps->giveThreadPoolName();
+#endif
         IPCThreadState::self()->joinThreadPool();
     }
 };

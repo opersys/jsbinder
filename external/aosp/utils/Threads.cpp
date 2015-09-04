@@ -835,6 +835,7 @@ bool Thread::isRunning() const {
 #if defined(__ANDROID__)
 pid_t Thread::getTid() const
 {
+  #if 0
     // mTid is not defined until the child initializes it, and the caller may need it earlier
     Mutex::Autolock _l(mLock);
     pid_t tid;
@@ -846,6 +847,7 @@ pid_t Thread::getTid() const
         tid = -1;
     }
     return tid;
+  #endif
 }
 #endif
 

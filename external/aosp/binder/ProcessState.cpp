@@ -302,7 +302,9 @@ status_t ProcessState::setThreadPoolMaxThreadCount(size_t maxThreads) {
 }
 
 void ProcessState::giveThreadPoolName() {
+#if 0
     androidSetThreadName( makeBinderThreadName().string() );
+#endif
 }
 
 static int open_driver()
