@@ -17,6 +17,7 @@
     "target_defaults": {
         "include_dirs": [
             "external/aosp/include",
+            "include"
         ],
         "cflags": [
             "-include AndroidConfig.h",
@@ -117,7 +118,10 @@
             "external/aosp/base/logging.cpp",
             "external/aosp/base/file.cpp",
             "external/aosp/base/strings.cpp",                
-            
+
+            "lib/jsparcel.cpp",
+            "lib/jsservicemanager.cpp",
+            "lib/jsservice.cpp",            
             "lib/jsbinder.cpp"
         ]
     },

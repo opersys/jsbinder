@@ -14,7 +14,7 @@ https://github.com/opersys/node
 
 source ./android-configure <Android NDK directory> <ia32 or arm>
 
-- In the jslibbinder directory:
+- In the jsbinder directory:
 
 node-gyp --arch=arm --nodedir=`node-android directory`
 
