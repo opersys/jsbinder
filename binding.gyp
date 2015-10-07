@@ -142,7 +142,8 @@
             "target_name": "jsbinderversion",
 	        "sources/": [
                 [ "exclude", "external/aosp" ],
-                [ "exclude", "lib/jsbinder.cpp" ]
+                [ "exclude", "lib" ],
+                [ "include", "lib/jsbinderversion.cpp" ]
             ],
             "sources": [ "lib/jsbinderversion.cpp" ]
         }
