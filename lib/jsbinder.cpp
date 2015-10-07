@@ -20,6 +20,10 @@
 
 using namespace android;
 
+v8::Persistent<v8::Function> JsServiceManager::constructor;
+v8::Persistent<v8::Function> JsService::constructor;
+v8::Persistent<v8::Function> JsParcel::constructor;
+
 void Init(v8::Handle<v8::Object> exports) {
   JsServiceManager::Init(exports);
   JsService::Init(exports);
