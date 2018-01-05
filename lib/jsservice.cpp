@@ -1,8 +1,24 @@
+/*
+ * Copyright (C) 2015,2017 Opersys inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 #include <string>
 #include <iostream>
 #include <sstream>
 
-#include <node.h>
+#include <nan.h>
 
 #include <sys/types.h>
 #include <sys/mman.h>
@@ -20,179 +36,181 @@
 using namespace android;
 
 JsService::JsService() {
-  this->dumpArea = 0;
-  this->dumpFd = -1;
+    this->dumpArea = 0;
+    this->dumpFd = -1;
 }
 
 JsService::~JsService() {
-  if (this->dumpArea)
-    munmap(this->dumpArea, this->dumpAreaSize);
+    if (this->dumpArea)
+        munmap(this->dumpArea, this->dumpAreaSize);
 
-  if (this->dumpFd > 0)
-    close(this->dumpFd);
+    if (this->dumpFd > 0)
+        close(this->dumpFd);
 
-  this->dumpArea = 0;
-  this->dumpFd = -1;
+    this->dumpArea = 0;
+    this->dumpFd = -1;
 }
 
-v8::Handle<v8::Value> JsService::New(const v8::Arguments& args) {
-  if (args.IsConstructCall()) {
-    JsService* jsSv = new JsService();
-    jsSv->Wrap(args.This());
-    return args.This();
-  }
-  else return v8::ThrowException(
-    v8::Exception::TypeError(
-      v8::String::New("Constructor not to be called directly")));
+NAN_METHOD(JsService::New) {
+    if (info.IsConstructCall()) {
+        JsService* jsSv = new JsService();
+        jsSv->Wrap(info.This());
+        info.GetReturnValue().Set(info.This());
+    }
+    else {
+        const int argc = 1;
+        v8::Local<v8::Value> argv[argc] = {info[0]};
+        v8::Local<v8::Function> cons = Nan::New(constructor());
+        info.GetReturnValue().Set(Nan::NewInstance(cons, argc, argv).ToLocalChecked());
+    }
 }
 
 // Send a parcel to a service, and returns the parcel that is returned as an answer.
-v8::Handle<v8::Value> JsService::Transact(const v8::Arguments& args) {
-  v8::HandleScope scope;
-  v8::Local<v8::Object> objR;
-  JsParcel *jsP, *jsR;
-  JsService* jsSv;
-  uint32_t code;
+NAN_METHOD(JsService::Transact) {
+    v8::MaybeLocal<v8::Object> objR;
+    v8::Local<v8::Function> cons;
+    v8::Local<v8::Value> argv[0] = {};
+    JsParcel *jsP, *jsR;
+    JsService* jsSv;
+    uint32_t code;
 
-  // FIXME: More type checking on the type of object.
-  if (!args[0]->IsNumber())
-    return v8::ThrowException(
-      v8::Exception::TypeError(
-        v8::String::New("Argument 1 should be a number")));
-  if (!args[1]->IsObject())
-      return v8::ThrowException(
-        v8::Exception::TypeError(
-          v8::String::New("Argument 2 should be a Parcel object")));
-
-  code = args[0]->ToUint32()->Value();
-
-  jsP = node::ObjectWrap::Unwrap<JsParcel>(args[1]->ToObject());
-  jsSv = node::ObjectWrap::Unwrap<JsService>(args.This());
-
-  // Construct a new JavaScript object that will receive the reply.
-  objR = JsParcel::constructor->NewInstance();
-  jsR = node::ObjectWrap::Unwrap<JsParcel>(objR);
-
-  jsSv->sv->transact(code, jsP->parcel, &jsR->parcel);
-
-  return scope.Close(objR);
-}
-
-v8::Handle<v8::Value> JsService::Ping(const v8::Arguments& args) {
-  v8::HandleScope scope;
-  JsService *jsSv;
-
-  jsSv = ObjectWrap::Unwrap<JsService>(args.This());
-  assert(jsSv->sv != 0);
-
-  jsSv->sv->pingBinder();
-
-  return scope.Close(v8::Null());
-}
-
-v8::Handle<v8::Value> JsService::GetInterface(const v8::Arguments& args) {
-  v8::HandleScope scope;
-  JsService *jsSv;
-  Parcel p, r;
-  status_t err;
-  String16 iface;
-
-  jsSv = node::ObjectWrap::Unwrap<JsService>(args.This());
-  assert(jsSv->sv != 0);
-
-  err = jsSv->sv->transact(IBinder::INTERFACE_TRANSACTION, p, &r);
-  iface = r.readString16();
-
-  if (err == NO_ERROR)
-    return scope.Close(v8::String::New((uint16_t *)iface.string()));
-  else
-    return scope.Close(v8::String::New(""));
-}
-
-v8::Handle<v8::Value> JsService::Dump(const v8::Arguments& args) {
-  v8::HandleScope scope;
-  JsService *jsSv;
-  Vector<String16> dumpArgs;
-  status_t err;
-  std::stringstream errMsg;
-  const char* fname = ".jsbinder-dumparea";
-
-  jsSv = node::ObjectWrap::Unwrap<JsService>(args.This());
-  assert(jsSv->sv != 0);
-
-  // There might be some arguments.
-  if (args.Length() > 0) {
-    for (int i = 0; i < args.Length(); i++) {
-      if (!args[i]->IsString()) {
-        errMsg << "Argument " << i + 1 << " should be a string";
-        return v8::ThrowException(
-          v8::Exception::TypeError(v8::String::New(errMsg.str().c_str())));
-      }
-      else
-        dumpArgs.add(String16((const char16_t *)*v8::String::Value(args[i])));
-    }
-  }
-
-  // Initialize the area where the 'dump' command will write its output.
-  if (!jsSv->dumpArea) {
-
-    // FIXME: This is clearly not safe to do. The name should be random.
-    if ((jsSv->dumpFd = open(fname, O_RDWR | O_CREAT)) < 0) {
-      errMsg << "Cannot open the file for dumping service: "
-             << strerror(errno);
-
-      return v8::ThrowException(
-        v8::Exception::TypeError(v8::String::New(errMsg.str().c_str())));
+    // FIXME: More type checking on the type of object.
+    if (!info[0]->IsNumber()) {
+        Nan::ThrowTypeError("Argument 1 should be a number");
+        return;
+    }        
+    if (!info[1]->IsObject()) {
+        Nan::ThrowTypeError("Argument 2 should be a Parcel object");
+        return;
     }
 
-    unlink(fname);
-    jsSv->dumpArea = mmap(NULL, jsSv->dumpAreaSize, PROT_READ | PROT_WRITE,
-                          MAP_PRIVATE, jsSv->dumpFd, 0);
+    code = Nan::To<uint32_t>(info[0]).FromJust();
+    
+    jsP = Nan::ObjectWrap::Unwrap<JsParcel>(info[1]->ToObject());
+    jsSv = Nan::ObjectWrap::Unwrap<JsService>(info.Holder());
+    
+    // Construct a new JavaScript object that will receive the reply.
+    cons = Nan::New<v8::Function>(JsParcel::constructor());
+    objR = Nan::NewInstance(cons, 0, argv);
+    jsR = Nan::ObjectWrap::Unwrap<JsParcel>(objR.ToLocalChecked());
 
+    jsSv->sv->transact(code, jsP->parcel, &jsR->parcel);
+
+    info.GetReturnValue().Set(objR.ToLocalChecked());
+}
+
+NAN_METHOD(JsService::Ping) {
+    JsService *jsSv;
+
+    jsSv = Nan::ObjectWrap::Unwrap<JsService>(info.Holder());
+    assert(jsSv->sv != 0);
+
+    jsSv->sv->pingBinder();
+}
+
+NAN_METHOD(JsService::GetInterface) {
+    JsService *jsSv;
+    Parcel p, r;
+    status_t err;
+    String16 iface;
+    v8::MaybeLocal<v8::String> ret;
+
+    jsSv = ObjectWrap::Unwrap<JsService>(info.Holder());
+    assert(jsSv->sv != 0);
+
+    err = jsSv->sv->transact(IBinder::INTERFACE_TRANSACTION, p, &r);
+    iface = r.readString16();       
+    
+    if (err == NO_ERROR)
+        ret = Nan::New<v8::String>(reinterpret_cast<const uint16_t *>(iface.string()));
+    else
+        ret = Nan::New<v8::String>("");
+
+    info.GetReturnValue().Set(ret.ToLocalChecked());
+}
+
+NAN_METHOD(JsService::Dump) {
+    JsService *jsSv;
+    Vector<String16> dumpArgs;
+    status_t err;
+    std::stringstream errMsg;
+    const char* fname = ".jsbinder-dumparea";
+    v8::MaybeLocal<v8::String> ret;
+
+    jsSv = Nan::ObjectWrap::Unwrap<JsService>(info.Holder());
+    assert(jsSv->sv != 0);
+
+    // There might be some arguments.
+    if (info.Length() > 0) {
+        for (int i = 0; i < info.Length(); i++) {
+            if (!info[i]->IsString()) {
+                errMsg << "Argument " << i + 1 << " should be a string";
+                Nan::ThrowError(errMsg.str().c_str());
+            }
+            else dumpArgs.add(String16((const char16_t *)*v8::String::Value(info[i])));
+        }
+    }
+
+    // Initialize the area where the 'dump' command will write its output.
     if (!jsSv->dumpArea) {
-      errMsg << "mmap on memory area for dump failed: "
-             << strerror(errno);
+        // FIXME: This is clearly not safe to do. The name should be random.
+        if ((jsSv->dumpFd = open(fname, O_RDWR | O_CREAT)) < 0) {
+            errMsg << "Cannot open the file for dumping service: "
+                   << strerror(errno);
 
-      close(jsSv->dumpFd);
-      jsSv->dumpFd = 0;
-
-      return v8::ThrowException(
-        v8::Exception::TypeError(v8::String::New(errMsg.str().c_str())));
+            Nan::ThrowError(errMsg.str().c_str());
+        }        
+        
+        unlink(fname);
+        jsSv->dumpArea = mmap(NULL, jsSv->dumpAreaSize, PROT_READ | PROT_WRITE,
+                              MAP_PRIVATE, jsSv->dumpFd, 0);
+        
+        if (!jsSv->dumpArea) {
+            errMsg << "mmap on memory area for dump failed: "
+                   << strerror(errno);
+            
+            close(jsSv->dumpFd);
+            jsSv->dumpFd = 0;
+            
+            Nan::ThrowError(errMsg.str().c_str());
+            return;
+        }
     }
-  }
+        
+    // Sync to the start of the temporary file.
+    lseek(jsSv->dumpFd, 0, SEEK_SET);
+    err = jsSv->sv->dump(jsSv->dumpFd, dumpArgs);
+    
+    if (err == NO_ERROR) {
+        // Get how much has been read.
+        off_t pos = lseek(jsSv->dumpFd, 0, SEEK_CUR);
+        ret = Nan::New<v8::String>(reinterpret_cast<char *>(jsSv->dumpArea), pos);
+    } 
+    else
+        ret = Nan::New<v8::String>("Dump failed");
 
-  // Sync to the start of the temporary file.
-  lseek(jsSv->dumpFd, 0, SEEK_SET);
-  err = jsSv->sv->dump(jsSv->dumpFd, dumpArgs);
-
-  if (err == NO_ERROR) {
-    // Get how much has been read.
-    off_t pos = lseek(jsSv->dumpFd, 0, SEEK_CUR);
-
-    return scope.Close(v8::String::New((char *)jsSv->dumpArea, pos));
-  } 
-  else
-    return scope.Close(v8::String::New("Dump failed"));
+    info.GetReturnValue().Set(ret.ToLocalChecked());
 }
 
-void JsService::Init(v8::Handle<v8::Object> exports) {
-  v8::Local<v8::FunctionTemplate> tpl = v8::FunctionTemplate::New(New);
-  v8::Local<v8::ObjectTemplate> proto;
+NAN_MODULE_INIT(JsService::Init) {
+    v8::MaybeLocal<v8::FunctionTemplate> mbTmpl = Nan::New<v8::FunctionTemplate>(New);
+    v8::Local<v8::ObjectTemplate> proto;
+    v8::Local<v8::FunctionTemplate> tmpl;
 
-  proto = tpl->PrototypeTemplate();
+    tmpl = mbTmpl.ToLocalChecked();
 
-  tpl->SetClassName(v8::String::NewSymbol("JsService"));
-  tpl->InstanceTemplate()->SetInternalFieldCount(4);
+    proto = tmpl->PrototypeTemplate();
 
-  proto->Set(v8::String::NewSymbol("ping"),
-             v8::FunctionTemplate::New(Ping)->GetFunction());
-  proto->Set(v8::String::NewSymbol("transact"),
-             v8::FunctionTemplate::New(Transact)->GetFunction());
-  proto->Set(v8::String::NewSymbol("getInterface"),
-             v8::FunctionTemplate::New(GetInterface)->GetFunction());
-  proto->Set(v8::String::NewSymbol("dump"),
-             v8::FunctionTemplate::New(Dump)->GetFunction());
+    tmpl->SetClassName(Nan::New("JsService").ToLocalChecked());
+    tmpl->InstanceTemplate()->SetInternalFieldCount(4);
 
-  constructor = v8::Persistent<v8::Function>::New(tpl->GetFunction());
-  exports->Set(v8::String::NewSymbol("JsService"), constructor);
+    Nan::SetPrototypeMethod(tmpl, "ping", Ping);
+    Nan::SetPrototypeMethod(tmpl, "transact", Transact);
+    Nan::SetPrototypeMethod(tmpl, "getInterface", GetInterface);
+    Nan::SetPrototypeMethod(tmpl, "dump", Dump);
+
+    constructor().Reset(Nan::GetFunction(tmpl).ToLocalChecked());
+    Nan::Set(target,
+             Nan::New("JsService").ToLocalChecked(),
+             Nan::GetFunction(tmpl).ToLocalChecked());
 }

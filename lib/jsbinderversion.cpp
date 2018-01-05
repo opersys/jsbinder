@@ -14,46 +14,54 @@
  * limitations under the License.
  */
 
-#include <node.h>
+#include <nan.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <string>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/ioctl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
+#ifdef AOSP_VERSION
 #include <linux/binder.h>
+#else
+#include <linux/android/binder.h>
+#endif
 
-v8::Handle<v8::Value> getBinderVersion() {
-  v8::HandleScope scope;
-  int vers = 0, result, fd = -1;
+NAN_METHOD(getBinderVersion) {
+    int vers = 0, result, fd = -1;
   
-  fd = open("/dev/binder", O_RDWR);
+    fd = open("/dev/binder", O_RDWR);
     
-  if (fd >= 0) {
-    result = ioctl(fd, BINDER_VERSION, &vers);
+    if (fd >= 0) {
+        result = ioctl(fd, BINDER_VERSION, &vers);
 
-    if (result == -1) {
-      std::string serr = "Binder ioctl to obtain version failed: " + std::string(strerror(errno));
-      
-      v8::ThrowException(
-        v8::Exception::Error(v8::String::New(serr.c_str())));
-          
-      close(fd);
-      fd = -1;
+        if (result == -1) {
+            std::string serr = "Binder ioctl to obtain version failed: " + std::string(strerror(errno));
+
+            Nan::ThrowError(serr.c_str());
+         
+            close(fd);
+            fd = -1;
+        }
+    } else {
+        std::string serr = "Opening '/dev/binder' failed: " + std::string(strerror(errno));
+
+        Nan::ThrowError(serr.c_str());
     }
-  } else {
-    std::string serr = "Opening '/dev/binder' failed: " + std::string(strerror(errno));
-    
-    v8::ThrowException(
-      v8::Exception::Error(v8::String::New(serr.c_str())));
-  }
   
-  close(fd);
+    close(fd);
 
-  return scope.Close(v8::Number::New(vers));
+    info.GetReturnValue().Set(Nan::New<v8::Number>(vers));
 }
 
-void Init(v8::Handle<v8::Object> exports) {
-  exports->Set(v8::String::NewSymbol("Version"), getBinderVersion());
+NAN_MODULE_INIT(Init) {
+    Nan::Set(target,
+             Nan::New("Version").ToLocalChecked(),
+             Nan::GetFunction(Nan::New<v8::FunctionTemplate>(getBinderVersion)).ToLocalChecked());
 }
 
 NODE_MODULE(jsbinderversion, Init);

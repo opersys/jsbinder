@@ -14,24 +14,22 @@
  * limitations under the License.
  */
 
+#include <nan.h>
+
 #include "jsservicemanager.hxx"
 #include "jsservice.hxx"
 #include "jsparcel.hxx"
 
 using namespace android;
 
-v8::Persistent<v8::Function> JsServiceManager::constructor;
-v8::Persistent<v8::Function> JsService::constructor;
-v8::Persistent<v8::Function> JsParcel::constructor;
-
-void Init(v8::Handle<v8::Object> exports) {
-  JsServiceManager::Init(exports);
-  JsService::Init(exports);
-  JsParcel::Init(exports);
+NAN_MODULE_INIT(InitAll) {
+  JsServiceManager::Init(target);
+  JsService::Init(target);
+  JsParcel::Init(target);
 }
 
 #ifdef BINDER_IPC_32BIT
-NODE_MODULE(jsbinder_binder32, Init);
+NODE_MODULE(jsbinder_binder32, InitAll);
 #else
-NODE_MODULE(jsbinder_binder64, Init);
+NODE_MODULE(jsbinder_binder64, InitAll);
 #endif

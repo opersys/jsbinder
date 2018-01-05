@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Opersys inc.
+ * Copyright (C) 2015,2017 Opersys inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,35 +17,43 @@
 #ifndef _JSPARCEL_HXX
 #define _JSPARCEL_HXX
 
+#include <nan.h>
+
 using namespace android;
 
-class JsParcel : public node::ObjectWrap {
+class JsParcel : public Nan::ObjectWrap {
 
 public:
-  static void Init(v8::Handle<v8::Object> exports);
-  static v8::Persistent<v8::Function> constructor;
-
-  Parcel parcel;
-
+    Parcel parcel;
+    static NAN_MODULE_INIT(Init);
+    
 private:
-  static v8::Handle<v8::Value> New(const v8::Arguments& args);
-  static v8::Handle<v8::Value> ReadInt32(const v8::Arguments& args);
-  static v8::Handle<v8::Value> ReadInt64(const v8::Arguments& args);
-  static v8::Handle<v8::Value> WriteInt32(const v8::Arguments& args);
-  static v8::Handle<v8::Value> WriteInt64(const v8::Arguments& args);
-  static v8::Handle<v8::Value> ReadString(const v8::Arguments& args);
-  static v8::Handle<v8::Value> WriteString(const v8::Arguments& args);
-  static v8::Handle<v8::Value> ReadString8(const v8::Arguments& args);
-  static v8::Handle<v8::Value> WriteString8(const v8::Arguments& args);
-  static v8::Handle<v8::Value> ReadExceptionCode(const v8::Arguments& args);
-  static v8::Handle<v8::Value> WriteInterfaceToken(const v8::Arguments& args);
+    friend class JsService;
+    
+    static inline Nan::Persistent<v8::Function> & constructor() {
+        static Nan::Persistent<v8::Function> jsParcelConstructor;
+        return jsParcelConstructor;
+    }
 
-  static v8::Handle<v8::Value> SetDataPosition(const v8::Arguments& args);
-  static v8::Handle<v8::Value> GetDataPosition(const v8::Arguments& args);
-  static v8::Handle<v8::Value> GetDataSize(const v8::Arguments& args);
+    static NAN_METHOD(Init);
+    static NAN_METHOD(New);
+    static NAN_METHOD(ReadInt32);
+    static NAN_METHOD(ReadInt64);
+    static NAN_METHOD(WriteInt32);
+    static NAN_METHOD(WriteInt64);
+    static NAN_METHOD(ReadString);
+    static NAN_METHOD(WriteString);
+    static NAN_METHOD(ReadString8);
+    static NAN_METHOD(WriteString8);
+    static NAN_METHOD(ReadExceptionCode);
+    static NAN_METHOD(WriteInterfaceToken);
+    
+    static NAN_METHOD(SetDataPosition);
+    static NAN_METHOD(GetDataPosition);
+    static NAN_METHOD(GetDataSize);
 
-  explicit JsParcel();
-  ~JsParcel();
+    explicit JsParcel();
+    ~JsParcel();
 };
 
 #endif // _JSPARCEL_HXX

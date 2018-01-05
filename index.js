@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 var JsBinderVersion = require("./build/Release/jsbinderversion");
-var JsBinder = require(JsBinderVersion.Version === 8 ? 
-  "./build/Release/jsbinder-binder64" : "./build/Release/jsbinder-binder32");
+var JsBinder = require(JsBinderVersion.Version >= 8 ? 
+  "./build/Release/jsbinder-binder64-oreo" : "./build/Release/jsbinder-binder32-oreo");
 
 exports.Parcel = JsBinder.JsParcel;
 exports.ServiceManager = JsBinder.JsServiceManager;

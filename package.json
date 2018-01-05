@@ -1,6 +1,6 @@
 {
   "name": "jsbinder",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "author": {
     "name": "François-Denis Gonthier",
     "email": "francois-denis.gonthier@opersys.com"
@@ -11,5 +11,6 @@
     "url": "git://github.com/opersys/jsbinder"
   },
   "dependencies": {
+    "nan": "^2.8.0"
   }
 }

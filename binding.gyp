@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2015 Opersys inc.
+# Copyright (C) 2015-2017 Opersys inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,139 +13,100 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Build with:
+
 {
-    "target_defaults": {
-        "include_dirs": [
-            "external/aosp/include",
-            "include"
-        ],
-        "cflags": [
-            "-include AndroidConfig.h",
-        ],
-        "cflags_cc": [
-            "--std=c++0x"                
-        ],
-        "defines": [
-            "ANDROID_SMP=0",
-            "LIBLOG_LOG_TAG=1005",
-            "__USE_BSD"
-        ],    
-        "sources": [
-            "external/aosp/binder/IPCThreadState.cpp",
-            "external/aosp/binder/Debug.cpp",
-            "external/aosp/binder/ProcessState.cpp",
-            "external/aosp/binder/PermissionCache.cpp",
-            "external/aosp/binder/IInterface.cpp",
-            "external/aosp/binder/Parcel.cpp",
-            "external/aosp/binder/AppOpsManager.cpp",
-            "external/aosp/binder/Static.cpp",
-            "external/aosp/binder/IMemory.cpp",
-            "external/aosp/binder/IAppOpsService.cpp",
-            "external/aosp/binder/TextOutput.cpp",
-            "external/aosp/binder/MemoryBase.cpp",
-            "external/aosp/binder/IAppOpsCallback.cpp",
-            "external/aosp/binder/IServiceManager.cpp",
-            "external/aosp/binder/IBatteryStats.cpp",
-            "external/aosp/binder/BpBinder.cpp",
-            "external/aosp/binder/IPermissionController.cpp",
-            "external/aosp/binder/BufferedTextOutput.cpp",
-            "external/aosp/binder/Binder.cpp",
+  "variables": {
+    "aosp_build_top": "<!(echo $ANDROID_BUILD_TOP)",
+    "aosp_product_out": "<!(echo $ANDROID_PRODUCT_OUT)",
+    "aosp_major": "<!(cat $ANDROID_PRODUCT_OUT/system/build.prop | perl -ne'/ro.build.version.release=([0-9]*)\./ && print $1+\"\n\"')",
+    "aosp_crtbegin": "<(aosp_product_out)/obj/lib/crtbegin_so.o",
 
-            "external/aosp/utils/Trace.cpp",
-            "external/aosp/utils/NativeHandle.cpp",
-            "external/aosp/utils/Threads.cpp",
-            "external/aosp/utils/VectorImpl.cpp",
-            "external/aosp/utils/Static.cpp",
-            "external/aosp/utils/SystemClock.cpp",
-            "external/aosp/utils/LinearTransform.cpp",
-            "external/aosp/utils/SharedBuffer.cpp",
-            "external/aosp/utils/FileMap.cpp",
-            "external/aosp/utils/LinearAllocator.cpp",
-            "external/aosp/utils/Tokenizer.cpp",
-            "external/aosp/utils/Timers.cpp",
-            "external/aosp/utils/RefBase.cpp",
-            "external/aosp/utils/BasicHashtable.cpp",
-            "external/aosp/utils/String16.cpp",
-            "external/aosp/utils/String8.cpp",
-            "external/aosp/utils/JenkinsHash.cpp",
-            "external/aosp/utils/Log.cpp",
-            "external/aosp/utils/Looper.cpp",
-            "external/aosp/utils/Printer.cpp",
-            "external/aosp/utils/BlobCache.cpp",
-            "external/aosp/utils/StopWatch.cpp",
-            "external/aosp/utils/Unicode.cpp",
-            "external/aosp/utils/misc.cpp",
+    # JSBinder
+    "jsbinder_sources": [
+      "lib/jsparcel.cpp",
+      "lib/jsservicemanager.cpp",
+      "lib/jsservice.cpp",
+      "lib/jsbinder.cpp"
+    ],
 
-            "external/aosp/libcutils/properties.c",
-            "external/aosp/libcutils/strlcpy.c",
-            "external/aosp/libcutils/atomic.c",
-            "external/aosp/libcutils/native_handle.c",
-            "external/aosp/libcutils/process_name.c",
-            "external/aosp/libcutils/socket_inaddr_any_server.c",
-            "external/aosp/libcutils/open_memstream.c",
-            "external/aosp/libcutils/qtaguid.c",
-            "external/aosp/libcutils/config_utils.c",
-            "external/aosp/libcutils/hashmap.c",
-            "external/aosp/libcutils/socket_loopback_server.c",
-            "external/aosp/libcutils/dlmalloc_stubs.c",
-            "external/aosp/libcutils/uevent.c",
-            "external/aosp/libcutils/multiuser.c",
-            "external/aosp/libcutils/ashmem-host.c",
-            "external/aosp/libcutils/strdup16to8.c",
-            "external/aosp/libcutils/fs.c",
-            "external/aosp/libcutils/strdup8to16.c",
-            "external/aosp/libcutils/arch-mips/android_memset.c",
-            "external/aosp/libcutils/partition_utils.c",
-            "external/aosp/libcutils/socket_local_server.c",
-            "external/aosp/libcutils/socket_network_client.c",
-            "external/aosp/libcutils/socket_loopback_client.c",
-            "external/aosp/libcutils/threads.c",
-            "external/aosp/libcutils/iosched_policy.c",
-            "external/aosp/libcutils/trace-host.c",
-            "external/aosp/libcutils/load_file.c",
-            "external/aosp/libcutils/socket_local_client.c",
-            "external/aosp/libcutils/klog.c",
-            "external/aosp/libcutils/sched_policy.c",
-            "external/aosp/libcutils/record_stream.c",
-            "external/aosp/libcutils/debugger.c",
-
-            "external/aosp/liblog/event_tag_map.c",
-            "external/aosp/liblog/fake_log_device.c",
-            "external/aosp/liblog/logd_write.c",
-            "external/aosp/liblog/logprint.c",
-            
-            "external/aosp/base/stringprintf.cpp",
-            "external/aosp/base/logging.cpp",
-            "external/aosp/base/file.cpp",
-            "external/aosp/base/strings.cpp",                
-
-            "lib/jsparcel.cpp",
-            "lib/jsservicemanager.cpp",
-            "lib/jsservice.cpp",            
-            "lib/jsbinder.cpp"
-        ]
-    },
-
-    "targets": [
-        {
-            "target_name": "jsbinder-binder64",
-            "defines": [
-            ]
-        },
-        {
-            "target_name": "jsbinder-binder32",
-            "defines": [
-                "BINDER_IPC_32BIT",
-            ]
-        },
-        {
-            "target_name": "jsbinderversion",
-	        "sources/": [
-                [ "exclude", "external/aosp" ],
-                [ "exclude", "lib" ],
-                [ "include", "lib/jsbinderversion.cpp" ]
-            ],
-            "sources": [ "lib/jsbinderversion.cpp" ]
-        }
+    # 32/64 bit detector.
+    "jsbinderversion_sources": [
+      "lib/jsbinderversion.cpp"
     ]
+  },
+
+  "conditions": [
+
+    # AOSP versions
+
+    ["aosp_major==8", {"includes": {"aosp_oreo.gypi"}},
+     "aosp_major==7", {"includes": {"aosp_nougat.gypi"}},
+     "aosp_major==6", {"includes": {"aosp_nougat.gypi"}},
+     #Untested
+     "aosp_major==5", {"includes": {"aosp_nougat.gypi"}},
+     "aosp_major==4", {"includes": {"aosp_nougat.gypi"}}],
+  ],
+
+  "target_defaults": {
+    "include_dirs": [
+      "external/aosp/include",
+      "include",
+      "<!(node -e \"require('nan')\")"
+    ],
+
+    "conditions": [
+      ['target_arch==\"arm64\"', {
+        "cflags": [
+          "-target aarch64-linux-android",
+          "-isystem <(aosp_build_top)/bionic/libc/kernel/uapi/asm-arm64"
+        ],
+        "ldflags": [
+#          "-target aarch64-linux-android",
+          "-Wl,-dynamic-linker,/system/bin/linker64",
+        ],
+      }],
+      ['target_arch==\"arm\"', {
+        "cflags": [
+          "-target arm-linux-android",
+          "-isystem <(aosp_build_top)/bionic/libc/kernel/uapi/asm-arm"
+        ],
+        "ldflags": [
+#          "-target arm-linux-android",
+          "-Wl,-dynamic-linker,/system/bin/linker32",
+        ]
+      }],
+      ['target_arch==\"ia32\"', {
+        "cflags": [
+          "-isystem <(aosp_build_top)/bionic/libc/kernel/uapi/asm-x86"
+        ],
+        "ldflags": [
+#          "-target i686-linux-android",
+          "-Wl,-dynamic-linker,/system/bin/linker32",
+        ]
+      }],
+    ],
+
+    "cflags": [
+      #"-nostdlib",
+      #"-nodefaultlibs",
+
+      "-I <(aosp_build_top)/bionic/libc/include",
+      # "-I <(aosp_build_top)/bionic/libm/include",
+
+      "-I <(aosp_build_top)/bionic/libc/kernel/uapi",
+      "-I <(aosp_build_top)/bionic/libc/kernel/android/uapi",
+    ],
+    "cflags_cc": [
+      "--std=c++0x"
+    ],
+    "defines": [
+      "ANDROID", "__ANDROID__"
+    ],
+    "ldflags": [
+      "-BDynamic",
+      "-nostdlib",
+      "-Wl,--gc-sections"
+    ],
+  }
 }

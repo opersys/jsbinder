@@ -14,59 +14,99 @@
  * limitations under the License.
  */
 
-var Binder = require("./index");
+var Binder = require("jsbinder");
 
 function testParcel() {
-	var p = new Binder.Parcel();
+    var p = new Binder.Parcel();
 
-	console.log("TEST PARCEL:");
+    console.log("TEST PARCEL:");
 
-	p.writeInt32(10);
-	console.log("Current data position: " + p.dataPosition());
-	p.setDataPosition(0);
-	console.log("New data position: " + p.dataPosition());
-	console.log(p.readInt32());
+    p.writeInterfaceToken("test")    
+    p.writeInt32(10);
+    console.log("Current data position: " + p.dataPosition());
+    p.setDataPosition(0);
+    console.log("New data position: " + p.dataPosition());
+    console.log(p.readInt32());
 
-	p.setDataPosition(0);
-	p.writeString("blarg");
-	console.log("Current data position: " + p.dataPosition());
-	p.setDataPosition(0);
-	console.log("New data position:" + p.dataPosition());
-	console.log(p.readString());
-	console.log("New data position:" + p.dataPosition());
+    p.setDataPosition(0);
+    p.writeString("blarg");
+    console.log("Current data position: " + p.dataPosition());
+    p.setDataPosition(0);
+    console.log("New data position:" + p.dataPosition());
+    console.log(p.readString());
+    console.log("New data position:" + p.dataPosition());
 }
 
 function testServiceCallWithParcel() {
-	var sm = new Binder.ServiceManager();
-	var dm = sm.getService("display");
-	var pDm = new Binder.Parcel();
+    console.log("SERVICE CALL WITH PARCEL:");
 
-	console.log("\nSERVICE CALL WITH PARCEL:");
-	console.log("DisplayManager.getDisplay");
+    var sm = new Binder.ServiceManager();
+    console.log("Got ServiceManager object.")
+    
+    var dm = sm.getService("display");
+    console.log("Got 'display' service");
+    
+    var pDm = new Binder.Parcel();
 
-	pDm.writeInterfaceToken("android.hardware.display.IDisplayManager");
-	pDm.writeInt32(0);
-	var np = dm.transact(1, pDm);
+    console.log("DisplayManager.getDisplay");
 
-	console.log("Returned data size: " + np.dataSize());
+    console.log("Writing Interface Token");
+    pDm.writeInterfaceToken("android.hardware.display.IDisplayManager");
+
+    console.log("Writing Call Parameter");
+    pDm.writeInt32(0);
+
+    console.log("Transacting");
+    var np = dm.transact(1, pDm);
+
+    console.log("Returned data size: " + np.dataSize());
 }
 
 function testPowerManagerCalls() {
-	var sm = new Binder.ServiceManager();
-	var pm = sm.getService("power");
-	var pPm = new Binder.Parcel();
+    console.log("SERVICE CALL ON POWERMANAGER:");
+    
+    var sm = new Binder.ServiceManager();
+    console.log("Got ServiceManager object.");
+    
+    var pm = sm.getService("power");
+    console.log("Got 'power' service");
+    
+    var pPm = new Binder.Parcel();
 
-	console.log("\nSERVICE CALL ON POWERMANAGER:");
-	console.log("PowerManager.isScreenOn");
-	pPm.writeInterfaceToken("android.os.IPowerManager");
-	var np = pm.transact(11, pPm);
+    console.log("PowerManager.isScreenOn");
+    pPm.writeInterfaceToken("android.os.IPowerManager");
+    var np = pm.transact(11, pPm);
 
-	console.log("Returned data size: " + np.dataSize());
-	np.readExceptionCode();
-	console.log("isScreenOn: " + np.readInt32());
-	console.log(pm.getInterface());
+    console.log("Returned data size: " + np.dataSize());
+    np.readExceptionCode();
+    console.log("isScreenOn: " + np.readInt32());
+    console.log(pm.getInterface());
 }
 
-testParcel();
-testServiceCallWithParcel();
-testPowerManagerCalls();
+try {
+    console.log("#### TESTING PARCEL #####");
+    testParcel();
+    console.log("**** WIN ****");
+} catch (e) {
+    console.log(e);
+    console.log("!!!! FAILED !!!!");
+}
+
+try {
+    console.log("#### TEST SERVICE CALL WITH PARCELS ####");
+    testServiceCallWithParcel();
+    console.log("**** WIN ****");
+} catch (e) {
+    console.log(e);
+    console.log("!!!! FAILED !!!!");
+}
+
+try {
+    console.log("#### TEST POWER MANAGER CALLS ####");
+    testPowerManagerCalls();
+    console.log("**** WIN ****");
+} catch (e) {
+    console.log(e);
+    console.log("!!!! FAILED !!!!");
+}
+    
