@@ -134,7 +134,7 @@ NAN_METHOD(JsService::Dump) {
     Vector<String16> dumpArgs;
     status_t err;
     std::stringstream errMsg;
-    const char* fname = ".jsbinder-dumparea";
+    const char* fname = "/data/local/tmp/.jsbinder-dumparea";
     v8::MaybeLocal<v8::String> ret;
 
     jsSv = Nan::ObjectWrap::Unwrap<JsService>(info.Holder());
