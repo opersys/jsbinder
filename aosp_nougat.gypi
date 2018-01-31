@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2017 Opersys inc.
+# Copyright (C) 2017-2018 Opersys inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,79 +26,67 @@
     ]
   },
 
-    "targets": [
-      {
-        "target_name": "jsbinder-binder64",
-        "defines": [
-          "AOSP_VERSION=7"
-        ],
-        "sources": ["<@(jsbinder_sources)"],
-        "cflags": ["<@(extra_cflags)"],
-        "ldflags": ["<(aosp_crtbegin)"],
-        "libraries": [
-          "<(aosp_product_out)/system/lib64/libbinder.so"
-        ]
-      }
-    ],
+  "conditions": [
+    ['target_arch==\"arm64\"', {
+      "targets": [
+        {
+          "target_name": "jsbinder-binder64",
+          "defines": [
+            "AOSP_VERSION=7"
+          ],
+          "sources": ["<@(jsbinder_sources)"],
+          "cflags": ["<@(extra_cflags)"],
+#          "ldflags": ["<(aosp_crtbegin)"],
+          "libraries": [
+            "<(aosp_product_out)/system/lib64/libbinder.so",
+            "<(aosp_product_out)/system/lib64/libc.so"
+          ]
+        }
+      ]
+    },
+     'target_arch==\"arm\"', {
+       "targets": [
+         {
+           "target_name": "jsbinder-binder32",
+           "defines": [
+             "BINDER_IPC_32BIT",
+             "AOSP_VERSION=7"
+           ],
+           "sources": ["<@(jsbinder_sources)"],
+           "cflags": ["<@(extra_cflags)"],
+#           "ldflags": ["<(aosp_crtbegin)"],
+           "libraries": [
+             "<(aosp_product_out)/system/lib/libbinder.so",
+             "<(aosp_product_out)/system/lib/libc.so"
+           ]
+         }
+       ]
+     },
+     'target_arch==\"ia32\"', {
+       "targets": [
+         {
+           "target_name": "jsbinder-binder32",
+           "defines": [
+             "BINDER_IPC_32BIT",
+             "AOSP_VERSION=7"
+           ],
+           "sources": ["<@(jsbinder_sources)"],
+           "cflags": ["<@(extra_cflags)"],
+#           "ldflags": ["<(aosp_crtbegin)"],
+           "libraries": [
+             "<(aosp_product_out)/system/lib/libbinder.so",
+             "<(aosp_product_out)/system/lib/libc.so"
+           ]
+         }
+       ]
+     }]
+  ],
 
-    "conditions": [
-      ['target_arch==\"arm64\"', {
-        "targets": [
-          {
-            "target_name": "jsbinder-binder64",
-             "defines": [
-               "AOSP_VERSION=7"
-             ],
-            "sources": ["<@(jsbinder_sources)"],
-            "cflags": ["<@(extra_cflags)"],
-            "ldflags": ["<(aosp_crtbegin)"],
-            "libraries": [
-              "<(aosp_product_out)/system/lib64/libbinder.so"
-            ]
-          }
-        ]
-      },
-       'target_arch==\"arm\"', {
-         "targets": [
-           {
-             "target_name": "jsbinder-binder32",
-             "defines": [
-               "BINDER_IPC_32BIT",
-               "AOSP_VERSION=7"
-             ],
-             "sources": ["<@(jsbinder_sources)"],
-             "cflags": ["<@(extra_cflags)"],
-             "ldflags": ["<(aosp_crtbegin)"],
-             "libraries": [
-               "<(aosp_product_out)/system/lib/libbinder.so"
-             ]
-           }
-         ]
-       },
-       'target_arch==\"ia32\"', {
-         "targets": [
-           {
-             "target_name": "jsbinder-binder32",
-             "defines": [
-               "BINDER_IPC_32BIT",
-               "AOSP_VERSION=7"
-             ],
-             "sources": ["<@(jsbinder_sources)"],
-             "cflags": ["<@(extra_cflags)"],
-             "ldflags": ["<(aosp_crtbegin)"],
-             "libraries": [
-               "<(aosp_product_out)/system/lib/libbinder.so"
-             ]
-           }
-         ]
-       }]
-    ],
-
-    "targets": [
-      {
-        "target_name": "jsbinderversion",
-        "sources": ["<@(jsbinderversion_sources)"],
-        "cflags": ["<@(extra_cflags)"]
-      }
-    ]
+  "targets": [
+    {
+      "target_name": "jsbinderversion",
+      "sources": ["<@(jsbinderversion_sources)"],
+      "cflags": ["<@(extra_cflags)"]
+    }
+  ]
 }

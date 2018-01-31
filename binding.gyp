@@ -37,15 +37,10 @@
   },
 
   "conditions": [
-
     # AOSP versions
-
-    ["aosp_major==8", {"includes": {"aosp_oreo.gypi"}},
-     "aosp_major==7", {"includes": {"aosp_nougat.gypi"}},
-     "aosp_major==6", {"includes": {"aosp_nougat.gypi"}},
-     #Untested
-     "aosp_major==5", {"includes": {"aosp_nougat.gypi"}},
-     "aosp_major==4", {"includes": {"aosp_nougat.gypi"}}],
+    ["aosp_major==8", {"includes": {"aosp_oreo.gypi"}}],
+    ["aosp_major==7", {"includes": {"aosp_nougat.gypi"}}],
+    ["aosp_major==6", {"includes": {"aosp_nougat.gypi"}}],
   ],
 
   "target_defaults": {
@@ -62,7 +57,7 @@
           "-isystem <(aosp_build_top)/bionic/libc/kernel/uapi/asm-arm64"
         ],
         "ldflags": [
-#          "-target aarch64-linux-android",
+          "-target aarch64-linux-android",
           "-Wl,-dynamic-linker,/system/bin/linker64",
         ],
       }],
@@ -72,7 +67,7 @@
           "-isystem <(aosp_build_top)/bionic/libc/kernel/uapi/asm-arm"
         ],
         "ldflags": [
-#          "-target arm-linux-android",
+          "-target arm-linux-android",
           "-Wl,-dynamic-linker,/system/bin/linker32",
         ]
       }],
@@ -83,6 +78,15 @@
         "ldflags": [
 #          "-target i686-linux-android",
           "-Wl,-dynamic-linker,/system/bin/linker32",
+        ]
+      }],
+      ['target_arch==\"x86_64\"', {
+        "cflags": [
+          "-isystem <(aosp_build_top)/bionic/libc/kernel/uapi/asm-x86"
+        ],
+        "ldflags": [
+#          "-target x86_64-linux-android",
+          "-Wl,-dynamic-linker,/system/bin/linker64",
         ]
       }],
     ],

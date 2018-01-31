@@ -24,6 +24,18 @@ case "$AOSP_ARCH" in
     x86)
         NODE_ARCH=ia32
         ;;
+    x86_64)
+        NODE_ARCH=x86_64
+        ;;
+esac
+
+case "$AOSP_VERSION" in
+    8)
+        AOSP_NAME=oreo
+        ;;
+    7)
+        AOSP_NAME=nougat
+        ;;
 esac
 
 if [[ $AOSP_VERSION -eq 8 ]]; then
@@ -53,6 +65,9 @@ $NDK_ARM node-gyp clean configure build \
          --verbose \
          --arch=$NODE_ARCH \
          --nodedir=$NODE_SRC
+
+mv -v build "build.${AOSP_NAME}.${NODE_ARCH}"
+rm -rf build
 
 for i in build.*; do
     aosp=$(echo $i | cut -d '.' -f 2)
