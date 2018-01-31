@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2017 Opersys inc.
+# Copyright (C) 2017-2018 Opersys inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,21 +36,8 @@
         ]
     },
 
-
-    "targets": [
-        {
-            "target_name": "jsbinder-binder64",
-            "sources": ["<@(jsbinder_sources)"],
-            "cflags": ["<@(extra_cflags)"],
-            "ldflags": ["<(aosp_crtbegin)"],
-            "libraries": [
-                "<(aosp_product_out)/system/lib64/libbinder.so"
-            ]
-        }
-    ],
-
     "conditions": [
-        ['target_arch==\"arm64\"', {
+        ['target_arch==\"x86_64\"', {
             "targets": [
                 {
                     "target_name": "jsbinder-binder64",
@@ -59,38 +46,73 @@
                         "-isystem <(aosp_build_top)/prebuilts/clang/host/linux-x86/clang-4053586/lib64/clang/5.0/include",
                         "<@(extra_cflags)",
                     ],
-                    "ldflags": ["<(aosp_crtbegin)"],
+#                    "ldflags": ["<(aosp_crtbegin)"],
                     "libraries": [
-                        "<(aosp_product_out)/system/lib64/libbinder.so"
+                        "<(aosp_product_out)/system/lib64/libbinder.so",
+                        "<(aosp_product_out)/system/lib64/libc.so"
+                    ]
+                },
+                {
+                    "target_name": "jsbinderversion",
+                    "sources": ["<@(jsbinderversion_sources)"],
+                    "cflags+": ["<@(extra_cflags)"],
+                    "libraries": [
+                        "<(aosp_product_out)/system/lib64/libc.so"
                     ]
                 }
             ]
-        },
-         'target_arch==\"arm\"', {
-             "targets": [
-                 {
-                     "target_name": "jsbinder-binder32",
-                     "defines": [
-                         "BINDER_IPC_32BIT",
-                     ],
-                     "sources": ["<@(jsbinder_sources)"],
-                     "cflags+": [
-                         "<@(extra_cflags)"
-                     ],
-                     "ldflags": ["<(aosp_crtbegin)"],
-                     "libraries": [
-                         "<(aosp_product_out)/system/lib/libbinder.so"
-                     ]
-                 }
-             ]
-         }]
+        }],
+         ['target_arch==\"arm64\"', {
+            "targets": [
+                {
+                    "target_name": "jsbinder-binder64",
+                    "sources": ["<@(jsbinder_sources)"],
+                    "cflags+": [
+                        "-isystem <(aosp_build_top)/prebuilts/clang/host/linux-x86/clang-4053586/lib64/clang/5.0/include",
+                        "<@(extra_cflags)",
+                    ],
+#                    "ldflags": ["<(aosp_crtbegin)"],
+                    "libraries": [
+                        "<(aosp_product_out)/system/lib64/libbinder.so",
+                        "<(aosp_product_out)/system/lib64/libc.so"
+                    ]
+                },
+                {
+                    "target_name": "jsbinderversion",
+                    "sources": ["<@(jsbinderversion_sources)"],
+                    "cflags+": ["<@(extra_cflags)"],
+                    "libraries": [
+                        "<(aosp_product_out)/system/lib64/libc.so"
+                    ]
+                }
+            ]
+        }],
+        ['target_arch==\"arm\"', {
+            "targets": [
+                {
+                    "target_name": "jsbinder-binder32",
+                    "defines": [
+                        "BINDER_IPC_32BIT",
+                    ],
+                    "sources": ["<@(jsbinder_sources)"],
+                    "cflags+": [
+                        "<@(extra_cflags)"
+                    ],
+#                    "ldflags": ["<(aosp_crtbegin)"],
+                    "libraries": [
+                        "<(aosp_product_out)/system/lib/libbinder.so",
+                        "<(aosp_product_out)/system/lib/libc.so"
+                    ]
+                },
+                {
+                    "target_name": "jsbinderversion",
+                    "sources": ["<@(jsbinderversion_sources)"],
+                    "cflags+": ["<@(extra_cflags)"],
+                    "libraries": [
+                        "<(aosp_product_out)/system/lib/libc.so"
+                    ]
+                }
+            ]
+        }]
     ],
-
-    "targets": [
-        {
-            "target_name": "jsbinderversion",
-            "sources": ["<@(jsbinderversion_sources)"],
-            "cflags": ["<@(extra_cflags)"]
-        }
-    ]
 }
